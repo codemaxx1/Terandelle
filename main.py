@@ -41,7 +41,7 @@ class Terandelle:
         text = "Terandelle"
         self.say(text)
 
-        maxwidth, unused = self.draw.textsize(text, font=self.font)
+        maxwidth, unused = self.display.draw.textsize(text, font=self.font)
 
         # Set animation and sine wave parameters.
         amplitude = self.height / 4
@@ -58,7 +58,7 @@ class Terandelle:
             # Enumerate characters and draw them offset vertically based on a sine wave.
             x = pos
 
-            display.drawCircle(display.width() / 2, display.height() / 2, 2, SSD1306_WHITE);
+            self.display.drawCircle(display.width() / 2, display.height() / 2, 2, SSD1306_WHITE);
 
             # Draw the image buffer.
             disp.image(self.image)
