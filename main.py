@@ -41,13 +41,13 @@ class Terandelle:
         text = "Terandelle"
         self.say(text)
 
-        maxwidth, unused = self.display.draw.textsize(text, font=self.font)
+        maxwidth, unused = self.display.draw.textsize(text, font=self.display.font)
 
         # Set animation and sine wave parameters.
-        amplitude = self.height / 4
-        offset = self.height / 2 - 4
+        amplitude = self.display.height / 4
+        offset = self.display.height / 2 - 4
         velocity = -2
-        startpos = self.width
+        startpos = self.display.width
 
         # Animate text moving in sine wave.
         print('Press Ctrl-C to quit.')
@@ -58,16 +58,9 @@ class Terandelle:
             # Enumerate characters and draw them offset vertically based on a sine wave.
             x = pos
 
-            self.display.drawCircle(display.width() / 2, display.height() / 2, 2, SSD1306_WHITE);
+            self.display.drawCircle(display.width() / 2, self.display.height() / 2, 40, SSD1306_WHITE);
 
-            # Draw the image buffer.
-            disp.image(self.image)
             disp.display()
-            # Move position for next frame.
-            pos += velocity
-            # Start over if text has scrolled completely off left side of screen.
-            if pos < -maxwidth:
-                pos = startpos
             # Pause briefly before drawing next frame.
             time.sleep(0.1)
 
