@@ -50,17 +50,16 @@ class Terandelle:
         startpos = self.display.width
 
         # Animate text moving in sine wave.
-        print('Press Ctrl-C to quit.')
+
         pos = startpos
         for i in range(100):
             # Clear image buffer by drawing a black filled box.
-            #self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
+            self.display.draw.rectangle((0, 0, self.display.width, self.display.height), outline=0, fill=0)
             # Enumerate characters and draw them offset vertically based on a sine wave.
-            x = pos
+            radius = i
+            self.display.ellipse((self.display.width/2, self.display.height/2+radius, self.display.width/2+radius, self.display.height/2 - radius), outline=255, fill=0)
 
-            self.display.drawCircle(display.width() / 2, self.display.height() / 2, 40, SSD1306_WHITE);
-
-            disp.display()
+            self.disp.display()
             # Pause briefly before drawing next frame.
             time.sleep(0.1)
 
