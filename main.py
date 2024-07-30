@@ -1,117 +1,126 @@
-#Trissa
-"""
-virtua assistant system + augmented reality system for RPi
-"""
-
-# imports
+# Copyright (c) 2014 Adafruit Industries
+# Author: Tony DiCola
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+import math
 import time
-import board
-import busio
-import digitalio
-from PIL import Image, ImageDraw, ImageFont
-import adafruit_ssd1306
-import subprocess
 
-# Define the Reset Pin
-oled_reset = digitalio.DigitalInOut(board.D4)
+import Adafruit_GPIO.SPI as SPI
+import Adafruit_SSD1306
 
-# Display Parameters
-WIDTH = 128
-HEIGHT = 64
-BORDER = 5
-
-# Display Refresh
-LOOPTIME = 1.0
-
-class OLED_screen:
-    def __init__(self):
-        # Use for I2C.
-        self.i2c = board.I2C()
-        self.oled = adafruit_ssd1306.SSD1306_I2C(WIDTH, HEIGHT, self.i2c, addr=0x3C, reset=oled_reset)
-
-        # Clear display.
-        self.oled.fill(0)
-        self.oled.show()
-
-        # Create blank image for drawing.
-        # Make sure to create image with mode '1' for 1-bit color.
-        self.width = self.oled.width
-        self.height = self.oled.height
-        self.image = Image.new('1', (self.width, self.height))
-
-        # Get drawing object to draw on image.
-        self.draw = ImageDraw.Draw(self.image)
-
-        # Draw a black filled box to clear the image.
-        self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
-
-        # Draw some shapes.
-        # First define some constants to allow easy resizing of shapes.
-        self.padding = -2
-        self.top = self.padding
-        self.bottom = self.height - self.padding
-        # Move left to right keeping track of the current x position for drawing shapes.
-        self.x = 0
-
-        # Load default font.
-        self.font = ImageFont.load_default()
-
-        # Alternatively load a TTF font.  Make sure the .ttf font file is in the same directory as the python script!
-        # Some other nice fonts to try: http://www.dafont.com/bitmap.php
-        # Icons website: https://icons8.com/line-awesome
-        self.font = ImageFont.truetype('PixelOperator.ttf', 16)
-        self.icon_font = ImageFont.truetype('lineawesome-webfont.ttf', 18)
-
-    def info(self):
-        while True:
-            # Draw a black filled box to clear the image.
-            draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
-
-            # Shell scripts for system monitoring from here : https://unix.stackexchange.com/questions/119126/command-to-display-memory-usage-disk-usage-and-cpu-load
-            cmd = "hostname -I | cut -d\' \' -f1 | head --bytes -1"
-            IP = subprocess.check_output(cmd, shell=True)
-
-            cmd = "top -bn1 | grep load | awk '{printf \"%.2fLA\", $(NF-2)}'"
-            CPU = subprocess.check_output(cmd, shell=True)
-
-            cmd = "free -m | awk 'NR==2{printf \"%.2f%%\", $3*100/$2 }'"
-            MemUsage = subprocess.check_output(cmd, shell=True)
-
-            cmd = "df -h | awk '$NF==\"/\"{printf \"HDD: %d/%dGB %s\", $3,$2,$5}'"
-            cmd = "df -h | awk '$NF==\"/\"{printf \"%d/%dGB\", $3,$2}'"
-            Disk = subprocess.check_output(cmd, shell=True)
-
-            cmd = "vcgencmd measure_temp | cut -d '=' -f 2 | head --bytes -1"
-            Temperature = subprocess.check_output(cmd, shell=True)
-
-            # Icons
-            # Icon temperature
-            draw.text((self.x, self.top + 5), chr(62609), font=self.icon_font, fill=255)
-            # Icon memory
-            draw.text((self.x + 65, self.top + 5), chr(62776), font=self.icon_font, fill=255)
-            # Icon disk
-            draw.text((self.x, self.top + 25), chr(63426), font=self.icon_font, fill=255)
-            # Icon cpu
-            draw.text((self.x + 65, self.top + 25), chr(62171), font=self.icon_font, fill=255)
-            # Icon wifi
-            draw.text((self.x, self.top + 45), chr(61931), font=self.icon_font, fill=255)
-
-            # Text
-            # Text temperature
-            draw.text((self.x + 19, self.top + 5), str(Temperature, 'utf-8'), font=self.font, fill=255)
-            # Text memory usage
-            draw.text((self.x + 87, self.top + 5), str(MemUsage, 'utf-8'), font=self.font, fill=255)
-            # Text Disk usage
-            draw.text((self.x + 19, self.top + 25), str(Disk, 'utf-8'), font=self.font, fill=255)
-            # Text cpu usage
-            draw.text((self.x + 87, self.top + 25), str(CPU, 'utf-8'), font=self.font, fill=255)
-            # Text IP address
-            draw.text((self.x + 19, self.top + 45), str(IP, 'utf-8'), font=self.font, fill=255)
-
-            # Display image.
-            self.oled.image(self.image)
-            self.oled.show()
-            time.sleep(LOOPTIME)
+from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw
 
 
-draw = OLED_screen
+# Raspberry Pi pin configuration:
+RST = 24
+# Note the following are only used with SPI:
+DC = 23
+SPI_PORT = 0
+SPI_DEVICE = 0
+
+# Beaglebone Black pin configuration:
+# RST = 'P9_12'
+# Note the following are only used with SPI:
+# DC = 'P9_15'
+# SPI_PORT = 1
+# SPI_DEVICE = 0
+
+# 128x32 display with hardware I2C:
+disp = Adafruit_SSD1306.SSD1306_128_32(rst=RST)
+
+# 128x64 display with hardware I2C:
+# disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+
+# 128x32 display with hardware SPI:
+# disp = Adafruit_SSD1306.SSD1306_128_32(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
+
+# 128x64 display with hardware SPI:
+# disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
+
+# Initialize library.
+disp.begin()
+
+# Get display width and height.
+width = disp.width
+height = disp.height
+
+# Clear display.
+disp.clear()
+disp.display()
+
+# Create image buffer.
+# Make sure to create image with mode '1' for 1-bit color.
+image = Image.new('1', (width, height))
+
+# Load default font.
+font = ImageFont.load_default()
+
+# Alternatively load a TTF font.  Make sure the .ttf font file is in the same directory as this python script!
+# Some nice fonts to try: http://www.dafont.com/bitmap.php
+# font = ImageFont.truetype('Minecraftia.ttf', 8)
+
+# Create drawing object.
+draw = ImageDraw.Draw(image)
+
+# Define text and get total width.
+text = 'SSD1306 ORGANIC LED DISPLAY. THIS IS AN OLD SCHOOL DEMO SCROLLER!! GREETZ TO: LADYADA & THE ADAFRUIT CREW, TRIXTER, FUTURE CREW, AND FARBRAUSCH'
+maxwidth, unused = draw.textsize(text, font=font)
+
+# Set animation and sine wave parameters.
+amplitude = height/4
+offset = height/2 - 4
+velocity = -2
+startpos = width
+
+# Animate text moving in sine wave.
+print('Press Ctrl-C to quit.')
+pos = startpos
+while True:
+    # Clear image buffer by drawing a black filled box.
+    draw.rectangle((0,0,width,height), outline=0, fill=0)
+    # Enumerate characters and draw them offset vertically based on a sine wave.
+    x = pos
+    for i, c in enumerate(text):
+        # Stop drawing if off the right side of screen.
+        if x > width:
+            break
+        # Calculate width but skip drawing if off the left side of screen.
+        if x < -10:
+            char_width, char_height = draw.textsize(c, font=font)
+            x += char_width
+            continue
+        # Calculate offset from sine wave.
+        y = offset+math.floor(amplitude*math.sin(x/float(width)*2.0*math.pi))
+        # Draw text.
+        draw.text((x, y), c, font=font, fill=255)
+        # Increment x position based on chacacter width.
+        char_width, char_height = draw.textsize(c, font=font)
+        x += char_width
+    # Draw the image buffer.
+    disp.image(image)
+    disp.display()
+    # Move position for next frame.
+    pos += velocity
+    # Start over if text has scrolled completely off left side of screen.
+    if pos < -maxwidth:
+        pos = startpos
+    # Pause briefly before drawing next frame.
+    time.sleep(0.1)
