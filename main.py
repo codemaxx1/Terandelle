@@ -37,7 +37,7 @@ class display:
 
         # Create image buffer.
         # Make sure to create image with mode '1' for 1-bit color.
-        self.image = Image.new('1', (width, height))
+        self.image = Image.new('1', (self.width, self.height))
 
         # Load default font.
         self.font = ImageFont.load_default()
@@ -56,7 +56,7 @@ class display:
         # Define text and get total width.
         text = 'SSD1306 ORGANIC LED DISPLAY. THIS IS AN OLD SCHOOL DEMO SCROLLER!! GREETZ TO: LADYADA & THE ADAFRUIT CREW, TRIXTER, FUTURE CREW, AND FARBRAUSCH'
         maxwidth, unused = self.draw.textsize(text, font=self.font)
-        
+
         # Set animation and sine wave parameters.
         amplitude = self.height/4
         offset = self.height/2 - 4
@@ -71,7 +71,7 @@ class display:
             self.draw.rectangle((0,0,self.width,self.height), outline=0, fill=0)
             # Enumerate characters and draw them offset vertically based on a sine wave.
             x = pos
-            for i, c in enumerate(self.text):
+            for i, c in enumerate(text):
                 # Stop drawing if off the right side of screen.
                 if x > self.width:
                     break
