@@ -4,6 +4,8 @@
 """
 
 #imports
+
+# for screen
 import math
 import time
 import Adafruit_GPIO.SPI as SPI
@@ -12,6 +14,9 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 
+# for tts
+from gtts import gTTS
+from playsound import playsound
 
 # Raspberry Pi pin configuration:
 RST = 24
@@ -21,6 +26,52 @@ RST = 24
 
 # 128x64 display with hardware I2C:
 disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+class Terandelle:
+    def __init__(self, display):
+        self.display = display
+
+    def say(self, words):
+        tts = gTTS(words, lang='en')
+        # Save converted audio as mp3 format
+        tts.save('ttsOut.mp3')
+        playsound("ttsOut.mp3")
+
+
+    def bootup(self):
+        text = "Terandelle"
+        self.say(text)
+
+        maxwidth, unused = self.draw.textsize(text, font=self.font)
+
+        # Set animation and sine wave parameters.
+        amplitude = self.height / 4
+        offset = self.height / 2 - 4
+        velocity = -2
+        startpos = self.width
+
+        # Animate text moving in sine wave.
+        print('Press Ctrl-C to quit.')
+        pos = startpos
+        for i in range(100):
+            # Clear image buffer by drawing a black filled box.
+            #self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
+            # Enumerate characters and draw them offset vertically based on a sine wave.
+            x = pos
+
+            display.drawCircle(display.width() / 2, display.height() / 2, 2, SSD1306_WHITE);
+
+            # Draw the image buffer.
+            disp.image(self.image)
+            disp.display()
+            # Move position for next frame.
+            pos += velocity
+            # Start over if text has scrolled completely off left side of screen.
+            if pos < -maxwidth:
+                pos = startpos
+            # Pause briefly before drawing next frame.
+            time.sleep(0.1)
+
+
 
 class display:
     def __init__(self):
@@ -48,7 +99,6 @@ class display:
 
         # Create drawing object.
         self.draw = ImageDraw.Draw(self.image)
-
 
 
     def wave(self):
@@ -93,7 +143,7 @@ class display:
             # Move position for next frame.
             pos += velocity
             # Start over if text has scrolled completely off left side of screen.
-            if pos < -self.maxwidth:
+            if pos < -maxwidth:
                 pos = startpos
             # Pause briefly before drawing next frame.
             time.sleep(0.1)
@@ -101,5 +151,12 @@ class display:
 if __name__ == "__main__":
     print("init display")
     display = display()
+
+    print("init terandelle")
+    Terandelle = Terandelle(display)
+
+    print("bootup sequence")
+    Terandelle.bootup()
+
     print("display wave")
     display.wave()
