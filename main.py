@@ -28,8 +28,8 @@ class display:
         disp.begin()
 
         # Get display width and height.
-        width = disp.width
-        height = disp.height
+        self.width = disp.width
+        self.height = disp.height
 
         # Clear display.
         disp.clear()
@@ -37,24 +37,26 @@ class display:
 
         # Create image buffer.
         # Make sure to create image with mode '1' for 1-bit color.
-        image = Image.new('1', (width, height))
+        self.image = Image.new('1', (width, height))
 
         # Load default font.
-        font = ImageFont.load_default()
+        self.font = ImageFont.load_default()
 
         # Alternatively load a TTF font.  Make sure the .ttf font file is in the same directory as this python script!
         # Some nice fonts to try: http://www.dafont.com/bitmap.php
         # font = ImageFont.truetype('Minecraftia.ttf', 8)
 
         # Create drawing object.
-        draw = ImageDraw.Draw(image)
+        self.draw = ImageDraw.Draw(self.image)
 
-        # Define text and get total width.
-        text = 'SSD1306 ORGANIC LED DISPLAY. THIS IS AN OLD SCHOOL DEMO SCROLLER!! GREETZ TO: LADYADA & THE ADAFRUIT CREW, TRIXTER, FUTURE CREW, AND FARBRAUSCH'
-        maxwidth, unused = draw.textsize(text, font=font)
 
 
     def wave(self):
+
+        # Define text and get total width.
+        text = 'SSD1306 ORGANIC LED DISPLAY. THIS IS AN OLD SCHOOL DEMO SCROLLER!! GREETZ TO: LADYADA & THE ADAFRUIT CREW, TRIXTER, FUTURE CREW, AND FARBRAUSCH'
+        maxwidth, unused = self.draw.textsize(text, font=self.font)
+        
         # Set animation and sine wave parameters.
         amplitude = self.height/4
         offset = self.height/2 - 4
@@ -96,6 +98,8 @@ class display:
             # Pause briefly before drawing next frame.
             time.sleep(0.1)
 
-if __name__ == "__amain__":
+if __name__ == "__main__":
+    print("init display")
     display = display()
+    print("display wave")
     display.wave()
