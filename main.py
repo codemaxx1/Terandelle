@@ -92,6 +92,8 @@ class display:
             self.draw.text((0,0), text, font=self.font, fill=255)
             self.draw.text((50,20), text, font=self.font, fill=255)
 
+            disp.image(self.image)
+            disp.display()
             time.sleep(0.1)
         print("bootup done")
 
