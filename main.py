@@ -98,7 +98,8 @@ class display:
             y = (self.height/2) * math.cos(radius)
 
             self.draw.ellipse((self.width/2-radius + x, self.height/2-radius + y, self.width/2+radius + x, self.height/2+radius + y), outline=255, fill=255)
-            self.draw.text(round(self.width / 2) - round(textWidth), (self.height / 2) + textHeight/2, text, font=self.font, fill=255)
+            
+            self.draw.text((self.width/2 - textWidth/2, self.height/2 + textHeight/2), text, font=self.font, fill=255)
             self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
 
 
