@@ -37,31 +37,11 @@ class Terandelle:
         playsound("ttsOut.mp3")
 
 
-    def bootup(self):
+    def bootup(self, display):
         text = "Terandelle"
         self.say(text)
+        display.bootup()
 
-        maxwidth, unused = self.display.draw.textsize(text, font=self.display.font)
-
-        # Set animation and sine wave parameters.
-        amplitude = self.display.height / 4
-        offset = self.display.height / 2 - 4
-        velocity = -2
-        startpos = self.display.width
-
-        # Animate text moving in sine wave.
-
-        pos = startpos
-        for i in range(100):
-            # Clear image buffer by drawing a black filled box.
-            self.display.draw.rectangle((0, 0, self.display.width, self.display.height), outline=0, fill=0)
-            # Enumerate characters and draw them offset vertically based on a sine wave.
-            radius = i
-            self.display.ellipse((self.display.width/2, self.display.height/2+radius, self.display.width/2+radius, self.display.height/2 - radius), outline=255, fill=0)
-
-            self.disp.display()
-            # Pause briefly before drawing next frame.
-            time.sleep(0.1)
 
 
 
@@ -91,6 +71,26 @@ class display:
 
         # Create drawing object.
         self.draw = ImageDraw.Draw(self.image)
+
+    def bootup(self):
+        # Define text and get total width.
+        text = "Terandelle"
+        maxwidth, unused = self.draw.textsize(text, font=self.font)
+
+        # Set animation and sine wave parameters.
+        amplitude = self.height / 4
+        offset = self.height / 2 - 4
+        velocity = -2
+        startpos = self.width
+
+        # Animate text moving in sine wave.
+        pos = startpos
+        for i in range(100):
+            radius = i
+            self.draw.ellipse((self.width/2-radius, self.height/2-radius, self.width/2+radius, self.height/2+radius), outline=255, fill=0)
+            self.draw.text((self.width / 2, self.height / 2), text, font=self.font, fill=255)
+
+        print("bootup done")
 
 
     def wave(self):
@@ -143,6 +143,8 @@ class display:
 if __name__ == "__main__":
     print("init display")
     display = display()
+
+
 
     print("init terandelle")
     Terandelle = Terandelle(display)
