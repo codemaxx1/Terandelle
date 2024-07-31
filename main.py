@@ -87,9 +87,12 @@ class display:
         pos = startpos
         for i in range(100):
             radius = i
-            self.draw.ellipse((self.width/2-radius, self.height/2-radius, self.width/2+radius, self.height/2+radius), outline=255, fill=0)
+            self.draw.ellipse((self.width/2-radius, self.height/2-radius, self.width/2+radius, self.height/2+radius), outline=255, fill=255)
             self.draw.text((self.width / 2, self.height / 2), text, font=self.font, fill=255)
+            self.draw.text((0,0), text, font=self.font, fill=255)
+            self.draw.text((50,20), text, font=self.font, fill=255)
 
+            time.sleep(0.1)
         print("bootup done")
 
 
@@ -150,7 +153,7 @@ if __name__ == "__main__":
     Terandelle = Terandelle(display)
 
     print("bootup sequence")
-    Terandelle.bootup()
+    Terandelle.bootup(display )
 
     print("display wave")
     display.wave()
