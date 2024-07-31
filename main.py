@@ -78,17 +78,7 @@ class display:
         self.draw = ImageDraw.Draw(self.image)
 
     def bootup(self):
-        # Define text and get total width.
-        maxwidth, unused = self.draw.textsize(text, font=self.font)
 
-        # Set animation and sine wave parameters.
-        amplitude = self.height / 4
-        offset = self.height / 2 - 4
-        velocity = -2
-        startpos = self.width
-
-        # Animate text moving in sine wave.
-        
         for i in range(200):
             radius = int(i/2)
 
