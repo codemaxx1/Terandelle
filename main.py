@@ -79,7 +79,6 @@ class display:
 
     def bootup(self):
         # Define text and get total width.
-        text = "Terandelle"
         maxwidth, unused = self.draw.textsize(text, font=self.font)
 
         # Set animation and sine wave parameters.
@@ -89,8 +88,7 @@ class display:
         startpos = self.width
 
         # Animate text moving in sine wave.
-        pos = startpos
-        textWidth, textHeight = self.draw.textsize(text, font=self.font)
+        
         for i in range(200):
             radius = int(i/2)
 
@@ -98,9 +96,16 @@ class display:
             y = (self.height/2) * math.cos(radius)
 
             self.draw.ellipse((self.width/2-radius + x, self.height/2-radius + y, self.width/2+radius + x, self.height/2+radius + y), outline=255, fill=255)
-            
+            self.draw.ellipse((self.width / 2 - 10 + x, self.height / 2 - 10 + y, self.width / 2 + 10 + x, self.height / 2 + 10 + y), outline=255, fill=0)
+
+            text = "Terandelle"
+            textWidth, textHeight = self.draw.textsize(text, font=self.font)
+            self.draw.text((self.width/2 - textWidth/2, self.height/2 - textHeight/2), text, font=self.font, fill=255)
+
+            text = "Booting up"
+            textWidth, textHeight = self.draw.textsize(text, font=self.font)
             self.draw.text((self.width/2 - textWidth/2, self.height/2 + textHeight/2), text, font=self.font, fill=255)
-            self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
+            #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
 
 
             disp.image(self.image)
