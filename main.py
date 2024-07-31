@@ -13,7 +13,7 @@ import Adafruit_SSD1306
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
-
+import threading
 # for tts
 from gtts import gTTS
 from playsound import playsound
@@ -30,12 +30,14 @@ class Terandelle:
     def __init__(self, display):
         self.display = display
 
-    def say(self, words):
-        tts = gTTS(words, lang='en')
+    def speakingThread(self, text):
+        tts = gTTS(text, lang='en')
         # Save converted audio as mp3 format
         tts.save('ttsOut.mp3')
         playsound("ttsOut.mp3")
 
+    def say(self, words):
+        thread = threading.Thread(target=self.speakingThread, args=(words,) daemon=True)
 
     def bootup(self, display):
         text = "Terandelle"
