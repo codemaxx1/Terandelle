@@ -32,7 +32,7 @@ class Terandelle:
     def __init__(self, display):
         self.display = display
 
-    def speakingThread(text):
+    def speakingThread(self, text):
         tts = gTTS(text, lang='en')
         # Save converted audio as mp3 format
         tts.save('ttsOut.mp3')
@@ -90,10 +90,12 @@ class display:
 
         # Animate text moving in sine wave.
         pos = startpos
-        for i in range(100):
-            radius = i
-            x = (self.width/2) * math.sin(i)
-            y = (self.height/2) * math.cos(i)
+        for i in range(200):
+            radius = i/2
+
+            self.draw.line((self.width/2, y, x, self.height/2), fill=255)
+            x = (self.width/2) * math.sin(radius)
+            y = (self.height/2) * math.cos(radius)
             self.draw.ellipse((self.width/2-radius + x, self.height/2-radius + y, self.width/2+radius + x, self.height/2+radius + y), outline=255, fill=255)
             self.draw.text((self.width / 2, self.height / 2), text, font=self.font, fill=255)
             self.draw.text((0,0), text, font=self.font, fill=255)
@@ -101,7 +103,7 @@ class display:
 
             disp.image(self.image)
             disp.display()
-            time.sleep(0.1)
+            time.sleep(0.05)
         print("bootup done")
 
 
