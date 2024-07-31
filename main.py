@@ -14,6 +14,9 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 import threading
+import socket
+import speech_recognition as sr
+
 # for tts
 from gtts import gTTS
 from playsound import playsound
@@ -43,10 +46,24 @@ class Terandelle:
         thread.start()
 
     def bootup(self, display):
-        text = "Terandelle"
-        self.say(text)
+        self.say("Terandelle system, booting up")
         display.bootup()
+        self.say("Ready for your command")
 
+    def listen(self, display):
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            print('Say something...')
+            r.pause_threshold = 1
+            r.adjust_for_ambient_noise(source, duration=1)
+            audio = r.listen(source)
+        try:
+            command = r.recognize_google(audio).lower()
+            print('You said: ' + command + '\n')
+        # loop back to continue to listen for commands if unrecognizable speech is received
+        except sr.UnknownValueError:
+            print('unknown error')
+        return command
 
 
 
@@ -79,6 +96,12 @@ class display:
 
     def bootup(self):
 
+        # IP address
+        try:
+            IP = socket.gethostbyname(socket.gethostname())
+        except:
+            IP = "network unreachable"
+
         for i in range(200):
             radius = int(i/2)
 
@@ -86,7 +109,7 @@ class display:
             y = (self.height/2) * math.cos(radius)
 
             self.draw.ellipse((self.width/2-radius + x, self.height/2-radius + y, self.width/2+radius + x, self.height/2+radius + y), outline=255, fill=255)
-            self.draw.ellipse((self.width / 2 - 10 + x, self.height / 2 - 10 + y, self.width / 2 + 10 + x, self.height / 2 + 10 + y), outline=255, fill=0)
+            #self.draw.ellipse((self.width / 2 - 10 + x, self.height / 2 - 10 + y, self.width / 2 + 10 + x, self.height / 2 + 10 + y), outline=255, fill=0)
 
             text = "Terandelle"
             textWidth, textHeight = self.draw.textsize(text, font=self.font)
@@ -95,8 +118,9 @@ class display:
             text = "Booting up"
             textWidth, textHeight = self.draw.textsize(text, font=self.font)
             self.draw.text((self.width/2 - textWidth/2, self.height/2 + textHeight/2), text, font=self.font, fill=255)
-            #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
+            self.draw.text((0,0), IP, font=self.font, fill=0)
 
+            #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
 
             disp.image(self.image)
             disp.display()
@@ -155,13 +179,13 @@ if __name__ == "__main__":
     print("init display")
     display = display()
 
-
-
     print("init terandelle")
     Terandelle = Terandelle(display)
 
     print("bootup sequence")
-    Terandelle.bootup(display )
+    Terandelle.bootup(display)
+
+    Terandelle.listen(display)
 
     print("display wave")
     display.wave()
