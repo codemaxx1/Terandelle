@@ -91,13 +91,13 @@ class display:
         # Animate text moving in sine wave.
         pos = startpos
         for i in range(200):
-            radius = i/2
+            radius = int(i/2)
 
             x = (self.width/2) * math.sin(radius)
             y = (self.height/2) * math.cos(radius)
 
             self.draw.ellipse((self.width/2-radius + x, self.height/2-radius + y, self.width/2+radius + x, self.height/2+radius + y), outline=255, fill=255)
-            self.draw.text(((self.width / 2) - self.draw.textsize(text, font=self.font), self.height / 2), text, font=self.font, fill=255)
+            self.draw.text((round(self.width / 2) - round(self.draw.textsize(text, font=self.font)), self.height / 2), text, font=self.font, fill=255)
             self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
 
 
