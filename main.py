@@ -24,20 +24,23 @@ RST = 24
 # 128x32 display with hardware I2C:
 #disp = Adafruit_SSD1306.SSD1306_128_32(rst=RST)
 
+
+
 # 128x64 display with hardware I2C:
 disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
 class Terandelle:
     def __init__(self, display):
         self.display = display
 
-    def speakingThread(self, text):
+    def speakingThread(text):
         tts = gTTS(text, lang='en')
         # Save converted audio as mp3 format
         tts.save('ttsOut.mp3')
         playsound("ttsOut.mp3")
 
     def say(self, words):
-        thread = threading.Thread(target=self.speakingThread, args=(words,) daemon=True)
+        thread = threading.Thread(target=self.speakingThread, args=(words,), daemon=True)
+        thread.start()
 
     def bootup(self, display):
         text = "Terandelle"
@@ -89,7 +92,9 @@ class display:
         pos = startpos
         for i in range(100):
             radius = i
-            self.draw.ellipse((self.width/2-radius, self.height/2-radius, self.width/2+radius, self.height/2+radius), outline=255, fill=255)
+            x = (self.width/2) * math.sin(i)
+            y = (self.height/2) * math.cos(i)
+            self.draw.ellipse((self.width/2-radius + x, self.height/2-radius + y, self.width/2+radius + x, self.height/2+radius + y), outline=255, fill=255)
             self.draw.text((self.width / 2, self.height / 2), text, font=self.font, fill=255)
             self.draw.text((0,0), text, font=self.font, fill=255)
             self.draw.text((50,20), text, font=self.font, fill=255)
