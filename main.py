@@ -95,12 +95,11 @@ class display:
 
             x = (self.width/2) * math.sin(radius)
             y = (self.height/2) * math.cos(radius)
-            self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=255)
 
             self.draw.ellipse((self.width/2-radius + x, self.height/2-radius + y, self.width/2+radius + x, self.height/2+radius + y), outline=255, fill=255)
-            self.draw.text((self.width / 2, self.height / 2), text, font=self.font, fill=255)
-            self.draw.text((0,0), text, font=self.font, fill=255)
-            self.draw.text((50,20), text, font=self.font, fill=255)
+            self.draw.text(((self.width / 2) - self.draw.textsize(text, font=self.font), self.height / 2), text, font=self.font, fill=255)
+            self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
+
 
             disp.image(self.image)
             disp.display()
