@@ -94,6 +94,12 @@ class display:
         # Create drawing object.
         self.draw = ImageDraw.Draw(self.image)
 
+    def textsize(text, font):
+        im = Image.new(mode="P", size=(0, 0))
+        draw = ImageDraw.Draw(im)
+        _, _, width, height = draw.textbbox((0, 0), text=text, font=font)
+        return width, height
+        
     def bootup(self):
 
         # IP address
@@ -112,11 +118,11 @@ class display:
             #self.draw.ellipse((self.width / 2 - 10 + x, self.height / 2 - 10 + y, self.width / 2 + 10 + x, self.height / 2 + 10 + y), outline=255, fill=0)
 
             text = "Terandelle"
-            textWidth, textHeight = self.draw.textsize(text, font=self.font)
+            textWidth = self.textSize(text, font=self.font)
             self.draw.text((self.width/2 - textWidth/2, self.height/2 - textHeight/2), text, font=self.font, fill=255)
 
             text = "Booting up"
-            textWidth, textHeight = self.draw.textsize(text, font=self.font)
+            textWidth, textHeight = self.draw.textlength(text, font=self.font)
             self.draw.text((self.width/2 - textWidth/2, self.height/2 + textHeight/2), text, font=self.font, fill=255)
             self.draw.text((0,0), IP, font=self.font, fill=0)
 
@@ -128,11 +134,12 @@ class display:
         print("bootup done")
 
 
+    '''
     def wave(self):
 
         # Define text and get total width.
         text = 'SSD1306 ORGANIC LED DISPLAY. THIS IS AN OLD SCHOOL DEMO SCROLLER!! GREETZ TO: LADYADA & THE ADAFRUIT CREW, TRIXTER, FUTURE CREW, AND FARBRAUSCH'
-        maxwidth, unused = self.draw.textsize(text, font=self.font)
+        maxwidth = self.draw.textlength(text, font=self.font)
 
         # Set animation and sine wave parameters.
         amplitude = self.height/4
@@ -154,7 +161,7 @@ class display:
                     break
                 # Calculate width but skip drawing if off the left side of screen.
                 if x < -10:
-                    char_width, char_height = self.draw.textsize(c, font=self.font)
+                    char_width, char_height = self.draw.textlength(c, font=self.font)
                     x += char_width
                     continue
                 # Calculate offset from sine wave.
@@ -162,7 +169,7 @@ class display:
                 # Draw text.
                 self.draw.text((x, y), c, font=self.font, fill=255)
                 # Increment x position based on chacacter width.
-                char_width, char_height = self.draw.textsize(c, font=self.font)
+                char_width, char_height = self.draw.textlength(c, font=self.font)
                 x += char_width
             # Draw the image buffer.
             disp.image(self.image)
@@ -174,7 +181,8 @@ class display:
                 pos = startpos
             # Pause briefly before drawing next frame.
             time.sleep(0.1)
-
+'''
+    
 if __name__ == "__main__":
     print("init display")
     display = display()
