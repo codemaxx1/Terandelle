@@ -118,7 +118,7 @@ class display:
             #self.draw.ellipse((self.width / 2 - 10 + x, self.height / 2 - 10 + y, self.width / 2 + 10 + x, self.height / 2 + 10 + y), outline=255, fill=0)
 
             text = "Terandelle"
-            textWidth = self.textSize(text, font=self.font)
+            textWidth = self.textsize(text, font=self.font)
             self.draw.text((self.width/2 - textWidth/2, self.height/2 - textHeight/2), text, font=self.font, fill=255)
 
             text = "Booting up"
