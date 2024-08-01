@@ -118,7 +118,8 @@ class display:
             self.draw.text((self.width/2 - textWidth/2, self.height/2 - textHeight/2), text, font=self.font, fill=255)
 
             text = "Booting up"
-            textWidth, textHeight = self.draw.textlength(text, font=self.font)
+            textWidth = 20
+            textHeight = 20
             self.draw.text((self.width/2 - textWidth/2, self.height/2 + textHeight/2), text, font=self.font, fill=255)
             self.draw.text((0,0), IP, font=self.font, fill=0)
 
