@@ -19,7 +19,8 @@ import speech_recognition as sr
 
 # for tts
 from gtts import gTTS
-from playsound import playsound
+#from playsound import playsound
+import vlc
 
 # Raspberry Pi pin configuration:
 RST = 24
@@ -39,11 +40,14 @@ class Terandelle:
         tts = gTTS(text, lang='en')
         # Save converted audio as mp3 format
         tts.save('ttsOut.mp3')
-        playsound("ttsOut.mp3")
+        #playsound("ttsOut.mp3")
+        p = vlc.MediaPlayer("ttsOut.mp3")
+        p.play()
 
     def say(self, words):
         thread = threading.Thread(target=self.speakingThread, args=(words,), daemon=True)
         thread.start()
+        
 
     def bootup(self, display):
         self.say("Terandelle system, booting up")
