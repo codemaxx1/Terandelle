@@ -93,12 +93,7 @@ class display:
 
         # Create drawing object.
         self.draw = ImageDraw.Draw(self.image)
-
-    def textsize(self, text, font):
-        im = Image.new(mode="P", size=(0, 0))
-        draw = ImageDraw.Draw(im)
-        _, _, width, height = draw.textbbox((0, 0), text=text, font=font)
-        return width, height
+        
         
     def bootup(self):
 
@@ -118,7 +113,8 @@ class display:
             #self.draw.ellipse((self.width / 2 - 10 + x, self.height / 2 - 10 + y, self.width / 2 + 10 + x, self.height / 2 + 10 + y), outline=255, fill=0)
 
             text = "Terandelle"
-            textWidth, textHeight = self.textsize(text, self.font)
+            textWidth = 20
+            textHeight = 20
             self.draw.text((self.width/2 - textWidth/2, self.height/2 - textHeight/2), text, font=self.font, fill=255)
 
             text = "Booting up"
