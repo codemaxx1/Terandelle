@@ -26,7 +26,7 @@ for package in packages:
     print(f"installing {package}")
     # implement pip3 as a subprocess:
     try:
-        subprocess.check_call([sys.executable, '-m', 'pip3', 'install', package])
+        subprocess.check_call(['pip3', 'install', package])
 
         # process output with an API in the subprocess module:
         reqs = subprocess.check_output([sys.executable, '-m', 'pip3', 'freeze'])
