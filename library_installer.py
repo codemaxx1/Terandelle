@@ -3,31 +3,32 @@ import subprocess
 
 packages = [#"math",
             #"time",
-            "Adafruit-SSD1306",
-            "pillow",
-            "feedparser",
-            "threading",
-            "re",
-            "wikipedia",
-            "datetime",
-            "sys",
-            "psutil",
-            "requests",
-            "json",
-            "RPi.GPIO",
-            "socket",
-            "SpeechRecognition",
-            "spacy",
-            "gTTS",
-            "python-vlc"
-]
+            ["pip3", "install", "Adafruit-SSD1306"],
+            ["pip3", "install", "pillow"],
+            ["pip3", "install", "feedparser"],
+            #["pip3", "install", "threading"],
+            #["pip3", "install", "re"],
+            ["pip3", "install", "wikipedia"],
+            ["pip3", "install", "datetime"],
+            ["pip3", "install", "sys"],
+            ["pip3", "install", "psutil"],
+            ["pip3", "install", "requests"],
+            ["pip3", "install", "json"],
+            ["pip3", "install", "RPi.GPIO"],
+            ["pip3", "install", "socket"],
+            ["pip3", "install", "PyAudio"],
+            ["pip3", "install", "SpeechRecognition"],
+            ["pip3", "install", "spacy"],
+            ["pip3", "install", "gTTS"],
+            ["pip3", "install", "python-vlc"],
+        ]
 
 print("installing packages")
 for package in packages:
     print(f"installing {package}")
     # implement pip3 as a subprocess:
     try:
-        subprocess.check_call(['pip3', 'install', package])
+        subprocess.check_call([package])
 
         # process output with an API in the subprocess module:
         reqs = subprocess.check_output([sys.executable, '-m', 'pip3', 'freeze'])

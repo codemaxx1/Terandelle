@@ -121,9 +121,9 @@ class Terandelle:
         returnedValue = [0,0]
         returnedValue[0] = subprocess.check_output(["git", "pull"])
         #self.say(returnedValue.decode("utf-8"))
-        self.say("update of program complete")
 
-        self.say("updating packages")
+        self.say("update of program complete. Now, I'm updating Python3 packages")
+
         updatePackages = "python3 library_installer.py"
         returnedValue[1] = subprocess.call(str(updatePackages), shell=True)
         self.say("update of packages complete")
