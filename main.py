@@ -415,7 +415,7 @@ class Display:
             self.draw.text((self.dispWidth/2, self.dispHeight/2), text, font=self.font, fill=255)
             text = "Booting up"
             self.draw.text((self.dispWidth/2, self.dispHeight/2), text, font=self.font, fill=255)
-            self.draw.text(IP, 0, 0, fill=0)
+            self.draw.text((0,0), IP, font=self.font, fill=255)
 
             #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
 
