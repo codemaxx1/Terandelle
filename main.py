@@ -366,11 +366,11 @@ class Display:
         self.display.pixel(127, 31, 1)
 
         self.image = Image.new("1", (self.dispWidth, self.dispHeight))
-        draw = ImageDraw.Draw(self.image)
+        self.draw = ImageDraw.Draw(self.image)
 
         # font sizes
-        fontLarge = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 28)
-        font2 = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 14)
+        self.fontLarge = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 28)
+        self.font2 = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 14)
 
         self.display.show()
 
