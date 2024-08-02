@@ -491,8 +491,8 @@ if __name__ == "__main__":
 
     time.sleep(1)
 
-    print("update")
-    Terandelle.update()
+    #print("update")
+    #Terandelle.update()
 
     time.sleep(2)
 
