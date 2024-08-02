@@ -127,7 +127,6 @@ class Terandelle:
 
         updatePackages = "python3 library_installer.py"
         returnedValue[1] = subprocess.call(str(updatePackages), shell=True)
-        self.say("update of packages complete")
 
         return returnedValue
 
@@ -337,7 +336,7 @@ class Terandelle:
         :param display: class instance of display
         :return: the name of the function run
         '''
-        command = command.toLower()
+        command = command.lower()
         functionRun = command
 
 
