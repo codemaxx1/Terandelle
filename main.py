@@ -365,7 +365,7 @@ class Display:
         # Set a pixel in the opposite 127, 31 position.
         self.display.pixel(127, 31, 1)
 
-        self.image = Image.new("1", (self.displayWidth, self.dispHeight))
+        self.image = Image.new("1", (self.dispWidth, self.dispHeight))
         draw = ImageDraw.Draw(self.image)
 
         # font sizes
@@ -439,7 +439,7 @@ class Display:
 
     def updateScreen(self):
         # update screen
-        self.display.image(image)
+        self.display.image(self.image)
         self.display.show()
 
 
