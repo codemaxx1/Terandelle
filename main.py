@@ -337,6 +337,7 @@ class Terandelle:
         :return: the name of the function run
         '''
         command = command.lower()
+
         functionRun = command
 
 
