@@ -120,6 +120,7 @@ class Terandelle:
         self.say("pulling from remote repo")
         returnedValue = [0,0]
         returnedValue[0] = subprocess.check_output(["git", "pull"])
+        time.sleep(1)
         #self.say(returnedValue.decode("utf-8"))
 
         self.say("update of program complete. Now, I'm updating Python3 packages")
