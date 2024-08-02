@@ -499,7 +499,7 @@ if __name__ == "__main__":
     Display = Display()
 
     print("init terandelle")
-    Terandelle = Terandelle(display)
+    Terandelle = Terandelle(Display)
 
     time.sleep(1)
 
@@ -514,4 +514,4 @@ if __name__ == "__main__":
     Terandelle.perform(Terandelle.listen(Display), Display)
 
     print("display wave")
-    display.wave()
+    Display.wave()
