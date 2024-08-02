@@ -353,11 +353,10 @@ class Display:
         self.dispWidth = 128
         # The first two parameters are the pixel width and pixel height.  Change these to the right size for your display!
         self.display = adafruit_ssd1306.SSD1306_I2C(self.dispWidth, self.dispHeight, i2c)
-        self.display.rotate(3)
+        self.display.rotate(2)
         self.display.fill(0)
 
         self.display.show()
-
 
         self.image = Image.new("1", (self.dispWidth, self.dispHeight))
         self.draw = ImageDraw.Draw(self.image)
