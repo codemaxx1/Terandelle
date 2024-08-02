@@ -340,7 +340,7 @@ class Terandelle:
 
         functionRun = command
 
-        display.printText(command, 0, 0)
+        display.printText(command, 0, 0, 255)
         display.updateScreen()
 
         return functionRun
