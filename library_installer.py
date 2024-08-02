@@ -23,6 +23,7 @@ packages = [#"math",
             ["pip3", "install", "python-vlc"],
         ]
 
+failureList = []
 print("installing packages")
 for package in packages:
     print(f"installing {package}")
@@ -36,6 +37,8 @@ for package in packages:
         print(installed_packages)
     except Exception as e:
         print("falure in installing {0} because of {1}".format(package, e))
+        failureList.append(package)
 
+print('failed packages: {0}'.format(failureList))
 print("done installing packages")
 

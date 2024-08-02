@@ -59,7 +59,6 @@ class Terandelle:
     def __init__(self, display):
         self.display = display
         subprocess.run(["pulseaudio", "-D"])
-        self.update()
 
 
     def speakingThread(self, text):
@@ -483,6 +482,9 @@ if __name__ == "__main__":
 
     print("init terandelle")
     Terandelle = Terandelle(display)
+
+    print("update")
+    Terandelle.update()
 
     print("bootup sequence")
     Terandelle.bootup(display)
