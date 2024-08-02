@@ -303,10 +303,8 @@ class Terandelle:
         '''
         self.say("Terandelle system, booting up")
         display.bootup()
-        time.sleep(1)
         self.user = self.login()
         self.say("Ready for your command")
-        time.sleep(1)
 
         return 1
 
@@ -486,6 +484,8 @@ if __name__ == "__main__":
 
     print("init terandelle")
     Terandelle = Terandelle(display)
+
+    time.sleep(1)
 
     print("update")
     Terandelle.update()
