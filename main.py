@@ -489,6 +489,8 @@ if __name__ == "__main__":
     print("update")
     Terandelle.update()
 
+    time.sleep(2)
+
     print("bootup sequence")
     Terandelle.bootup(display)
 
