@@ -53,8 +53,8 @@ class Terandelle:
     # user, for use in identifying authority and for customizing response data
     user = "guest"
 
-    def __init__(self, display):
-        self.display = display
+    def __init__(self, Display):
+        self.Display = Display
         subprocess.run(["pulseaudio", "-D"])
 
 
@@ -189,7 +189,7 @@ class Terandelle:
         return newsFeedList
 
 
-    def news(self, display):
+    def news(self, Display):
         '''
         get you your news
         :return: 1 on completion
@@ -274,7 +274,7 @@ class Terandelle:
         return 1
 
 
-    def weather(self, city, display):
+    def weather(self, city, Display):
         weather = self.getWeather(city)
         # build TTS response
         response = "In " + str(city) + "the weather is " + str(weather.weatherDescription) + " and it is " + str(
@@ -283,29 +283,29 @@ class Terandelle:
             response += " and wind speed is " + str(weather.windSpeed) + " so it feels like " + str(weather.feelsLike)
         # Temperature (in kelvin unit) = " + str(temperature) + " atmospheric pressure (in hPa unit) = " + str(pressure) + " humidity (in percentage) = " + str(humidity) + " description = " +
 
-        display.printText(f"weather : {weather.weatherDescription}", 0, 0, 255)
-        display.printText(f"temp : {weather.temperature}", 0, "1textHeight", 255)
+        Display.printText(f"weather : {weather.weatherDescription}", 0, 0, 255)
+        Display.printText(f"temp : {weather.temperature}", 0, "1textHeight", 255)
 
         self.say(response)
 
         return 1
 
 
-    def bootup(self, display):
+    def bootup(self, Display):
         '''
         perform some functions at time of startup
         :param display: instance of the display class, named display
         :return: 1 on success
         '''
         self.say("Terandelle system, booting up")
-        display.bootup()
+        Display.bootup()
         self.user = self.login()
         self.say("Ready for your command")
 
         return 1
 
 
-    def listen(self, display):
+    def listen(self, Display):
         '''
         listen to audio input from the attached microphone and run it through the speech recognition server
         :param display: instance of display class
@@ -327,7 +327,7 @@ class Terandelle:
         return str(wordsSpoken)
 
 
-    def perform(self, command, display):
+    def perform(self, command, Display):
         '''
         take the words spoken data from the listen() function and actually run a command from it
         :param command: the text of words spoken
@@ -338,8 +338,8 @@ class Terandelle:
 
         functionRun = command
 
-        display.printText(command, 0, 0, 255)
-        display.updateScreen()
+        Display.printText(command, 0, 0, 255)
+        Display.updateScreen()
 
         return functionRun
 
@@ -348,7 +348,7 @@ class Terandelle:
     display class
     for functionality relating to the display
 """
-class display:
+class Display:
     def __init__(self):
 
         display.fill(0)
@@ -470,7 +470,7 @@ class display:
 
 if __name__ == "__main__":
     print("init display")
-    display = display()
+    Display = Display()
 
     print("init terandelle")
     Terandelle = Terandelle(display)
@@ -483,9 +483,9 @@ if __name__ == "__main__":
     time.sleep(2)
 
     print("bootup sequence")
-    Terandelle.bootup(display)
+    Terandelle.bootup(Display)
 
-    Terandelle.perform(Terandelle.listen(display), display)
+    Terandelle.perform(Terandelle.listen(Display), Display)
 
     print("display wave")
     display.wave()
