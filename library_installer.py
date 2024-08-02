@@ -1,8 +1,8 @@
 import sys
 import subprocess
 
-packages = ["math",
-            "time",
+packages = [#"math",
+            #"time",
             "Adafruit-SSD1306",
             "pillow",
             "feedparser",
@@ -14,7 +14,7 @@ packages = ["math",
             "psutil",
             "requests",
             "json",
-            "RPi",
+            "RPi.GPIO",
             "socket",
             "SpeechRecognition",
             "spacy",
