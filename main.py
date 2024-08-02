@@ -340,7 +340,8 @@ class Terandelle:
 
         functionRun = command
 
-
+        display.printText(command, 0, 0)
+        display.updateScreen()
 
         return functionRun
 
@@ -429,6 +430,9 @@ class display:
         disp.image(self.image)
         disp.display()
 
+
+    def wave(self):
+        return 0
     '''
     def wave(self):
 
