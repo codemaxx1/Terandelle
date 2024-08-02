@@ -314,7 +314,7 @@ class Terandelle:
         
         # Reading Microphone as source
         # listening the speech and store in audio_text variable
-        for i in range(len(sr.Microphone.list_microphone_hames())):
+        for i in range(len(sr.Microphone.list_microphone_names())):
             with sr.Microphone(device_index=i) as source:
                 print(f"Talk to mic {i} please ...")
                 audio_text = r.listen(source)
