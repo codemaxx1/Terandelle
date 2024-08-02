@@ -315,6 +315,7 @@ class Terandelle:
         :return: the text-converted voice data
         '''
         r = sr.Recognizer()
+        wordsSpoken = ""
         with sr.Microphone() as source:
             print('Say something...')
             r.pause_threshold = 1
@@ -326,7 +327,7 @@ class Terandelle:
         # loop back to continue to listen for commands if unrecognizable speech is received
         except sr.UnknownValueError:
             print('unknown error')
-        return wordsSpoken
+        return str(wordsSpoken)
 
 
     def perform(self, command, display):
