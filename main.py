@@ -363,6 +363,7 @@ class display:
         # Clear display.
         disp.clear()
         disp.display()
+        disp.setRotation(1)
 
         # Create image buffer.
         # Make sure to create image with mode '1' for 1-bit color.
