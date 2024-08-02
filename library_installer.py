@@ -25,12 +25,15 @@ print("installing packages")
 for package in packages:
     print(f"installing {package}")
     # implement pip3 as a subprocess:
-    subprocess.check_call([sys.executable, '-m', 'pip3', 'install', package])
+    try:
+        subprocess.check_call([sys.executable, '-m', 'pip3', 'install', package])
 
-    # process output with an API in the subprocess module:
-    reqs = subprocess.check_output([sys.executable, '-m', 'pip3', 'freeze'])
-    installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
-    print(installed_packages)
+        # process output with an API in the subprocess module:
+        reqs = subprocess.check_output([sys.executable, '-m', 'pip3', 'freeze'])
+        installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
+        print(installed_packages)
+    except Exception as e:
+        print("falure in installing {0} because of {1}".format(package, e))
 
 print("done installing packages")
 
