@@ -303,8 +303,11 @@ class Terandelle:
         '''
         self.say("Terandelle system, booting up")
         display.bootup()
-        self.say("Ready for your command")
+        time.sleep(1)
         self.user = self.login()
+        self.say("Ready for your command")
+        time.sleep(1)
+
         return 1
 
 
