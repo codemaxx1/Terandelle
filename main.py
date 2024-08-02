@@ -349,8 +349,8 @@ class Display:
     def __init__(self):
 
         i2c = busio.I2C(SCL, SDA)
-        self.dispHeight = 128#64
-        self.dispWidth = 64#128
+        self.dispHeight = 64
+        self.dispWidth = 128
         # The first two parameters are the pixel width and pixel height.  Change these to the right size for your display!
         self.display = adafruit_ssd1306.SSD1306_I2C(self.dispWidth, self.dispHeight, i2c)
 
