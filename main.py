@@ -306,42 +306,10 @@ class Terandelle:
         :param display: instance of display class
         :return: the text-converted voice data
         '''
-        '''
-        r = sr.Recognizer()
-        with sr.Microphone() as source:
-            print('Say something...')
-            r.pause_threshold = 1
-            r.adjust_for_ambient_noise(source, duration=1)
-            audio = r.listen(source)
-        try:
-            wordsSpoken = r.recognize_google(audio).lower()
-            print('You said: ' + wordsSpoken + '\n')
-        # loop back to continue to listen for commands if unrecognizable speech is received
-        except sr.UnknownValueError:
-            print('unknown error')
-        return wordsSpoken
-        '''
-        
-        # Initialize recognizer class (for recognizing the speech)
-        r = sr.Recognizer()
-        
-        # Reading Microphone as source
-        # listening the speech and store in audio_text variable
-        with sr.Microphone() as source:
-            print("Talk")
-            audio_text = r.listen(source)
-            print("Time over, thanks")
-            # recoginze_() method will throw a request
-            # error if the API is unreachable,
-            # hence using exception handling
-            
-            try:
-                # using google speech recognition
-                print("Text: "+r.recognize_google(audio_text))
-            except:
-                 print("Sorry, I did not get that")
-
-
+        while True:
+            print('looping on listen')
+            time.sleep(1)
+    
     def perform(self, command, display):
         '''
         take the words spoken data from the listen() function and actually run a command from it
