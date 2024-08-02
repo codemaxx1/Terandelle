@@ -408,13 +408,6 @@ class Display:
             text = time.strftime("%X")
             self.draw.text((0, 36), text, font=self.fontLarge, fill=255)
 
-            time.sleep(1)
-
-            for i in range(0, self.dispHeight // 2):
-                offset = (offset + 1) % self.dispHeight
-                self.display.write_cmd(adafruit_ssd1306.SET_DISP_START_LINE | offset)
-                self.display.show()
-                time.sleep(0.001)
 
             text = "Terandelle"
             self.display.text(text, self.dispWidth/2, self.dispHeight/2)
