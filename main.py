@@ -28,6 +28,7 @@ import speech_recognition as sr # for speech recognition
 #import spacy                    # for natural language processing
 from gtts import gTTS           # for tts
 import vlc
+import sounddevice
 #from playsound import playsound # to play TTS .mp3 file after it is generated
 
 # Raspberry Pi pin configuration:
