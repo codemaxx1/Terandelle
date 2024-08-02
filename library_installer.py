@@ -16,7 +16,7 @@ packages = [#"math",
             ["pip3", "install", "json"],
             ["pip3", "install", "RPi.GPIO"],
             ["pip3", "install", "socket"],
-            ['sudo', "apt-get", "install", "portaudio19-dev", "python-pyaudio"],
+            ['sudo', "apt-get", "install", "portaudio19-dev", "python-pyaudio", "-y"],
             ["pip3", "install", "PyAudio"],
             ['pip3', 'install', 'pipwin'],
             ["pipwin", 'install', 'pyaudio']
