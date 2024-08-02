@@ -3,7 +3,8 @@ import subprocess
 
 packages = [#"math",
             #"time",
-            ["pip3", "install", "Adafruit-SSD1306"],
+            #["pip3", "install", "Adafruit-SSD1306"],
+            ["pip3", "install", "adafruit-circuitpython-ssd1306"],
             ["pip3", "install", "pillow"],
             ["pip3", "install", "feedparser"],
             #["pip3", "install", "threading"],

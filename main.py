@@ -7,8 +7,9 @@
 
 import math
 import time
-import Adafruit_GPIO.SPI as SPI
-import Adafruit_SSD1306         # for OLED interface
+from board import SCL, SDA      # for scl and sda pins
+import busio
+import adafruit_ssd1306         # for OLED interface
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
@@ -29,13 +30,9 @@ from gtts import gTTS           # for tts
 import vlc
 #from playsound import playsound # to play TTS .mp3 file after it is generated
 
-# Raspberry Pi pin configuration:
-RST = 24
-
-# 128x32 display with hardware I2C:
-#disp = Adafruit_SSD1306.SSD1306_128_32(rst=RST)
-# 128x64 display with hardware I2C:
-disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+i2c = busio.I2C(SCL, SDA)
+# The first two parameters are the pixel width and pixel height.  Change these to the right size for your display!
+display = adafruit_ssd1306.SSD1306_I2C(128, 64, i2c)
 
 '''
     Person class, for use with loading data on peoplpe
@@ -353,31 +350,18 @@ class Terandelle:
 """
 class display:
     def __init__(self):
-        # Initialize library.
-        disp.begin()
 
-        # Get display width and height.
-        self.width = disp.width
-        self.height = disp.height
+        display.fill(0)
 
-        # Clear display.
-        disp.clear()
-        disp.display()
-        disp.setRotation(1)
+        display.show()
 
-        # Create image buffer.
-        # Make sure to create image with mode '1' for 1-bit color.
-        self.image = Image.new('1', (self.width, self.height))
-
-        # Load default font.
-        self.font = ImageFont.load_default()
-
-        # Alternatively load a TTF font.  Make sure the .ttf font file is in the same directory as this python script!
-        # Some nice fonts to try: http://www.dafont.com/bitmap.php
-        # font = ImageFont.truetype('Minecraftia.ttf', 8)
-
-        # Create drawing object.
-        self.draw = ImageDraw.Draw(self.image)
+        # Set a pixel in the origin 0,0 position.
+        display.pixel(0, 0, 1)
+        # Set a pixel in the middle 64, 16 position.
+        display.pixel(64, 16, 1)
+        # Set a pixel in the opposite 127, 31 position.
+        display.pixel(127, 31, 1)
+        display.show()
 
 
     def bootup(self):
