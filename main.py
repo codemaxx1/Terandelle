@@ -317,7 +317,7 @@ class Terandelle:
         for i in range(1,len(sr.Microphone.list_microphone_names())):
             with sr.Microphone(device_index=i) as source:
                 print(f"Talk to mic {i} please ...")
-                audio_text = r.listen(source)
+                audio_text = r.listen(source, 10, 3)
                 print("Time over, thanks")
                 
             # recoginze_() method will throw a request
