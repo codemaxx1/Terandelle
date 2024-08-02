@@ -410,10 +410,10 @@ class Display:
 
 
             text = "Terandelle"
-            self.display.text(text, self.dispWidth/2, self.dispHeight/2)
+            self.display.text(text, self.dispWidth/2, self.dispHeight/2, 1)
             text = "Booting up"
-            self.display.text(text, self.dispWidth/2, self.dispHeight/2)
-            self.draw.text((0,0), IP, font=self.font, fill=0)
+            self.display.text(text, self.dispWidth/2, self.dispHeight/2, 1)
+            self.draw.text(IP, 0, 0, fill=0)
 
             #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
 
