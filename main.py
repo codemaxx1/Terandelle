@@ -30,9 +30,6 @@ from gtts import gTTS           # for tts
 import vlc
 #from playsound import playsound # to play TTS .mp3 file after it is generated
 
-i2c = busio.I2C(SCL, SDA)
-# The first two parameters are the pixel width and pixel height.  Change these to the right size for your display!
-display = adafruit_ssd1306.SSD1306_I2C(128, 64, i2c)
 
 '''
     Person class, for use with loading data on peoplpe
@@ -351,17 +348,31 @@ class Terandelle:
 class Display:
     def __init__(self):
 
-        display.fill(0)
+        i2c = busio.I2C(SCL, SDA)
+        self.dispHeight = 64
+        self.dispWidth = 128
+        # The first two parameters are the pixel width and pixel height.  Change these to the right size for your display!
+        self.display = adafruit_ssd1306.SSD1306_I2C(self.dispWidth, self.dispHeight, i2c)
 
-        display.show()
+        self.display.fill(0)
+
+        self.display.show()
 
         # Set a pixel in the origin 0,0 position.
-        display.pixel(0, 0, 1)
+        self.display.pixel(0, 0, 1)
         # Set a pixel in the middle 64, 16 position.
-        display.pixel(64, 16, 1)
+        self.display.pixel(64, 16, 1)
         # Set a pixel in the opposite 127, 31 position.
-        display.pixel(127, 31, 1)
-        display.show()
+        self.display.pixel(127, 31, 1)
+
+        self.image = Image.new("1", (self.displayWidth, self.dispHeight))
+        draw = ImageDraw.Draw(self.image)
+
+        # font sizes
+        fontLarge = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 28)
+        font2 = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 14)
+
+        self.display.show()
 
 
     def bootup(self):
@@ -376,30 +387,46 @@ class Display:
         except:
             IP = "network unreachable"
 
+
         # perform visual loop for 200 frames
         for i in range(200):
             radius = int(i/2)
-
+            '''
             x = (self.width/2) * math.sin(radius)
             y = (self.height/2) * math.cos(radius)
 
             self.draw.ellipse((self.width/2-radius + x, self.height/2-radius + y, self.width/2+radius + x, self.height/2+radius + y), outline=255, fill=255)
             #self.draw.ellipse((self.width / 2 - 10 + x, self.height / 2 - 10 + y, self.width / 2 + 10 + x, self.height / 2 + 10 + y), outline=255, fill=0)
+            '''
+
+            # write the current time to the display after each scroll
+            self.draw.rectangle((0, 0, self.dispWidth, self.dispHeight * 2), outline=0, fill=0)
+            text = time.strftime("%A")
+            self.draw.text((0, 0), text, font=self.font, fill=255)
+            text = time.strftime("%e %b %Y")
+            self.draw.text((0, 14), text, font=self.font, fill=255)
+            text = time.strftime("%X")
+            self.draw.text((0, 36), text, font=self.fontLarge, fill=255)
+
+            time.sleep(1)
+
+            for i in range(0, self.dispHeight // 2):
+                offset = (offset + 1) % self.dispHeight
+                self.display.write_cmd(adafruit_ssd1306.SET_DISP_START_LINE | offset)
+                self.display.show()
+                time.sleep(0.001)
 
             text = "Terandelle"
-            textWidth, textHeight = 60, 20 #self.draw.textsize(text, font=self.font)
-            self.draw.text((self.width/2 - textWidth/2, self.height/2 - textHeight/2), text, font=self.font, fill=255)
-
+            self.display.text(text, self.dispWidth/2, self.dispHeight/2)
             text = "Booting up"
-            textWidth, textHeight = 70, 20 #self.draw.textsize(text, font=self.font)
-            self.draw.text((self.width/2 - textWidth/2, self.height/2 + textHeight/2), text, font=self.font, fill=255)
+            self.display.text(text, self.dispWidth/2, self.dispHeight/2)
             self.draw.text((0,0), IP, font=self.font, fill=0)
 
             #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
 
             # update screen
-            disp.image(self.image)
-            disp.display()
+            self.display.image(self.image)
+            self.display.show()
 
             # refresh rate
             time.sleep(0.05)
@@ -408,13 +435,12 @@ class Display:
 
 
     def printText(self, text, x, y, fill):
-        self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0) # Clear image buffer by drawing a black filled box.
-        self.draw.text((x,y), text, font=self.font, fill=fill) # print text
+        self.display.text(text, x, y, fill)
 
     def updateScreen(self):
         # update screen
-        disp.image(self.image)
-        disp.display()
+        self.display.image(image)
+        self.display.show()
 
 
     def wave(self):
