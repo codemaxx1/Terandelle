@@ -24,7 +24,7 @@ import requests                 # used to send data requests
 import json
 import socket                   # for determining IP
 import speech_recognition as sr # for speech recognition
-import spacy                    # for natural language processing
+#import spacy                    # for natural language processing
 from gtts import gTTS           # for tts
 import vlc
 #from playsound import playsound # to play TTS .mp3 file after it is generated
