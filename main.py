@@ -315,12 +315,12 @@ class Terandelle:
         # Reading Microphone as source
         # listening the speech and store in audio_text variable
         for i in range(1,len(sr.Microphone.list_microphone_names())):
-            with sr.Microphone(device_index=i) as source:
-                print(f"Talk to mic {i} please ...")
-                try:
+            try:
+                with sr.Microphone(device_index=i) as source:
+                    print(f"Talk to mic {i} please ...")
                     audio_text = r.listen(source, 10, 3)
                     print("Time over, thanks")
-                except Exception as e:
+            except Exception as e:
                     print(f"um... something broke {e}")
             # recoginze_() method will throw a request
             # error if the API is unreachable,
