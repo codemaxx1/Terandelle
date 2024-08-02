@@ -312,9 +312,10 @@ class Terandelle:
         # Reading Microphone as source
         # listening the speech and store in audio_text variable
         with sr.Microphone() as source:
-        print("Talk")
-        audio_text = r.listen(source)
-        print("Time over, thanks")
+            print("Talk")
+            audio_text = r.listen(source)
+            print("Time over, thanks")
+            
         # recoginze_() method will throw a request
         # error if the API is unreachable,
         # hence using exception handling
