@@ -400,6 +400,7 @@ class Display:
             '''
 
             # write the current time to the display after each scroll
+            '''
             self.draw.rectangle((0, 0, self.dispWidth, self.dispHeight * 2), outline=0, fill=0)
             text = time.strftime("%A")
             self.draw.text((0, 0), text, font=self.font, fill=255)
@@ -407,6 +408,7 @@ class Display:
             self.draw.text((0, 14), text, font=self.font, fill=255)
             text = time.strftime("%X")
             self.draw.text((0, 36), text, font=self.fontLarge, fill=255)
+            '''
 
 
             text = "Terandelle"
