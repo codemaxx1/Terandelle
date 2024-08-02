@@ -309,6 +309,8 @@ class Terandelle:
         '''
         # Initialize recognizer class (for recognizing the speech)
         r = sr.Recognizer()
+
+        print(f"microphone names: {speech_recog.Microphone.list_microphone_names()}")
         
         # Reading Microphone as source
         # listening the speech and store in audio_text variable
