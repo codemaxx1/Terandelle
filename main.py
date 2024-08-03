@@ -375,6 +375,12 @@ class Display:
         self.splash = displayio.Group()
         self.display.root_group = self.splash
 
+        self.color_bitmap = displayio.Bitmap(self.displayWidth, self.displayHeight, 1)
+        self.color_palette = displayio.Palette(1)
+        self.color_palette[0] = 0xFFFFFF  # White
+
+        self.bg_sprite = displayio.TileGrid(self.color_bitmap, pixel_shader=self.color_palette, x=0, y=0)
+        self.splash.append(self.bg_sprite)
 
     def bootup(self):
         '''
@@ -400,9 +406,7 @@ class Display:
             #self.draw.ellipse((self.width / 2 - 10 + x, self.height / 2 - 10 + y, self.width / 2 + 10 + x, self.height / 2 + 10 + y), outline=255, fill=0)
             '''
 
-            # write the current time to the display after each scroll
-            # Draw a label
-            text = "Hello World!"
+            text = "Terrandelle"
             text_area = label.Label(terminalio.FONT, text=text, color=0xFFFFFF, x=self.displayWidth/2, y=self.displayHeight / 2)
             self.splash.append(text_area)
 
