@@ -32,7 +32,10 @@ import vlc
 
 import board                        #for screen
 import displayio                    #for screen
-from displayio import I2CDisplay as I2CDisplayBus   #for screen
+try:
+    from i2cdisplaybus import I2CDisplayBus
+except ImportError:
+    from displayio import I2CDisplay as I2CDisplayBus
 import terminalio                   #for screen
 from adafruit_display_text import label             #for screen
 import adafruit_displayio_ssd1306   #for screen
