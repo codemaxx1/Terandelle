@@ -369,7 +369,7 @@ class Display:
         self.displayHeight = 64
         BORDER = 5
 
-        display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=self.displayWidth, height=self.displayHeight)
+        self.display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=self.displayWidth, height=self.displayHeight)
 
         # Make the display context
         self.splash = displayio.Group()
