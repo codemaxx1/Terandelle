@@ -365,9 +365,9 @@ class Display:
         i2c = board.I2C()  # uses board.SCL and board.SDA
         display_bus = I2CDisplayBus(i2c, device_address=0x3C, reset=oled_reset)
 
-        self.displayWidth = 164
+        self.displayWidth = 128
         self.displayHeight = 64
-        BORDER = 5
+        #BORDER = 5
 
         self.display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=self.displayWidth, height=self.displayHeight, rotation=90)
 
@@ -375,9 +375,9 @@ class Display:
         self.splash = displayio.Group()
         self.display.root_group = self.splash
 
-        self.color_bitmap = displayio.Bitmap(self.displayWidth, self.displayHeight, 1)
-        self.color_palette = displayio.Palette(1)
-        self.color_palette[0] = 0xFFFFFF  # White
+        #self.color_bitmap = displayio.Bitmap(self.displayWidth, self.displayHeight, 1)
+        #self.color_palette = displayio.Palette(1)
+        #self.color_palette[0] = 0xFFFFFF  # White
 
 
     def bootup(self):
@@ -394,7 +394,14 @@ class Display:
 
 
         # perform visual loop for 200 frames
-        for i in range(200):
+        for i in range(self.displayWidth):
+            for j in range(self.displayHeight):
+                self.inner_bitmap = displayio.Bitmap(1, 1, 1)
+                self.inner_palette = displayio.Palette(1)
+                self.inner_palette[0] = 0xFFFFF  # Black
+                self.inner_sprite = displayio.TileGrid(self.inner_bitmap, pixel_shader=self.inner_palette, x=i, y=j)
+                self.splash.append(self.inner_sprite)
+
             radius = int(i/2)
             '''
             x = (self.width/2) * math.sin(radius)
@@ -408,11 +415,13 @@ class Display:
             text_area = label.Label(terminalio.FONT, text=text, color=0xFFFFFF, x=self.displayWidth/2, y=self.displayHeight / 2)
             self.splash.append(text_area)
 
+            '''
             self.inner_bitmap = displayio.Bitmap(self.displayWidth, self.displayHeight, 1)
             self.inner_palette = displayio.Palette(1)
             self.inner_palette[0] = 0xFFFFF  # Black
             self.inner_sprite = displayio.TileGrid( self.inner_bitmap, pixel_shader=self.inner_palette, x=0, y=0  )
             self.splash.append(self.inner_sprite)
+            '''
 
             '''
             text = "Terandelle"
