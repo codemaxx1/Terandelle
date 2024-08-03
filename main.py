@@ -379,15 +379,6 @@ class Display:
         self.color_palette = displayio.Palette(1)
         self.color_palette[0] = 0xFFFFFF  # White
 
-        # Draw a smaller inner rectangle
-
-        self.inner_bitmap = displayio.Bitmap(self.displayWidth, self.displayWidth, 1)
-        self.inner_palette = displayio.Palette(1)
-        self.inner_palette[0] = 0x000000  # Black
-        self.inner_sprite = displayio.TileGrid(
-            self.inner_bitmap, pixel_shader=self.inner_palette, x=BORDER, y=BORDER
-        )
-        self.splash.append(self.inner_sprite)
 
     def bootup(self):
         '''
@@ -416,6 +407,14 @@ class Display:
             text = "Terrandelle"
             text_area = label.Label(terminalio.FONT, text=text, color=0xFFFFFF, x=self.displayWidth/2, y=self.displayHeight / 2)
             self.splash.append(text_area)
+
+            self.inner_bitmap = displayio.Bitmap(self.displayWidth, self.displayWidth, 1)
+            self.inner_palette = displayio.Palette(1)
+            self.inner_palette[0] = 0xFFFFF  # Black
+            self.inner_sprite = displayio.TileGrid(
+                self.inner_bitmap, pixel_shader=self.inner_palette, x=0, y=0
+            )
+            self.splash.append(self.inner_sprite)
 
             '''
             text = "Terandelle"
