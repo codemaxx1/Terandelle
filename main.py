@@ -30,6 +30,12 @@ from gtts import gTTS           # for tts
 import vlc
 #from playsound import playsound # to play TTS .mp3 file after it is generated
 
+import board                        #for screen
+import displayio                    #for screen
+from displayio import I2CDisplay as I2CDisplayBus   #for screen
+import terminalio                   #for screen
+from adafruit_display_text import label             #for screen
+import adafruit_displayio_ssd1306   #for screen
 
 '''
     Person class, for use with loading data on peoplpe
@@ -348,24 +354,23 @@ class Terandelle:
 class Display:
     def __init__(self):
 
-        i2c = busio.I2C(SCL, SDA)
-        self.dispHeight = 64
-        self.dispWidth = 128
-        # The first two parameters are the pixel width and pixel height.  Change these to the right size for your display!
-        self.display = adafruit_ssd1306.SSD1306_I2C(self.dispWidth, self.dispHeight, 90, i2c)
+        displayio.release_displays()
 
-        self.display.fill(0)
+        oled_reset = board.D9
 
-        self.display.show()
+        # Use for I2C
+        i2c = board.I2C()  # uses board.SCL and board.SDA
+        display_bus = I2CDisplayBus(i2c, device_address=0x3C, reset=oled_reset)
 
-        self.image = Image.new("1", (self.dispWidth, self.dispHeight))
-        self.draw = ImageDraw.Draw(self.image)
+        self.displayWidth = 128
+        self.displayHeight = 64
+        BORDER = 5
 
-        # font sizes
-        self.fontLarge = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 28)
-        self.font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 8)
+        display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=self.displayWidth, height=self.displayHeight)
 
-        self.display.show()
+        # Make the display context
+        self.splash = displayio.Group()
+        self.display.root_group = self.splash
 
 
     def bootup(self):
@@ -393,23 +398,18 @@ class Display:
             '''
 
             # write the current time to the display after each scroll
+            # Draw a label
+            text = "Hello World!"
+            text_area = label.Label(terminalio.FONT, text=text, color=0xFFFFFF, x=self.displayWidth/2, y=self.displayHeight / 2)
+            self.splash.append(text_area)
 
-            self.draw.rectangle((0, 0, self.dispWidth, self.dispHeight * 2), outline=0, fill=0)
-            text = time.strftime("%A")
-            self.draw.text((0, 0), text, font=self.font, fill=255)
-            text = time.strftime("%e %b %Y")
-            self.draw.text((0, 14), text, font=self.font, fill=255)
-            text = time.strftime("%X")
-            self.draw.text((0, 36), text, font=self.fontLarge, fill=255)
-
-
-
+            '''
             text = "Terandelle"
             self.draw.text((self.dispWidth/2, self.dispHeight/2), text, font=self.font, fill=255)
             text = "Booting up"
             self.draw.text((self.dispWidth/2, self.dispHeight/2), text, font=self.font, fill=255)
             self.draw.text((0,0), IP, font=self.font, fill=255)
-
+            '''
             #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
 
             # update screen
