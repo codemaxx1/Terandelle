@@ -365,7 +365,7 @@ class Display:
         i2c = board.I2C()  # uses board.SCL and board.SDA
         display_bus = I2CDisplayBus(i2c, device_address=0x3C, reset=oled_reset)
 
-        self.displayWidth = 128
+        self.displayWidth = 164
         self.displayHeight = 64
         BORDER = 5
 
