@@ -398,7 +398,7 @@ class Display:
             for j in range(self.displayHeight):
                 self.inner_bitmap = displayio.Bitmap(1, 1, 1)
                 self.inner_palette = displayio.Palette(1)
-                self.inner_palette[0] = 0xFFFFF  # Black
+                self.inner_palette[0] = 0x00000  # Black
                 self.inner_sprite = displayio.TileGrid(self.inner_bitmap, pixel_shader=self.inner_palette, x=i, y=j)
                 self.splash.append(self.inner_sprite)
 
