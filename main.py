@@ -416,8 +416,8 @@ class Display:
             #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
 
             # update screen
-            self.display.image(self.image)
-            self.display.show()
+            #self.display.image(self.image)
+            #self.display.show()
 
             # refresh rate
             time.sleep(0.05)
