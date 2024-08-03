@@ -379,8 +379,15 @@ class Display:
         self.color_palette = displayio.Palette(1)
         self.color_palette[0] = 0xFFFFFF  # White
 
-        self.bg_sprite = displayio.TileGrid(self.color_bitmap, pixel_shader=self.color_palette, x=0, y=0)
-        self.splash.append(self.bg_sprite)
+        # Draw a smaller inner rectangle
+
+        self.inner_bitmap = displayio.Bitmap(self.displayWidth, self.displayWidth, 1)
+        self.inner_palette = displayio.Palette(1)
+        self.inner_palette[0] = 0x000000  # Black
+        self.inner_sprite = displayio.TileGrid(
+            self.inner_bitmap, pixel_shader=self.inner_palette, x=BORDER, y=BORDER
+        )
+        self.splash.append(self.inner_sprite)
 
     def bootup(self):
         '''
