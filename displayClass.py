@@ -58,10 +58,10 @@ class Display:
                 self.draw.rectangle((x, y, x+1, y+1), outline=255, fill=0)
 
                 text = "Terandelle"
-                self.printText(self.displayWidth / 2, self.displayHeight / 2, text, 0)
+                self.printText(self.displayWidth / 2, self.displayHeight / 2, text, 1)
                 text = "Booting up"
-                self.printText(self.displayWidth / 2, self.displayHeight / 2 + 20, text, 0)
-                self.printText(0, 0, IP, 0)
+                self.printText(self.displayWidth / 2, self.displayHeight / 2 + 20, text, 1)
+                self.printText(0, 0, IP, 1)
 
                 self.updateScreen()
                 pygame.time.wait(1)  # Milliseconds
