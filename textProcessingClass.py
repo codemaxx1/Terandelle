@@ -29,7 +29,7 @@ class TextProcessing:
                 for word in fileData.readlines():
                     print(f"{file} contents: {word}")
                     # populate tree
-                    self.WordTree.insert(word)
+                    self.WordTree.insert(int(word))
 
 
     def update(self):
@@ -65,7 +65,7 @@ class TextProcessing:
                 actions.append(token)
             if str(token.tag_) == "NN":
                 nouns.append(token)
-                locatedFromFiles.append(self.WordTree.find(token))
+                locatedFromFiles.append(self.WordTree.find(int(token)))
             if str(token.tag_) == "NNP":
                 properNouns.append(token)
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
