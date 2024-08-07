@@ -65,7 +65,7 @@ class TextProcessing:
                 actions.append(token)
             if str(token.tag_) == "NN":
                 nouns.append(token)
-                locatedFromFiles.append(self.WordTree.search(token))
+                locatedFromFiles.append(self.WordTree.find(token))
             if str(token.tag_) == "NNP":
                 properNouns.append(token)
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
