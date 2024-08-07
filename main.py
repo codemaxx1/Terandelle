@@ -367,9 +367,9 @@ class Display:
             IP = "network unreachable"
 
         text = "Terandelle"
-        self.printText(self.dispWidth / 2, self.dispHeight / 2, text, fill=1)
+        self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
         text = "Booting up"
-        self.self.printText(self.dispWidth / 2, self.dispHeight / 2, text, fill=1)
+        self.self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
         self.self.printText(0, 0, IP, fill=1)
 
         # perform visual loop for displayWidth frames
