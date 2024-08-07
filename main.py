@@ -7,6 +7,8 @@
 
 import math
 import time
+from random import randrange
+
 import Adafruit_SSD1306         # for OLED interface
 from PIL import Image
 from PIL import ImageFont
@@ -373,20 +375,22 @@ class Display:
 
 
         # perform visual loop for displayWidth frames
-        for i in range(self.displayWidth):
+        for i in range(self.displayWidth/2):
             text = "Terandelle"
             self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
             text = "Booting up"
             self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
             self.printText(0, 0, IP, fill=1)
 
-            for j in range(self.displayHeight):
-                self.draw.rectangle((i, j, i+1, j+1), outline=255, fill=0)
+            for j in range(self.displayHeight/2):
+                x = randrange(0, self.displayWidth)
+                y = randrange(0, self.displayHeight)
+                self.draw.rectangle((x, y, x+1, y+1), outline=255, fill=0)
 
                 #self.oled.pixel(i, j, 1)
 
                 self.updateScreen()
-                pygame.time.wait(0.5)  # Milliseconds
+                pygame.time.wait(1)  # Milliseconds
 
 
 
