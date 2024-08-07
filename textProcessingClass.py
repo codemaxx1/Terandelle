@@ -47,6 +47,7 @@ class TextProsessing:
                 properNouns.append(token)
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
 
+
         #get the list of files for keyword associations
         # Get the list of all files and directories
         path = os.getcwd()
