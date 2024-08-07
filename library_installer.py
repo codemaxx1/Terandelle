@@ -30,10 +30,10 @@ packages = [#"math",
             ["python3", "-m", "spacy", "download", "en_core_web_sm"],
             ["pip3", "install", "socket"],
             ['sudo', "apt-get", "install", "portaudio19-dev", "python-pyaudio", "-y"],
-            ["sudo", "apt-get", "install", "flac"]
+            ["sudo", "apt-get", "install", "flac"],
             ["pip3", "install", "PyAudio"],
             ['pip3', 'install', 'pipwin'],
-            ["pipwin", 'install', 'pyaudio']
+            ["pipwin", 'install', 'pyaudio'],
             ["pip3", "install", "SpeechRecognition"],
             ["pip3", "install", "spacy"],
             ["pip3", "install", "gTTS"],
