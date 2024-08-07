@@ -1,3 +1,7 @@
+'''
+
+'''
+
 # imports
 import board                        #for screen
 import pygame                       # for high resolution sleep/delay function
