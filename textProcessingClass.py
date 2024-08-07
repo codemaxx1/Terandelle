@@ -56,6 +56,7 @@ class TextProcessing:
         actions = []
         nouns = []
         properNouns = []
+        locatedFromFiles = []
 
         for token in command:
             print(
@@ -64,9 +65,12 @@ class TextProcessing:
                 actions.append(token)
             if str(token.tag_) == "NN":
                 nouns.append(token)
+                locatedFromFiles.append(self.WordTree.search(token))
             if str(token.tag_) == "NNP":
                 properNouns.append(token)
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
+        print(f"located from files -- {locatedFromFiles}")
+
 
 
         """
@@ -78,9 +82,3 @@ class TextProcessing:
         return "unknown"  # Default intent if no known intent is found
         """
 
-
-    def chatbot(self, input_sentence):
-        processed_input = self.preprocess(input_sentence)
-        intent = self.recognize_intent(processed_input)
-        response = self.generate_response(intent)
-        return response
