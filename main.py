@@ -339,7 +339,7 @@ class Terandelle:
             Display.updateScreen()
 
             time.sleep(10)
-            return functionRun
+        return functionRun
 
 
 if __name__ == "__main__":

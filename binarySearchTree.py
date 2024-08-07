@@ -1,50 +1,75 @@
 class Tree:
     def __init__(self, val=None):
-
-        # Initialize the Tree node with a value
+        # Initialize a tree node with a value
         self.value = val
-
-        # If the node has a value,
-        # create left and right children nodes
         if self.value:
+            # If a value is provided,
+            # create left and right children as empty trees
             self.left = Tree()
             self.right = Tree()
         else:
-
-            # If the node has no value,
-            # set left and right children to None
+            # If no value is provided, set left and
+            # right children to None
             self.left = None
             self.right = None
 
-    # Check if the node is empty (has no value)
     def isempty(self):
-        return (self.value == None)
+        # Check if the tree node is empty
+        return self.value == None
 
-    # Insert a new value into the tree
+    def isleaf(self):
+        # Check if the tree node is a leaf node (both left and right children are None)
+        if self.left.left == None and self.right.right == None:
+            return True
+        else:
+            return False
+
     def insert(self, data):
-
-        # If the node is empty, insert the data here
         if self.isempty():
+            # If the current node is empty,
+            # insert the data as its value
             self.value = data
-
-            # Create left and right children
-            # for the inserted node
+            # Create empty left and right children
             self.left = Tree()
             self.right = Tree()
-            print("{} is inserted successfully".format(self.value))
-
-        # If data is less than current node value,
-        # insert into left subtree
+        elif self.value == data:
+            # If the data already exists in the tree, return
+            return
         elif data < self.value:
+            # If the data is less than the current node's value,
+            # insert it into the left subtree
             self.left.insert(data)
             return
-
-        # If data is greater than current node value,
-        # insert into right subtree
         elif data > self.value:
+            # If the data is greater than the current node's value,
+            # insert it into the right subtree
             self.right.insert(data)
-
-        # If data is equal to current node value, do nothing
-        elif data == self.value:
             return
+
+    def find(self, v):
+        if self.isempty():
+            # If the tree is empty, the value is not found
+            print("{} is not found".format(v))
+            return False
+        if self.value == v:
+            # If the value is found at the current node,
+            # print a message and return True
+            print("{} is found".format(v))
+            return True
+        if v < self.value:
+            # If the value is less than the current node's value,
+            # search in the left subtree
+            return self.left.find(v)
+        else:
+            # If the value is greater than the current node's value,
+            # search in the right subtree
+            return self.right.find(v)
+
+    def inorder(self):
+        if self.isempty():
+            # If the tree is empty, return an empty list
+            return []
+        else:
+            # Return the inorder traversal of the tree (left subtree, root, right subtree)
+            return self.left.inorder() + [self.value] + self.right.inorder()
 
