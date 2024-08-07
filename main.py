@@ -404,7 +404,7 @@ class Display:
         :return:
         '''
         self.oled.fill(fill)
-        self.oled.text(str(text), x, y)
+        self.oled.text(str(text), x, y, 1)
 
     def updateScreen(self):
         # update screen
