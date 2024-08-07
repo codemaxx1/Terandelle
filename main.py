@@ -328,14 +328,18 @@ class Terandelle:
         command = command.lower()
 
         functionRun = command
-
-        Display.printText(command, 0, 0, 255)
+        Display.printText(0,0, f"you said:{command}", 1)
+        Display.printText(0, displayHeight/2, functionRun, 1)
         Display.updateScreen()
 
         return functionRun
 
 
 if __name__ == "__main__":
+    displayHeight = 64
+    displayWidth = 128
+
+
     print("init display")
     Display = Display()
 
