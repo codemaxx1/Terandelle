@@ -29,6 +29,7 @@ class Display:
         self.oled = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
 
         self.image = Image.new("1", (self.displayWidth, self.displayHeight))
+        self.font = ImageFont.load_default()
 
         # Get drawing object to draw on image.
         self.draw = ImageDraw.Draw(self.image)
@@ -81,6 +82,7 @@ class Display:
         '''
         # Clear display.
         self.oled.fill(0)
+        self.draw.rectangle((0, 0, self.displayWidth, self.displayHeight), outline=0, fill=0)
         self.updateScreen()
 
     def printText(self, x, y, text, fill):
@@ -93,10 +95,9 @@ class Display:
         :return:
         '''
         # Load default font.
-        font = ImageFont.load_default()
 
         # Draw Some Text
-        self.draw.text((x, y), text, font=font, fill=fill)
+        self.draw.text((x, y), text, font=self.font, fill=fill)
 
 
     def updateScreen(self):

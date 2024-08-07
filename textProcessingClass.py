@@ -7,8 +7,17 @@ print("after importing psacy")
 import nltk
 nltk.download('popular')  # This command downloads the most popular datasets and models
 
+from nltk.tokenize import word_tokenize
+from nltk.tag import pos_tag
+
+
 
 class TextProsessing:
+
+    def preprocess(input_sentence):
+        words = word_tokenize(input_sentence)
+        pos_tags = pos_tag(words)
+        return pos_tags
 
     def partOfSpeech(self, text):
 

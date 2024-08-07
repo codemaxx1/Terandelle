@@ -324,7 +324,9 @@ class Terandelle:
         Display.updateScreen()
         Display.printText(0, displayHeight/2, functionRun, 1)
 
-        TextProcessing.partOfSpeech(command)
+        #TextProcessing.partOfSpeech(command)
+        processed_sentence = TextProcessing.preprocess(command)
+        print(processed_sentence)
 
         return functionRun
 
@@ -346,7 +348,7 @@ if __name__ == "__main__":
     time.sleep(2)
 
     print("bootup sequence")
-    Terandelle.bootup(Display)
+    #Terandelle.bootup(Display)
 
     print('init text processing')
     TextProcessing = TextProsessing()
