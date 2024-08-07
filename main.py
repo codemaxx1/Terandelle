@@ -108,6 +108,9 @@ class Terandelle:
         updatePackages = "python3 library_installer.py"
         returnedValue[1] = subprocess.call(str(updatePackages), shell=True)
 
+        self.say("update of python3 packages complete. Updating text processing datasets and models")
+        TextProsessing.update()
+
         return returnedValue
 
 
@@ -323,7 +326,7 @@ class Terandelle:
         Display.printText(0,0, f"you said:\"{command}\"", 1)
         Display.printText(0, displayHeight/2, functionRun, 1)
 
-
+        """
         partospeech = TextProcessing.partOfSpeech(command)
         print(partospeech)
         processed_sentence = TextProcessing.preprocess(command)
@@ -332,6 +335,8 @@ class Terandelle:
         print(intent)
         chatbotResposnt = TextProcessing.chatbot(command)
         print(chatbotResposnt)
+        """
+        TextProsessing.analyzeCommand(command)
 
         # update the image buffer
         Display.updateScreen()
