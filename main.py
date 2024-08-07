@@ -7,8 +7,7 @@
 
 import math
 import time
-from board import SCL, SDA      # for scl and sda pins
-import busio
+import busio as io
 import adafruit_ssd1306         # for OLED interface
 from PIL import Image
 from PIL import ImageFont
@@ -32,12 +31,6 @@ import vlc
 
 import board                        #for screen
 import displayio                    #for screen
-try:
-    from i2cdisplaybus import I2CDisplayBus
-except ImportError:
-    from displayio import I2CDisplay as I2CDisplayBus
-import terminalio                   #for screen
-from adafruit_display_text import label             #for screen
 import adafruit_displayio_ssd1306   #for screen
 
 '''
@@ -356,29 +349,13 @@ class Terandelle:
 """
 class Display:
     def __init__(self):
+        self.displayHeight = 128
+        self.displayWidth = 64
 
-        displayio.release_displays()
-
-        oled_reset = board.D9
-
-        # Use for I2C
-        i2c = board.I2C()  # uses board.SCL and board.SDA
-        display_bus = I2CDisplayBus(i2c, device_address=0x3C, reset=oled_reset)
-
-        self.displayWidth = 128
-        self.displayHeight = 64
-        #BORDER = 5
-
-        self.display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=self.displayWidth, height=self.displayHeight, rotation=90)
-
-        # Make the display context
-        self.splash = displayio.Group()
-        self.display.root_group = self.splash
-
-        #self.color_bitmap = displayio.Bitmap(self.displayWidth, self.displayHeight, 1)
-        #self.color_palette = displayio.Palette(1)
-        #self.color_palette[0] = 0xFFFFFF  # White
-
+        i2c = io.I2C(board.SCL, board.SDA)
+        self.oled = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
+        self.oled.fill(1)
+        self.oled.show()
 
     def bootup(self):
         '''
@@ -392,46 +369,21 @@ class Display:
         except:
             IP = "network unreachable"
 
+        text = "Terandelle"
+        self.printText(self.dispWidth / 2, self.dispHeight / 2, text, fill=1)
+        text = "Booting up"
+        self.self.printText(self.dispWidth / 2, self.dispHeight / 2, text, fill=1)
+        self.self.printText(0, 0, IP, fill=1)
 
-        # perform visual loop for 200 frames
+        # perform visual loop for displayWidth frames
         for i in range(self.displayWidth):
+
             for j in range(self.displayHeight):
-                self.inner_bitmap = displayio.Bitmap(1, 1, 1)
-                self.inner_palette = displayio.Palette(1)
-                self.inner_palette[0] = 0xFFFFF  # Black
+                self.oled.pixel(i, j, 1)
+                time.sleep(0.01)
 
-                self.inner_sprite = displayio.TileGrid(self.inner_bitmap, pixel_shader=self.inner_palette, x=i, y=j)
-                self.splash.append(self.inner_sprite)
-                time.sleep(0.1)
 
-            radius = int(i/2)
-            '''
-            x = (self.width/2) * math.sin(radius)
-            y = (self.height/2) * math.cos(radius)
 
-            self.draw.ellipse((self.width/2-radius + x, self.height/2-radius + y, self.width/2+radius + x, self.height/2+radius + y), outline=255, fill=255)
-            #self.draw.ellipse((self.width / 2 - 10 + x, self.height / 2 - 10 + y, self.width / 2 + 10 + x, self.height / 2 + 10 + y), outline=255, fill=0)
-            '''
-
-            #text = "Terrandelle"
-            #text_area = label.Label(terminalio.FONT, text=text, color=0xFFFFFF, x=self.displayWidth/2, y=self.displayHeight / 2)
-            #self.splash.append(text_area)
-
-            '''
-            self.inner_bitmap = displayio.Bitmap(self.displayWidth, self.displayHeight, 1)
-            self.inner_palette = displayio.Palette(1)
-            self.inner_palette[0] = 0xFFFFF  # Black
-            self.inner_sprite = displayio.TileGrid( self.inner_bitmap, pixel_shader=self.inner_palette, x=0, y=0  )
-            self.splash.append(self.inner_sprite)
-            '''
-
-            '''
-            text = "Terandelle"
-            self.draw.text((self.dispWidth/2, self.dispHeight/2), text, font=self.font, fill=255)
-            text = "Booting up"
-            self.draw.text((self.dispWidth/2, self.dispHeight/2), text, font=self.font, fill=255)
-            self.draw.text((0,0), IP, font=self.font, fill=255)
-            '''
             #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
 
             # update screen
@@ -445,12 +397,19 @@ class Display:
 
 
     def printText(self, text, x, y, fill):
-        self.display.text(text, x, y, fill)
+        '''
+        print text
+        :param text: (str)
+        :param x: x position of text
+        :param y:  y position of text
+        :param fill:  0 to not fill or 1 to fill
+        :return:
+        '''
+        self.oled.text(str(text), x, y, fill)
 
     def updateScreen(self):
         # update screen
-        self.display.image(self.image)
-        self.display.show()
+        self.oled.show()
 
 
     def wave(self):
