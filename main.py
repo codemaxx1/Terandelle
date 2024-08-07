@@ -386,7 +386,7 @@ class Display:
                 #self.oled.pixel(i, j, 1)
 
                 self.updateScreen()
-                time.sleep(0.01)
+                time.sleep(0.1)
 
 
 
