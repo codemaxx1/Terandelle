@@ -61,6 +61,8 @@ for package in packages:
             installCMD += " " + package[i]
         try:
             os.system(installCMD)
+        except KeyboardInterrupt:
+            quit()
         except Exception as e:
             print("double falure in installing {0} because of {1}".format(package, e))
             failureList.append(package)

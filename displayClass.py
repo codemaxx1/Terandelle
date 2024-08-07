@@ -62,7 +62,7 @@ class Display:
                 self.printText(self.displayWidth / 2, self.displayHeight / 2 + 20, text, 1)
                 self.printText(0, 0, IP, 1)
 
-                self.updateScreen()
+                self.updateScreen(self.oled)
                 pygame.time.wait(1)  # Milliseconds
 
             #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
@@ -78,7 +78,7 @@ class Display:
         '''
         # Clear display.
         self.oled.fill(0)
-        self.updateScreen()
+        self.updateScreen(self.oled)
 
     def printText(self, x, y, text, fill):
         '''
@@ -96,14 +96,14 @@ class Display:
         self.draw.text((x, y), text, font=font, fill=fill)
 
 
-    def updateScreen(self):
+    def updateScreen(self, oled):
         '''
         update the screen with the new image draw data
         :return:
         '''
         # update screen
-        self.oled.image(self.image)
-        self.oled.show()
+        oled.image(self.image)
+        oled.show()
 
 
     def wave(self):
