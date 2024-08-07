@@ -11,7 +11,7 @@ packages = [#"math",
 
             #["pip3", "install", "displayio"],
             #["pip3", "install", "terminalio"],
-            ["pip", "install", "Adafruit_SSD1306"],
+            ["pip3", "install", "Adafruit_SSD1306"],
             ["pip3", "install", "pillow"],
             ["pip3", "install", "feedparser"],
             ["pip3", "install", "pygame"],
