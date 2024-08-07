@@ -7,10 +7,28 @@ from nltk.tokenize import word_tokenize
 from nltk.tag import pos_tag
 import os                                   #for directory scanning
 
+# import custom tree
+from binarySearchTree import Tree
+
+
 '''
 class for processing of text from user
 '''
 class TextProcessing:
+
+    def __init__(self):
+        WordTree = Tree()
+        # get all keyword files
+        path = os.getcwd() + "/keywords"
+        dirList = os.listdir(path)
+        print(f"Files and directories in {path} :")
+        for file in dirList:
+            print(f"file: {file}")
+            with open(path + "/" + file, "r") as fileData:
+                for word in fileData.readlines():
+                    print(f"{file} contents: {word}")
+                    WordTree.insert(word)
+
 
     def update(self):
         """
@@ -48,14 +66,7 @@ class TextProcessing:
                 properNouns.append(token)
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
 
-        # get all keyword files
-        path = os.getcwd()+"/keywords"
-        dirList = os.listdir(path)
-        print(f"Files and directories in {path} :")
-        for file in dirList:
-            print(f"file: {file}")
-            with open(path+"/"+file, "r") as fileData:
-                print(f"{file} contents: {fileData.read()}")
+
 
 
 
