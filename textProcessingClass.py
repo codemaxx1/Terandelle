@@ -19,6 +19,8 @@ class TextProsessing:
     def analyzeCommand(self, command):
         nlp = spacy.load("en_core_web_sm")
 
+        print(f"command to run (in analyzeCommand) {command}")
+
         commandAnalysis = nlp(command)
         # create list of all the sentances
         sentances = list(commandAnalysis.sent)

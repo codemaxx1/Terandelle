@@ -336,7 +336,7 @@ class Terandelle:
         chatbotResposnt = TextProcessing.chatbot(command)
         print(chatbotResposnt)
         """
-        TextProsessing.analyzeCommand(command)
+        TextProcessing.analyzeCommand(command)
 
         # update the image buffer
         Display.updateScreen()
