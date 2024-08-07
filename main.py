@@ -380,7 +380,9 @@ class Display:
         for i in range(self.displayWidth):
 
             for j in range(self.displayHeight):
-                self.oled.pixel(i, j, 1)
+                self.draw.rectangle((i, j, i+1, j+1), outline=255, fill=0)
+                #self.oled.pixel(i, j, 1)
+
                 self.updateScreen()
                 time.sleep(0.01)
 
