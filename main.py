@@ -418,7 +418,7 @@ class Display:
     def updateScreen(self):
         # update screen
         self.disp.image(self.image)
-        self.disp.show()
+        self.disp.display()
 
 
     def wave(self):
