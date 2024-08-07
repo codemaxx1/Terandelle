@@ -317,17 +317,19 @@ class Terandelle:
         :param display: class instance of display
         :return: the name of the function run
         '''
-        command = command.lower()
+        command = str(command.lower())
 
         functionRun = command
         Display.printText(0,0, f"you said:\"{command}\"", 1)
-        Display.updateScreen()
         Display.printText(0, displayHeight/2, functionRun, 1)
+
 
         #TextProcessing.partOfSpeech(command)
         processed_sentence = TextProcessing.preprocess(command)
         print(processed_sentence)
 
+        # update the image buffer
+        Display.updateScreen()
         return functionRun
 
 
