@@ -49,7 +49,7 @@ class Display:
             IP = "network unreachable"
 
         # perform visual loop for displayWidth frames
-        for i in range(round(self.displayWidth/2)):
+        for i in range(round(self.displayWidth/3)):
 
             for j in range(round(self.displayHeight/2)):
                 x = randrange(0, self.displayWidth)
