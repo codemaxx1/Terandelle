@@ -28,6 +28,7 @@ from gtts import gTTS           # for tts
 import vlc
 #from playsound import playsound # to play TTS .mp3 file after it is generated
 import board                        #for screen
+import pygame                       # for high resolution sleep/delay function
 
 '''
     Person class, for use with loading data on peoplpe
@@ -385,8 +386,7 @@ class Display:
                 #self.oled.pixel(i, j, 1)
 
                 self.updateScreen()
-                time.select(10)
-                #time.sleep(0.1)
+                pygame.time.wait(50)  # Milliseconds
 
 
 
