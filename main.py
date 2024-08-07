@@ -377,6 +377,7 @@ class Display:
 
             for j in range(self.displayHeight):
                 self.oled.pixel(i, j, 1)
+                self.updateScreen()
                 time.sleep(0.01)
 
 
