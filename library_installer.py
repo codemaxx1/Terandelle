@@ -52,6 +52,8 @@ for package in packages:
         reqs = subprocess.check_output([sys.executable, '-m', 'pip3', 'freeze'])
         installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
         print(installed_packages)
+    except KeyboardInterrupt:
+        quit()
     except:
         installCMD = ''
         for i in range(len(package)):
@@ -61,6 +63,7 @@ for package in packages:
         except Exception as e:
             print("double falure in installing {0} because of {1}".format(package, e))
             failureList.append(package)
+
 
 print('failed packages: {0}'.format(failureList))
 print("done installing packages")
