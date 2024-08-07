@@ -102,7 +102,7 @@ class Display:
         :return:
         '''
         # update screen
-        oled.image(self.image)
+        oled.image(image)
         oled.show()
 
 
