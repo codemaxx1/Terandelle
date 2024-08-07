@@ -21,8 +21,8 @@ from PIL import ImageDraw
 """
 class Display:
     def __init__(self, displayWidth, displayHeight):
-        self.displayHeight = displayWidth
-        self.displayWidth = displayHeight
+        self.displayHeight = displayHeight
+        self.displayWidth = displayWidth
 
         i2c = board.I2C()
         #self.disp = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
