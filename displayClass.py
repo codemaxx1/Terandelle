@@ -72,7 +72,7 @@ class Display:
         return 1
 
     def clearScreen(self):
-        self.draw.rectangle((0,0,self.displayWidth, self.displayHeight), outline=255, fill=0)
+        self.draw.rectangle((0,0,self.displayWidth+1, self.displayHeight+1), outline=0, fill=0)
         self.updateScreen()
 
 
