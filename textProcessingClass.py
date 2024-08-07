@@ -24,11 +24,14 @@ class TextProsessing:
         commandAnalysis = nlp(command)
 
         actions = []
+        nouns = []
         for token in commandAnalysis:
             print(f"""TOKEN: {str(token)}=====TAG: {str(token.tag_):10} POS: {token.pos_}EXPLANATION: {spacy.explain(token.tag_)}""")
             if str(token.tag_) == "VB":
-                actions.append(token.tag_)
-        print(f"actions to be performed: {actions}")
+                actions.append(token)
+            if str(token.tag_) == "NN":
+                nouns.append(token)
+        print(f"actions to be performed: {actions}\nnouns captures: {nouns}")
         return 1
 
 
