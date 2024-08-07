@@ -50,9 +50,9 @@ class Display:
             IP = "network unreachable"
 
         # perform visual loop for displayWidth frames
-        for i in range(round(self.displayWidth/3)):
+        for i in range(round(self.displayWidth/5)):
 
-            for j in range(round(self.displayHeight/2)):
+            for j in range(round(self.displayHeight/5)):
                 x = randrange(0, self.displayWidth)
                 y = randrange(0, self.displayHeight)
                 self.draw.rectangle((x, y, x+1, y+1), outline=255, fill=0)
@@ -62,6 +62,8 @@ class Display:
                 text = "Booting up"
                 self.printText(self.displayWidth / 2, self.displayHeight / 2 + 20, text, 1)
                 self.printText(0, 0, IP, 1)
+
+                self.draw.rectangle((0, self.displayHeight-10, i+j, self.displayHeight), outline=255, fill=0)
 
                 self.updateScreen()
                 pygame.time.wait(1)  # Milliseconds
