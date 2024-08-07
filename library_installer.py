@@ -69,6 +69,6 @@ for package in packages:
             failureList.append(package)
 
 
-print('failed packages: {0}'.format(failureList))
+print('\x1b[1;33m failed packages: {0} \x1b[0m'.format(failureList))
 print("done installing packages")
 
