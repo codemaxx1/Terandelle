@@ -402,7 +402,8 @@ class Display:
         :param fill:  0 to not fill or 1 to fill
         :return:
         '''
-        self.oled.text(str(text), x, y, fill)
+        self.oled.fill(fill)
+        self.oled.text(str(text), x, y)
 
     def updateScreen(self):
         # update screen
