@@ -24,6 +24,7 @@ packages = [#"math",
             ["pip3", "install", "requests"],
             ["pip3", "install", "json"],
             ["sudo", "apt-get", "install", "libopenblas-dev", " -y"]
+            ['pip3', 'install', 'https://github.com/explosion/spacy-models/releases/download/de_core_news_lg-3.1.0/de_core_news_lg-3.1.0-py3-none-any.whl'],
             ["pip3", "install", "RPi.GPIO"],
             ["pip3", "install", "nltk", "spacy"],
             ["python3", "-m", "spacy", "download", "en_core_web_sm"],
