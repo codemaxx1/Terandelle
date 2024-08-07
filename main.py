@@ -7,7 +7,6 @@
 
 import math
 import time
-import busio as io
 import adafruit_ssd1306         # for OLED interface
 from PIL import Image
 from PIL import ImageFont
@@ -352,7 +351,7 @@ class Display:
         self.displayHeight = 128
         self.displayWidth = 64
 
-        i2c = io.I2C(board.SCL, board.SDA)
+        i2c = board.I2C(board.SCL, board.SDA)
         self.oled = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
         self.oled.fill(1)
         self.oled.show()
