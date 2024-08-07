@@ -48,14 +48,16 @@ class TextProcessing:
                 properNouns.append(token)
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
 
-
-        #get the list of files for keyword associations
-        # Get the list of all files and directories
+        # get all keyword files
         path = os.getcwd()+"/keywords"
         dirList = os.listdir(path)
         print(f"Files and directories in {path} :")
-        for command in dirList:
-            print(f"file: {command}")
+        for file in dirList:
+            print(f"file: {file}")
+            fileData = open(file, "r")
+            print(f"{file} contents: {fileData}")
+
+
 
         """
         greeting_keywords = ['hello', 'hi', 'greetings', 'hey']
