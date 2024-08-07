@@ -373,8 +373,8 @@ class Display:
         text = "Terandelle"
         self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
         text = "Booting up"
-        self.self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
-        self.self.printText(0, 0, IP, fill=1)
+        self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
+        self.printText(0, 0, IP, fill=1)
 
         # perform visual loop for displayWidth frames
         for i in range(self.displayWidth):
@@ -398,7 +398,7 @@ class Display:
         return 1
 
 
-    def printText(self, text, x, y, fill):
+    def printText(self, x, y, text, fill):
         '''
         print text
         :param text: (str)
