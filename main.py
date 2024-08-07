@@ -332,9 +332,8 @@ class Terandelle:
             Display.printText(0, 0, f"you said:", 1)
             Display.printText(0, 10, f"\"{command}\"", 1)
 
-            commandAnalysis = TextProcessing.analyzeCommand(command)
 
-            functionRun = TextProsessing.recognizeIntent(commandAnalysis)
+            functionRun = TextProsessing.recognizeIntent(TextProcessing.analyzeCommand(command))
 
             # update the image buffer
             Display.updateScreen()
