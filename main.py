@@ -407,7 +407,7 @@ class Display:
         :param fill:  0 to not fill or 1 to fill
         :return:
         '''
-        self.disp.text((x, y), text, font=self.font, fill=fill)
+        self.draw.text((x, y), text, font=self.font, fill=fill)
 
     def updateScreen(self):
         # update screen
