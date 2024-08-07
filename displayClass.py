@@ -63,7 +63,7 @@ class Display:
                 self.printText(self.displayWidth / 2, self.displayHeight / 2 + 20, text, 1)
                 self.printText(0, 0, IP, 1)
 
-                self.draw.rectangle((0, self.displayHeight-10, i+j, self.displayHeight), outline=255, fill=0)
+                self.draw.rectangle((0, self.displayHeight-15, i+j, self.displayHeight), outline=255, fill=0)
 
                 self.updateScreen()
                 pygame.time.wait(1)  # Milliseconds
