@@ -10,7 +10,7 @@ import os                                   #for directory scanning
 '''
 class for processing of text from user
 '''
-class TextProsessing:
+class TextProcessing:
 
     def update(self):
         """

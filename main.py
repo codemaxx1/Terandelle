@@ -25,7 +25,7 @@ import vlc
 # custom classes
 from displayClass import Display
 from personClass import Person
-from textProcessingClass import TextProsessing
+from textProcessingClass import TextProcessing
 
 
 '''
@@ -333,7 +333,7 @@ class Terandelle:
             Display.printText(0, 10, f"\"{command}\"", 1)
 
 
-            functionRun = TextProsessing.recognizeIntent(TextProcessing.analyzeCommand(command))
+            functionRun = TextProcessing.recognizeIntent(TextProcessing.analyzeCommand(command))
 
             # update the image buffer
             Display.updateScreen()
@@ -362,7 +362,7 @@ if __name__ == "__main__":
     #Terandelle.bootup(Display)
 
     print('init text processing')
-    TextProcessing = TextProsessing()
+    TextProcessing = TextProcessing()
 
     # begin performing functions
     Terandelle.perform(Terandelle, Display, TextProcessing)
