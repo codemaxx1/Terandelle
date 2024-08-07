@@ -5,13 +5,13 @@ import os
 packages = [#"math",
             #"time",
             #["pip3", "install", "Adafruit-SSD1306"],
-            #["pip3", "install", "adafruit-circuitpython-ssd1306"],
+            ["pip3", "install", "adafruit-circuitpython-ssd1306"],
             ["pip3", "install", "board"],
             #["pip3", "install", "I2CDisplayBus"],
 
             #["pip3", "install", "displayio"],
             #["pip3", "install", "terminalio"],
-            ["pip3", "install", "Adafruit_SSD1306"],
+            #["pip3", "install", "Adafruit_SSD1306"],
             ["pip3", "install", "pillow"],
             ["pip3", "install", "feedparser"],
             ["pip3", "install", "pygame"],
@@ -38,6 +38,7 @@ packages = [#"math",
             ["pip3", "install", "spacy"],
             ["pip3", "install", "gTTS"],
             ["pip3", "install", "python-vlc"],
+            ["pip3", "install", "RPi.GPIO"],
         ]
 
 failureList = []

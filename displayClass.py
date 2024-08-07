@@ -10,11 +10,11 @@ import math
 import time
 from random import randrange
 import socket                   # for determining IP
-import Adafruit_SSD1306         # for OLED interface
+import adafruit_ssd1306         # for OLED interface
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
-
+import busio
 
 """
     display class
@@ -25,16 +25,16 @@ class Display:
         self.displayHeight = displayHeight
         self.displayWidth = displayWidth
 
-        #i2c = board.I2C()
-        #self.disp = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
-        RST = 24
-        self.disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
-
-        self.image = Image.new("1", (self.displayWidth, self.displayHeight))
-        self.font = ImageFont.load_default()
-        self.draw = ImageDraw.Draw(self.image)
+        i2c = busio.I2C(board.SCL, board.SDA)
+        self.oled = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
 
         self.clearScreen()
+
+        self.image = Image.new("1", (self.displayWidth, self.displayHeight))
+
+        # Get drawing object to draw on image.
+        self.draw = ImageDraw.Draw(self.image)
+
 
     def bootup(self):
         '''
@@ -76,9 +76,9 @@ class Display:
         as the name implies, this method is the clear the display
         :return:
         '''
-        self.draw.rectangle((0,0,self.displayWidth+1, self.displayHeight+1), outline=0, fill=0)
+        # Clear display.
+        self.oled.fill(0)
         self.updateScreen()
-
 
     def printText(self, x, y, text, fill):
         '''
@@ -89,7 +89,11 @@ class Display:
         :param fill:  0 to not fill or 1 to fill
         :return:
         '''
-        self.draw.text((x, y), text, font=self.font, fill=fill)
+        # Load default font.
+        font = ImageFont.load_default()
+
+        # Draw Some Text
+        self.draw.text((x, y), text, font=font, fill=fill)
 
 
     def updateScreen(self):
@@ -98,8 +102,8 @@ class Display:
         :return:
         '''
         # update screen
-        self.disp.image(self.image)
-        self.disp.display()
+        self.oled.image(self.image)
+        self.oled.show()
 
 
     def wave(self):
