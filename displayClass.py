@@ -116,7 +116,7 @@ class Display:
         if str(y) == "middle":
             y = self.displayHeight/2
 
-        self.draw.ellipse((x, y-radius/2, x + radius*2, y+radius/2), outline=outline, fill=fill)
+        self.draw.ellipse((x-radius, y-radius-radius, x + radius*2 - radius, y+radius - radius), outline=outline, fill=fill)
 
     def updateScreen(self):
         '''
