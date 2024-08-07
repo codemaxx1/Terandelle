@@ -22,8 +22,6 @@ class TextProsessing:
         print(f"command to run (in analyzeCommand) {command}")
 
         commandAnalysis = nlp(command)
-        # create list of all the sentances
-        sentances = list(commandAnalysis.sent)
 
         for token in commandAnalysis:
             print(f"""TOKEN: {str(token)}=====TAG: {str(token.tag_):10} POS: {token.pos_}EXPLANATION: {spacy.explain(token.tag_)}""")
