@@ -17,7 +17,8 @@ class for processing of text from user
 class TextProcessing:
 
     def __init__(self):
-        WordTree = Tree()
+        # create tree of all identifying words
+        self.WordTree = Tree()
         # get all keyword files
         path = os.getcwd() + "/keywords"
         dirList = os.listdir(path)
@@ -27,7 +28,8 @@ class TextProcessing:
             with open(path + "/" + file, "r") as fileData:
                 for word in fileData.readlines():
                     print(f"{file} contents: {word}")
-                    WordTree.insert(word)
+                    # populate tree
+                    self.WordTree.insert(word)
 
 
     def update(self):
@@ -65,9 +67,6 @@ class TextProcessing:
             if str(token.tag_) == "NNP":
                 properNouns.append(token)
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
-
-
-
 
 
         """

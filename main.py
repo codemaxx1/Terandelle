@@ -302,7 +302,7 @@ class Terandelle:
         with sr.Microphone() as source:
             print('Say something...')
             r.pause_threshold = 2
-            r.adjust_for_ambient_noise(source, duration=1 )
+            r.adjust_for_ambient_noise(source, duration=1)
             audio = r.listen(source, phrase_time_limit=7)
         try:
             wordsSpoken = r.recognize_google(audio).lower()
