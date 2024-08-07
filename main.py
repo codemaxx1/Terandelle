@@ -370,21 +370,24 @@ class Display:
         except:
             IP = "network unreachable"
 
-        text = "Terandelle"
-        self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
-        text = "Booting up"
-        self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
-        self.printText(0, 0, IP, fill=1)
+
 
         # perform visual loop for displayWidth frames
         for i in range(self.displayWidth):
+            text = "Terandelle"
+            self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
+            text = "Booting up"
+            self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
+            self.printText(0, 0, IP, fill=1)
 
             for j in range(self.displayHeight):
                 self.draw.rectangle((i, j, i+1, j+1), outline=255, fill=0)
+
                 #self.oled.pixel(i, j, 1)
 
                 self.updateScreen()
                 time.sleep(0.01)
+
 
 
 
