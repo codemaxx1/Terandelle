@@ -25,7 +25,8 @@ class TextProsessing:
 
         for token in commandAnalysis:
             print(f"""TOKEN: {str(token)}=====TAG: {str(token.tag_):10} POS: {token.pos_}EXPLANATION: {spacy.explain(token.tag_)}""")
-
+            if str(token.tag_) == "VB":
+                print(f"action to be performed -- {token.tag_}")
         return 1
 
 
