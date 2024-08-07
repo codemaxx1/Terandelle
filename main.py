@@ -349,9 +349,14 @@ class Display:
         self.displayWidth = 64
 
         i2c = board.I2C()
-        self.oled = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
-        self.oled.fill(1)
-        self.oled.show()
+        self.disp = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
+        # Clear display.
+        self.disp.fill(0)
+        self.disp.show()
+
+        self.image = Image.new("1", (self.displayWidth, self.displayHeight))
+        font = ImageFont.load_default()
+        self.draw = ImageDraw.Draw(self.image)
 
     def bootup(self):
         '''
@@ -402,13 +407,12 @@ class Display:
         :param fill:  0 to not fill or 1 to fill
         :return:
         '''
-        self.oled.fill(fill)
-        #self.oled.text(str(text), x, y  )
-        self.oled.text((x, y), text, font=self.font, fill=255)
+        self.disp.text((x, y), text, font=self.font, fill=fill)
 
     def updateScreen(self):
         # update screen
-        self.oled.show()
+        self.disp.image(self.image)
+        self.disp.show()
 
 
     def wave(self):
