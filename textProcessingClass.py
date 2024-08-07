@@ -15,6 +15,7 @@ class TextProsessing:
     def update(self):
         nltk.download('popular')
 
+
     def analyzeCommand(self, command):
         nlp = spacy.load("en_core_web_sm")
 
@@ -24,6 +25,9 @@ class TextProsessing:
 
         for token in commandAnalysis:
             print(f"""TOKEN: {str(token)}=====TAG: {str(token.tag_):10} POS: {token.pos_}EXPLANATION: {spacy.explain(token.tag_)}""")
+
+        return 1
+
 
     def preprocess(self, input_sentence):
         words = word_tokenize(input_sentence)
