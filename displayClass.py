@@ -1,6 +1,7 @@
 '''
-
+displayClass contains the class Display, whose entire purpose in life is to work with the OLED display
 '''
+
 
 # imports
 import board                        #for screen
@@ -47,8 +48,6 @@ class Display:
         except:
             IP = "network unreachable"
 
-
-
         # perform visual loop for displayWidth frames
         for i in range(round(self.displayWidth/2)):
 
@@ -71,7 +70,12 @@ class Display:
         print("bootup done")
         return 1
 
+
     def clearScreen(self):
+        '''
+        as the name implies, this method is the clear the display
+        :return:
+        '''
         self.draw.rectangle((0,0,self.displayWidth+1, self.displayHeight+1), outline=0, fill=0)
         self.updateScreen()
 
@@ -87,7 +91,12 @@ class Display:
         '''
         self.draw.text((x, y), text, font=self.font, fill=fill)
 
+
     def updateScreen(self):
+        '''
+        update the screen with the new image draw data
+        :return:
+        '''
         # update screen
         self.disp.image(self.image)
         self.disp.display()

@@ -24,17 +24,11 @@ import vlc
 
 # custom classes
 from displayClass import Display
+from personClass import Person
+from textProcessingClass import TextProsessing
 
-'''
-    Person class, for use with loading data on peoplpe
-'''
-class Person:
-    def __init__(self, personData):
-        self.firstName = personData.firstName
-        self.lastName = personData.lastName
-        self.birthday = personData.birthday
-        self.pronouns = personData.pronouns
-
+import nltk
+nltk.download('popular')  # This command downloads the most popular datasets and models
 
 '''
     Terandelle class
@@ -318,7 +312,7 @@ class Terandelle:
         return str(wordsSpoken)
 
 
-    def perform(self, command, Display):
+    def perform(self, command, Display, TextProcessing):
         '''
         take the words spoken data from the listen() function and actually run a command from it
         :param command: the text of words spoken
@@ -331,6 +325,8 @@ class Terandelle:
         Display.printText(0,0, f"you said:{command}", 1)
         Display.printText(0, displayHeight/2, functionRun, 1)
         Display.updateScreen()
+
+        TextProcessing.partOfSpeech(command)
 
         return functionRun
 
@@ -346,8 +342,6 @@ if __name__ == "__main__":
     print("init terandelle")
     Terandelle = Terandelle(Display)
 
-    time.sleep(1)
-
     #print("update")
     #Terandelle.update()
 
@@ -356,7 +350,11 @@ if __name__ == "__main__":
     print("bootup sequence")
     Terandelle.bootup(Display)
 
-    Terandelle.perform(Terandelle.listen(Display), Display)
+    print('init text processing')
+    TextProcessing = TextProsessing()
+
+    # begin performing functions
+    Terandelle.perform(Terandelle.listen(Display), Display, TextProcessing)
 
     print("display wave")
     Display.wave()

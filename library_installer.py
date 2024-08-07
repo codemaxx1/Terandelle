@@ -24,6 +24,8 @@ packages = [#"math",
             ["pip3", "install", "requests"],
             ["pip3", "install", "json"],
             ["pip3", "install", "RPi.GPIO"],
+            ["pip3", "install", "nltk", "spacy"],
+            ["python3", "-m", "spacy", "download", "en_core_web_sm"],
             ["pip3", "install", "socket"],
             ['sudo', "apt-get", "install", "portaudio19-dev", "python-pyaudio", "-y"],
             ["sudo", "apt-get", "install", "flac"]
