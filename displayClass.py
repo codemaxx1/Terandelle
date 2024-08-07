@@ -97,7 +97,10 @@ class Display:
         :param fill:  0 to not fill or 1 to fill
         :return:
         '''
-        # Load default font.
+        if str(x) == "middle":
+            x = self.displayWidth / 2
+        if str(y) == "middle":
+            y = self.displayHeight / 2
 
         # Draw Some Text
         self.draw.text((x, y), text, font=self.font, fill=fill)
