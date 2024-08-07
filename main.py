@@ -353,7 +353,6 @@ class Display:
         RST = 24
         self.disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
         # Clear display.
-        self.disp.fill(0)
         self.disp.show()
 
         self.image = Image.new("1", (self.displayWidth, self.displayHeight))
