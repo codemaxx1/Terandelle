@@ -54,8 +54,8 @@ class TextProcessing:
         print(f"Files and directories in {path} :")
         for file in dirList:
             print(f"file: {file}")
-            fileData = open(path+"/"+file, "r")
-            print(f"{file} contents: {fileData}")
+            with open(path+"/"+file, "r") as fileData:
+                print(f"{file} contents: {fileData.read()}")
 
 
 
