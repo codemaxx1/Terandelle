@@ -352,8 +352,6 @@ class Display:
         #self.disp = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
         RST = 24
         self.disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
-        # Clear display.
-        self.disp.show()
 
         self.image = Image.new("1", (self.displayWidth, self.displayHeight))
         self.font = ImageFont.load_default()
