@@ -5,7 +5,7 @@ import spacy
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.tag import pos_tag
-
+import os                                   #for directory scanning
 
 '''
 class for processing of text from user
@@ -13,6 +13,10 @@ class for processing of text from user
 class TextProsessing:
 
     def update(self):
+        """
+        update the nlp data
+        :return:
+        """
         nltk.download('popular')
 
 
@@ -21,19 +25,44 @@ class TextProsessing:
 
         print(f"command to run (in analyzeCommand) {command}")
 
+        # perform analysis of the command
         commandAnalysis = nlp(command)
 
+        return commandAnalysis
+
+    def recognizeIntent(self, nlpData):
+        # identify the important parts of speech from the command
         actions = []
         nouns = []
-        for token in commandAnalysis:
-            print(f"""TOKEN: {str(token)} \t\tTAG: {str(token.tag_)} \t POS: {token.pos_} \t EXPLANATION: {spacy.explain(token.tag_)}""")
+        properNouns = []
+
+        for token in nlpData:
+            print(
+                f"""TOKEN: {str(token)} \t\tTAG: {str(token.tag_)} \t POS: {token.pos_} \t EXPLANATION: {spacy.explain(token.tag_)}""")
             if str(token.tag_) == "VB":
                 actions.append(token)
             if str(token.tag_) == "NN":
                 nouns.append(token)
-        print(f"actions to be performed: {actions}\nnouns captures: {nouns}")
-        return 1
+            if str(token.tag_) == "NNP":
+                properNouns.append(token)
+        print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
 
+        #get the list of files for keyword associations
+        # Get the list of all files and directories
+        path = os.getcwd()
+        dir_list = os.listdir(path)
+        print("Files and directories in '", path, "' :")
+        # prints all files
+        print(dir_list)
+
+        """
+        greeting_keywords = ['hello', 'hi', 'greetings', 'hey']
+        tokens = [token.lower() for token, pos in tokens]
+        if any(token in greeting_keywords for token in tokens):
+            return "greeting"
+
+        return "unknown"  # Default intent if no known intent is found
+        """
 
 
     def partOfSpeech(self, text):
@@ -47,14 +76,6 @@ class TextProsessing:
         return doc
 
 
-    def recognize_intent(self, tokens):
-
-        greeting_keywords = ['hello', 'hi', 'greetings', 'hey']
-        tokens = [token.lower() for token, pos in tokens]
-        if any(token in greeting_keywords for token in tokens):
-            return "greeting"
-
-        return "unknown"  # Default intent if no known intent is found
 
 
     def chatbot(self, input_sentence):

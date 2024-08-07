@@ -111,12 +111,14 @@ class Display:
 
 
     def drawCircle(self, x, y, radius, outline, fill):
+        # allow for the circle to be centered at the middle
         if str(x) == "middle":
             x = self.displayWidth/2
         if str(y) == "middle":
             y = self.displayHeight/2
+        # draw circle
+        self.draw.ellipse((x-radius, y-radius, x + radius*2 - radius, y+radius), outline=outline, fill=fill)
 
-        self.draw.ellipse((x-radius, y-radius-radius, x + radius*2 - radius, y+radius - radius), outline=outline, fill=fill)
 
     def updateScreen(self):
         '''

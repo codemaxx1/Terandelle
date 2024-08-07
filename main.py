@@ -326,25 +326,15 @@ class Terandelle:
             Display.drawCircle("middle", "middle", 10, 1, 1)
             Display.updateScreen()
 
+            # listen for a command
             command = Terandelle.listen(Display)
 
-            command = str(command.lower())
+            Display.printText(0, 0, f"you said:", 1)
+            Display.printText(0, 10, f"\"{command}\"", 1)
 
-            functionRun = command
-            Display.printText(0,0, f"you said:\"{command}\"", 1)
-            Display.printText(0, displayHeight/2, functionRun, 1)
+            commandAnalysis = TextProcessing.analyzeCommand(command)
 
-            """
-            partospeech = TextProcessing.partOfSpeech(command)
-            print(partospeech)
-            processed_sentence = TextProcessing.preprocess(command)
-            print(processed_sentence)
-            intent = TextProcessing.recognize_intent(command)
-            print(intent)
-            chatbotResposnt = TextProcessing.chatbot(command)
-            print(chatbotResposnt)
-            """
-            TextProcessing.analyzeCommand(command)
+            functionRun = TextProsessing.recognizeIntent(commandAnalysis)
 
             # update the image buffer
             Display.updateScreen()
