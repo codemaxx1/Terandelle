@@ -23,6 +23,7 @@ packages = [#"math",
             ["pip3", "install", "psutil"],
             ["pip3", "install", "requests"],
             ["pip3", "install", "json"],
+            ["sudo", "apt-get", "install", "libopenblas-dev", " -y"]
             ["pip3", "install", "RPi.GPIO"],
             ["pip3", "install", "nltk", "spacy"],
             ["python3", "-m", "spacy", "download", "en_core_web_sm"],

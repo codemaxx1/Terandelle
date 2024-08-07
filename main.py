@@ -27,8 +27,6 @@ from displayClass import Display
 from personClass import Person
 from textProcessingClass import TextProsessing
 
-import nltk
-nltk.download('popular')  # This command downloads the most popular datasets and models
 
 '''
     Terandelle class

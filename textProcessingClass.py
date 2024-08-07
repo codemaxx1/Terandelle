@@ -2,6 +2,8 @@
 
 # imports
 import spacy
+import nltk
+nltk.download('popular')  # This command downloads the most popular datasets and models
 
 
 class TextProsessing:
