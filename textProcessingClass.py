@@ -3,6 +3,7 @@
 # imports
 print("before importing spacy")
 import spacy
+print("after importing psacy")
 import nltk
 nltk.download('popular')  # This command downloads the most popular datasets and models
 
