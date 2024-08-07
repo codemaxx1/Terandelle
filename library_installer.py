@@ -55,7 +55,7 @@ for package in packages:
     except:
         installCMD = ''
         for i in range(len(package)):
-            installCMD += " " + i
+            installCMD += " " + package[i]
         try:
             os.system(installCMD)
         except Exception as e:
