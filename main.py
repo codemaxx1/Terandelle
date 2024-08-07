@@ -325,8 +325,10 @@ class Terandelle:
 
 
         #TextProcessing.partOfSpeech(command)
-        processed_sentence = TextProcessing.preprocess(command)
-        print(processed_sentence)
+        #processed_sentence = TextProcessing.preprocess(command)
+        #intent = TextProcessing.recognize_intent(command)
+        chatbotResposnt = TextProcessing.chatbot(command)
+        print(chatbotResposnt)
 
         # update the image buffer
         Display.updateScreen()
