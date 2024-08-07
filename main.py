@@ -345,8 +345,8 @@ class Terandelle:
 """
 class Display:
     def __init__(self):
-        self.displayHeight = 128
-        self.displayWidth = 64
+        self.displayHeight = 64
+        self.displayWidth = 128
 
         i2c = board.I2C()
         #self.disp = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
