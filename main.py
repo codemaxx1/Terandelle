@@ -7,7 +7,7 @@
 
 import math
 import time
-import adafruit_ssd1306         # for OLED interface
+import Adafruit_SSD1306         # for OLED interface
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
@@ -349,7 +349,9 @@ class Display:
         self.displayWidth = 64
 
         i2c = board.I2C()
-        self.disp = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
+        #self.disp = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
+        RST = 24
+        self.disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
         # Clear display.
         self.disp.fill(0)
         self.disp.show()
