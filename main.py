@@ -386,7 +386,7 @@ class Display:
                 #self.oled.pixel(i, j, 1)
 
                 self.updateScreen()
-                pygame.time.wait(50)  # Milliseconds
+                pygame.time.wait(5)  # Milliseconds
 
 
 
