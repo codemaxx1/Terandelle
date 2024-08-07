@@ -341,7 +341,7 @@ if __name__ == "__main__":
 
 
     print("init display")
-    Display = Display()
+    Display = Display(displayWidth, displayHeight)
 
     print("init terandelle")
     Terandelle = Terandelle(Display)
