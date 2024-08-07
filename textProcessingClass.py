@@ -14,7 +14,7 @@ from nltk.tag import pos_tag
 
 class TextProsessing:
 
-    def preprocess(input_sentence):
+    def preprocess(self, input_sentence):
         words = word_tokenize(input_sentence)
         pos_tags = pos_tag(words)
         return pos_tags

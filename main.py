@@ -325,7 +325,6 @@ class Terandelle:
 
 
         #TextProcessing.partOfSpeech(command)
-        command = "Hello, how can I help you?"
         processed_sentence = TextProcessing.preprocess(command)
         print(processed_sentence)
 
