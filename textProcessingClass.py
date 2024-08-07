@@ -30,13 +30,14 @@ class TextProsessing:
 
         return commandAnalysis
 
-    def recognizeIntent(self, nlpData):
+
+    def recognizeIntent(self, command):
         # identify the important parts of speech from the command
         actions = []
         nouns = []
         properNouns = []
 
-        for token in nlpData:
+        for token in command:
             print(
                 f"""TOKEN: {str(token)} \t\tTAG: {str(token.tag_)} \t POS: {token.pos_} \t EXPLANATION: {spacy.explain(token.tag_)}""")
             if str(token.tag_) == "VB":
