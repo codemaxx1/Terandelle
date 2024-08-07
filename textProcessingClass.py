@@ -29,7 +29,7 @@ class TextProcessing:
                 for word in fileData.readlines():
                     print(f"{file} contents: {word}")
                     # populate tree
-                    wordAscii = ''.join(str(ord(c)) for c in word)
+                    wordAscii = ''.join(str(ord(c)) for c in str(word))
                     self.WordTree.insert(wordAscii)
 
 
@@ -66,7 +66,7 @@ class TextProcessing:
                 actions.append(token)
             if str(token.tag_) == "NN":
                 nouns.append(token)
-                tokenAscii = ''.join(str(ord(c)) for c in token)
+                tokenAscii = ''.join(str(ord(c)) for c in str(token))
                 locatedFromFiles.append(self.WordTree.find(tokenAscii))
             if str(token.tag_) == "NNP":
                 properNouns.append(token)
