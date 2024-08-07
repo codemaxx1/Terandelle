@@ -355,7 +355,7 @@ class Display:
         self.disp.show()
 
         self.image = Image.new("1", (self.displayWidth, self.displayHeight))
-        font = ImageFont.load_default()
+        self.font = ImageFont.load_default()
         self.draw = ImageDraw.Draw(self.image)
 
     def bootup(self):
