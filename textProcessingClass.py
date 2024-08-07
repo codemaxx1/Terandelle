@@ -51,11 +51,11 @@ class TextProcessing:
 
         #get the list of files for keyword associations
         # Get the list of all files and directories
-        path = os.getcwd()
-        dir_list = os.listdir(path)
-        print("Files and directories in '", path, "' :")
-        # prints all files
-        print(dir_list)
+        path = os.getcwd()+"/keywords"
+        dirList = os.listdir(path)
+        print(f"Files and directories in {path} :")
+        for command in dirList:
+            print(f"file: {command}")
 
         """
         greeting_keywords = ['hello', 'hi', 'greetings', 'hey']
