@@ -27,7 +27,6 @@ import speech_recognition as sr # for speech recognition
 from gtts import gTTS           # for tts
 import vlc
 #from playsound import playsound # to play TTS .mp3 file after it is generated
-import bitmapfont
 import board                        #for screen
 
 '''
@@ -403,7 +402,6 @@ class Display:
         :param fill:  0 to not fill or 1 to fill
         :return:
         '''
-        bf = bitmapfont.BitmapFont()
         self.oled.fill(fill)
         #self.oled.text(str(text), x, y  )
         self.oled.text((x, y), text, font=self.font, fill=255)
