@@ -26,7 +26,7 @@ class TextProsessing:
         actions = []
         nouns = []
         for token in commandAnalysis:
-            print(f"""TOKEN: {str(token)}=====TAG: {str(token.tag_):10} POS: {token.pos_}EXPLANATION: {spacy.explain(token.tag_)}""")
+            print(f"""TOKEN: {str(token)} \t\tTAG: {str(token.tag_)} \t POS: {token.pos_} \t EXPLANATION: {spacy.explain(token.tag_)}""")
             if str(token.tag_) == "VB":
                 actions.append(token)
             if str(token.tag_) == "NN":
@@ -34,11 +34,6 @@ class TextProsessing:
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}")
         return 1
 
-
-    def preprocess(self, input_sentence):
-        words = word_tokenize(input_sentence)
-        pos_tags = pos_tag(words)
-        return pos_tags
 
 
     def partOfSpeech(self, text):
@@ -60,13 +55,6 @@ class TextProsessing:
             return "greeting"
 
         return "unknown"  # Default intent if no known intent is found
-
-
-    def generate_response(self, intent):
-        if intent == "greeting":
-            return "Hello! How can I assist you today?"
-        else:
-            return "I am not sure how to respond to that. Can you please rephrase?"
 
 
     def chatbot(self, input_sentence):

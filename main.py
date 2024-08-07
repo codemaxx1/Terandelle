@@ -313,34 +313,44 @@ class Terandelle:
         return str(wordsSpoken)
 
 
-    def perform(self, command, Display, TextProcessing):
+    def perform(self, Terandelle, Display, TextProcessing):
         '''
         take the words spoken data from the listen() function and actually run a command from it
         :param command: the text of words spoken
         :param display: class instance of display
         :return: the name of the function run
         '''
-        command = str(command.lower())
+        while True:
+            # give signal that we are ready for a command
+            Display.printText("middle", 0, "please speak", 1)
+            Display.drawCircle("middle", "middle", 10, 1, 1)
+            Display.updateScreen()
 
-        functionRun = command
-        Display.printText(0,0, f"you said:\"{command}\"", 1)
-        Display.printText(0, displayHeight/2, functionRun, 1)
+            command = Terandelle.listen(Display)
 
-        """
-        partospeech = TextProcessing.partOfSpeech(command)
-        print(partospeech)
-        processed_sentence = TextProcessing.preprocess(command)
-        print(processed_sentence)
-        intent = TextProcessing.recognize_intent(command)
-        print(intent)
-        chatbotResposnt = TextProcessing.chatbot(command)
-        print(chatbotResposnt)
-        """
-        TextProcessing.analyzeCommand(command)
+            command = str(command.lower())
 
-        # update the image buffer
-        Display.updateScreen()
-        return functionRun
+            functionRun = command
+            Display.printText(0,0, f"you said:\"{command}\"", 1)
+            Display.printText(0, displayHeight/2, functionRun, 1)
+
+            """
+            partospeech = TextProcessing.partOfSpeech(command)
+            print(partospeech)
+            processed_sentence = TextProcessing.preprocess(command)
+            print(processed_sentence)
+            intent = TextProcessing.recognize_intent(command)
+            print(intent)
+            chatbotResposnt = TextProcessing.chatbot(command)
+            print(chatbotResposnt)
+            """
+            TextProcessing.analyzeCommand(command)
+
+            # update the image buffer
+            Display.updateScreen()
+
+            time.sleep(10)
+            return functionRun
 
 
 if __name__ == "__main__":
@@ -366,7 +376,7 @@ if __name__ == "__main__":
     TextProcessing = TextProsessing()
 
     # begin performing functions
-    Terandelle.perform(Terandelle.listen(Display), Display, TextProcessing)
+    Terandelle.perform(Terandelle, Display, TextProcessing)
 
     print("display wave")
     Display.wave()

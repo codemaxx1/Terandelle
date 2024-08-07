@@ -56,7 +56,8 @@ class Display:
             for j in range(round(self.displayHeight/5)):
                 x = randrange(0, self.displayWidth)
                 y = randrange(0, self.displayHeight)
-                self.draw.rectangle((x, y, x+1, y+1), outline=255, fill=0)
+                # random dots
+                self.drawRect(x, y, x+1, y+1, 1, 0)
 
                 text = "Terandelle"
                 self.printText(self.displayWidth / 2, self.displayHeight / 2, text, 1)
@@ -64,7 +65,9 @@ class Display:
                 self.printText(self.displayWidth / 2, self.displayHeight / 2 + 20, text, 1)
                 self.printText(0, 0, IP, 1)
 
-                self.draw.rectangle((0, self.displayHeight-15, i+j, self.displayHeight), outline=255, fill=0)
+                #loading indicator
+                self.drawRect(0, self.displayHeight-15, i+j, self.displayHeight, 1, 0)
+
 
                 self.updateScreen()
                 pygame.time.wait(1)  # Milliseconds
@@ -82,7 +85,7 @@ class Display:
         '''
         # Clear display.
         self.oled.fill(0)
-        self.draw.rectangle((0, 0, self.displayWidth, self.displayHeight), outline=0, fill=0)
+        self.drawRect(0, 0, self.displayWidth, self.displayHeight, 0, 0)
         self.updateScreen()
 
     def printText(self, x, y, text, fill):
@@ -99,6 +102,18 @@ class Display:
         # Draw Some Text
         self.draw.text((x, y), text, font=self.font, fill=fill)
 
+
+    def drawRect(self, x, y, height, width, outline, fill):
+        self.draw.rectangle((x, y, width, height), outline=outline, fill=fill)
+
+
+    def drawCircle(self, x, y, radius, outline, fill):
+        if str(x) == "middle":
+            x = self.displayWidth/2
+        if str(y) == "middle":
+            y = self.displayHeight/2
+
+        self.draw.ellipse((x, y-radius/2, x + radius*2, y+radius/2), outline=outline, fill=fill)
 
     def updateScreen(self):
         '''
