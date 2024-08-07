@@ -375,14 +375,14 @@ class Display:
 
 
         # perform visual loop for displayWidth frames
-        for i in range(self.displayWidth/2):
+        for i in range(round(self.displayWidth/2)):
             text = "Terandelle"
             self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
             text = "Booting up"
             self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
             self.printText(0, 0, IP, fill=1)
 
-            for j in range(self.displayHeight/2):
+            for j in range(round(self.displayHeight/2)):
                 x = randrange(0, self.displayWidth)
                 y = randrange(0, self.displayHeight)
                 self.draw.rectangle((x, y, x+1, y+1), outline=255, fill=0)
