@@ -360,6 +360,8 @@ class Display:
         self.font = ImageFont.load_default()
         self.draw = ImageDraw.Draw(self.image)
 
+        self.clearScreen()
+
     def bootup(self):
         '''
         graphical sequence for the bootup operation
@@ -377,10 +379,10 @@ class Display:
         # perform visual loop for displayWidth frames
         for i in range(round(self.displayWidth/2)):
             text = "Terandelle"
-            self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
+            self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=0)
             text = "Booting up"
-            self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=1)
-            self.printText(0, 0, IP, fill=1)
+            self.printText(self.displayWidth / 2, self.displayHeight / 2, text, fill=0)
+            self.printText(0, 0, IP, fill=0)
 
             for j in range(round(self.displayHeight/2)):
                 x = randrange(0, self.displayWidth)
@@ -405,6 +407,10 @@ class Display:
             #time.sleep(0.05)
         print("bootup done")
         return 1
+
+    def clearScreen(self):
+        self.draw.rectangle((0,0,self.displayWidth, self.displayHeight), outline=255, fill=0)
+        self.updateScreen()
 
 
     def printText(self, x, y, text, fill):
