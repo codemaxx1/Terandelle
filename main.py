@@ -324,9 +324,12 @@ class Terandelle:
         Display.printText(0, displayHeight/2, functionRun, 1)
 
 
-        #TextProcessing.partOfSpeech(command)
-        #processed_sentence = TextProcessing.preprocess(command)
-        #intent = TextProcessing.recognize_intent(command)
+        partospeech = TextProcessing.partOfSpeech(command)
+        print(partospeech)
+        processed_sentence = TextProcessing.preprocess(command)
+        print(processed_sentence)
+        intent = TextProcessing.recognize_intent(command)
+        print(intent)
         chatbotResposnt = TextProcessing.chatbot(command)
         print(chatbotResposnt)
 

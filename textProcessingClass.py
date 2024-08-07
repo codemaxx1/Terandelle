@@ -11,7 +11,9 @@ from nltk.tokenize import word_tokenize
 from nltk.tag import pos_tag
 
 
-
+'''
+class for processing of text from user
+'''
 class TextProsessing:
 
     def preprocess(self, input_sentence):
