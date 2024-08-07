@@ -60,8 +60,7 @@ class TextProcessing:
         locatedFromFiles = []
 
         for token in command:
-            print(
-                f"""TOKEN: {str(token)} \t\tTAG: {str(token.tag_)} \t POS: {token.pos_} \t EXPLANATION: {spacy.explain(token.tag_)}""")
+            print(f"""TOKEN: {str(token)} \t\tTAG: {str(token.tag_)} \t POS: {token.pos_} \t EXPLANATION: {spacy.explain(token.tag_)}""")
             if str(token.tag_) == "VB":
                 actions.append(token)
             if str(token.tag_) == "NN":
@@ -70,6 +69,7 @@ class TextProcessing:
                 locatedFromFiles.append(self.WordTree.find(tokenAscii))
             if str(token.tag_) == "NNP":
                 properNouns.append(token)
+
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
         print(f"located from files -- {locatedFromFiles}")
 

@@ -351,7 +351,7 @@ if __name__ == "__main__":
     Display = Display(displayWidth, displayHeight)
 
     print("init terandelle")
-    Terandelle = Terandelle(Display)
+    #Terandelle = Terandelle(Display)
 
     #print("update")
     #Terandelle.update()
