@@ -1,17 +1,17 @@
 import sys
 import subprocess
+import os
 
 packages = [#"math",
             #"time",
             #["pip3", "install", "Adafruit-SSD1306"],
             #["pip3", "install", "adafruit-circuitpython-ssd1306"],
             ["pip3", "install", "board"],
-            ["pip3", "install", "I2CDisplayBus"],
-            ["pip3", "install", "displayio"],
-            ["pip3", "install", "terminalio"],
-            ["pip3", "install", "adafruit-circuitpython-displayio-ssd1306"],
-            ["pip", "install", "adafruit-blinka-displayio"],
-            ["pip", "install", "adafruit-circuitpython-display-text"],
+            #["pip3", "install", "I2CDisplayBus"],
+
+            #["pip3", "install", "displayio"],
+            #["pip3", "install", "terminalio"],
+            ["pip", "install", "Adafruit_SSD1306"],
             ["pip3", "install", "pillow"],
             ["pip3", "install", "feedparser"],
             ["pip3", "install", "pygame"],
@@ -23,9 +23,9 @@ packages = [#"math",
             ["pip3", "install", "psutil"],
             ["pip3", "install", "requests"],
             ["pip3", "install", "json"],
-            ["sudo", "apt-get", "install", "libopenblas-dev", " -y"]
-            ['pip3', 'install', 'https://github.com/explosion/spacy-models/releases/download/de_core_news_lg-3.1.0/de_core_news_lg-3.1.0-py3-none-any.whl'],
-            ["pip3", "install", "RPi.GPIO"],
+            #["sudo", "apt-get", "install", "libopenblas-dev", " -y"]
+            #['pip3', 'install', 'https://github.com/explosion/spacy-models/releases/download/de_core_news_lg-3.1.0/de_core_news_lg-3.1.0-py3-none-any.whl'],
+            #["pip3", "install", "RPi.GPIO"],
             ["pip3", "install", "nltk", "spacy"],
             ["python3", "-m", "spacy", "download", "en_core_web_sm"],
             ["pip3", "install", "socket"],
@@ -52,9 +52,15 @@ for package in packages:
         reqs = subprocess.check_output([sys.executable, '-m', 'pip3', 'freeze'])
         installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
         print(installed_packages)
-    except Exception as e:
-        print("falure in installing {0} because of {1}".format(package, e))
-        failureList.append(package)
+    except:
+        installCMD = ''
+        for i in range(len(package)):
+            installCMD.append(i)
+        try:
+            os.system(installCMD)
+        except Exception as e:
+            print("double falure in installing {0} because of {1}".format(package, e))
+            failureList.append(package)
 
 print('failed packages: {0}'.format(failureList))
 print("done installing packages")
