@@ -28,12 +28,13 @@ class Display:
         i2c = busio.I2C(board.SCL, board.SDA)
         self.oled = adafruit_ssd1306.SSD1306_I2C(self.displayWidth, self.displayHeight, i2c)
 
-        self.clearScreen()
-
         self.image = Image.new("1", (self.displayWidth, self.displayHeight))
 
         # Get drawing object to draw on image.
         self.draw = ImageDraw.Draw(self.image)
+
+        self.clearScreen()
+
 
 
     def bootup(self):
@@ -62,7 +63,7 @@ class Display:
                 self.printText(self.displayWidth / 2, self.displayHeight / 2 + 20, text, 1)
                 self.printText(0, 0, IP, 1)
 
-                self.updateScreen(self.oled, self.image)
+                self.updateScreen()
                 pygame.time.wait(1)  # Milliseconds
 
             #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
@@ -78,7 +79,7 @@ class Display:
         '''
         # Clear display.
         self.oled.fill(0)
-        self.updateScreen(self.oled, self.image)
+        self.updateScreen()
 
     def printText(self, x, y, text, fill):
         '''
@@ -96,14 +97,14 @@ class Display:
         self.draw.text((x, y), text, font=font, fill=fill)
 
 
-    def updateScreen(self, oled, image):
+    def updateScreen(self):
         '''
         update the screen with the new image draw data
         :return:
         '''
         # update screen
-        oled.image(image)
-        oled.show()
+        self.oled.image(self.image)
+        self.oled.show()
 
 
     def wave(self):
