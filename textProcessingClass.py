@@ -33,7 +33,7 @@ class TextProcessing:
                     print(f"{file} contents: {word}")
                     # populate tree
                     #load relations into memory
-                    self.listOfRelations += {word : file}
+                    self.listOfRelations.append({word : file})
 
 
 
