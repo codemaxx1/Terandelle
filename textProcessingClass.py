@@ -80,7 +80,7 @@ class TextProcessing:
                     commandToRun = token
                     print(f"command to run is {token}")
 
-        if properNouns == []:
+        if properNouns == [] and nouns != []:
             properNouns = nouns.strip(commandToRun)
 
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
