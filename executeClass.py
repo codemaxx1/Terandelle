@@ -16,6 +16,9 @@ import sys
 
 class ExecuteClass:
 
+    def __init__(self, Terandelle):
+        self.Terandelle = Terandelle
+
 
     def getBatteryInformation(self):
         '''
@@ -130,7 +133,7 @@ class ExecuteClass:
             self.temperature = (9 / 5) * (self.temperature - 273) + 32
 
         else:
-            self.say(f"i'm sorry, but {city} does not seem to exist.")
+            self.Terandelle.say(f"i'm sorry, but {city} does not seem to exist.")
 
             """
             example of returned weather JSON
@@ -166,7 +169,7 @@ class ExecuteClass:
         return 1
 
 
-    def weather(self, city, Display, Terandelle):
+    def weather(self, city, Display):
         print('getting weather')
         weather = self.getWeather(city)
         # build TTS response
@@ -179,7 +182,7 @@ class ExecuteClass:
         Display.printText(f"weather : {weather.weatherDescription}", 0, 0, 255)
         Display.printText(f"temp : {weather.temperature}", 0, "1textHeight", 255)
 
-        Terandelle.say(response)
+        self.Terandelle.say(response)
 
         return 1
 
