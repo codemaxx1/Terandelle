@@ -52,7 +52,7 @@ class Display:
 
         # perform visual loop for displayWidth frames
 
-        for i in range(round(self.displayWidth*self.displayHeight/50)):
+        for i in range(round(self.displayWidth*self.displayHeight/70)):
             x = int(randrange(0, self.displayWidth))
             y = int(randrange(0, self.displayHeight))
             # random dots
@@ -65,7 +65,7 @@ class Display:
             self.printText(0, 0, IP, 1)
 
             #loading indicator
-            self.drawRect(0, self.displayHeight-15, round(i*50/self.displayHeight), self.displayHeight, 1, 0)
+            self.drawRect(0, self.displayHeight-15, round(i*70/self.displayHeight), self.displayHeight, 1, 0)
 
 
             self.updateScreen()
