@@ -28,8 +28,8 @@ class TextProcessing:
             print(f"file: {file}")
             with open(path + "/" + file, "r") as fileData:
                 for word in fileData.readlines():
-                    word.strip("\n")
-                    word.strip(" ")
+                    word = word.strip("\n")
+                    word = word.strip(" ")
                     print(f"{file} contents: {word}")
                     # populate tree
                     #load relations into memory
@@ -73,7 +73,8 @@ class TextProcessing:
                 nouns.append(token)
                 for i in self.listOfRelations:
                     print(f"i is {i}")
-                    if token in i[0]:
+                    word, reference = i
+                    if token == word:
                         commandToRun = token
                         print(f"command to run is {token}")
 
