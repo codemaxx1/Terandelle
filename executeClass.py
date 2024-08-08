@@ -13,14 +13,8 @@ import json
 import subprocess
 import sys
 
-# custom classes
-from displayClass import Display
-from personClass import Person
-from textProcessingClass import TextProcessing
-from executeClass import ExecuteClass
 
-
-class ExecuteClass():
+class ExecuteClass:
 
 
     def getBatteryInformation(self):
