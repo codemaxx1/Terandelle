@@ -81,7 +81,7 @@ class TextProcessing:
                     print(f"command to run is {token}")
 
         if properNouns == [] and nouns != []:
-            properNouns = nouns.strip(commandToRun)
+            properNouns = nouns.remove(commandToRun)
 
 
 
