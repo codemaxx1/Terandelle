@@ -83,14 +83,4 @@ class TextProcessing:
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
         print(f"located from files -- {locatedFromFiles}")
 
-
-        """
-        greeting_keywords = ['hello', 'hi', 'greetings', 'hey']
-        tokens = [token.lower() for token, pos in tokens]
-        if any(token in greeting_keywords for token in tokens):
-            return "greeting"
-
-        return "unknown"  # Default intent if no known intent is found
-        """
-
-        return commandToRun
+        return commandToRun, properNouns
