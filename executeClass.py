@@ -59,7 +59,7 @@ class ExecuteClass:
         :param lineEnd: the position in the text that you want to stop reading at
         :return:
         '''
-        self.say("let's see what I can find")
+        self.Terandelle.say("let's see what I can find")
         try:
             text = wikipedia.summary(str(query))
             defineTextList = text.split('.')
@@ -67,9 +67,9 @@ class ExecuteClass:
             # loop through input:lines, or fewer lines in the return if there are fewer than input:lines lines in it
             for i in range( lineStart, min(len(defineTextList) + 1, lineEnd) ):
                 print("line: " + str(i))
-                self.say(defineTextList[i])
+                self.Terandelle.say(defineTextList[i])
         except Exception as e:
-            self.say(f"failure finding information about {query} because of {e}, could you try again?")
+            self.Terandelle.say(f"failure finding information about {query} because of {e}, could you try again?")
 
 
     def getNews(self):
@@ -177,6 +177,7 @@ class ExecuteClass:
 
         self.Display.printText( 0, 0, f"weather : {self.weatherDescription}", 255)
         self.Display.printText( 0, 20, f"temp : {self.temperature}", 255)
+        self.Display.updateScreen()
 
         self.Terandelle.say(response)
 
@@ -196,12 +197,12 @@ class ExecuteClass:
 
         #self.say(returnedValue.decode("utf-8"))
 
-        self.say("update of program complete. Now, I'm updating Python3 packages")
+        self.Terandelle.say("update of program complete. Now, I'm updating Python3 packages")
 
         updatePackages = "python3 library_installer.py"
         returnedValue[1] = subprocess.call(str(updatePackages), shell=True)
 
-        self.say("update of python3 packages complete. Updating text processing datasets and models")
+        self.Terandelle.say("update of python3 packages complete. Updating text processing datasets and models")
         TextProsessing.update()
 
         return returnedValue
@@ -212,7 +213,7 @@ class ExecuteClass:
         restart program by creating a new instance of it and terminating this one
         :return: none
         '''
-        self.say("restarting program")
+        self.Terandelle.say("restarting program")
         openNewProcess = "python3 " + str(sys.argv[0])
         subprocess.call(str(openNewProcess), shell=True)    # open new instance of self
         sys.exit()                                          # terminate instance of self
