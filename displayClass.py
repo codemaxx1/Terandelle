@@ -51,28 +51,27 @@ class Display:
             IP = "network unreachable"
 
         # perform visual loop for displayWidth frames
-        for i in range(round(self.displayWidth/5)):
 
-            for j in range(round(self.displayHeight/5)):
-                x = randrange(0, self.displayWidth)
-                y = randrange(0, self.displayHeight)
-                # random dots
-                self.drawRect(x, y, x+2, y+2, 1, 0)
+        for i in range(round(self.displayWidth*self.displayHeight/10)):
+            x = int(randrange(0, self.displayWidth))
+            y = int(randrange(0, self.displayHeight))
+            # random dots
+            self.drawRect(x, y, x+2, y+2, 1, 1)
 
-                text = "Terandelle"
-                self.printText(self.displayWidth / 2, self.displayHeight / 2, text, 1)
-                text = "Booting up"
-                self.printText(self.displayWidth / 2, self.displayHeight / 2 + 20, text, 1)
-                self.printText(0, 0, IP, 1)
+            text = "Terandelle"
+            self.printText(self.displayWidth / 2, self.displayHeight / 2, text, 1)
+            text = "Booting up"
+            self.printText(self.displayWidth / 2, self.displayHeight / 2 + 20, text, 1)
+            self.printText(0, 0, IP, 1)
 
-                #loading indicator
-                self.drawRect(0, self.displayHeight-15, i+j, self.displayHeight, 1, 0)
+            #loading indicator
+            self.drawRect(0, self.displayHeight-15, i, self.displayHeight, 1, 0)
 
 
-                self.updateScreen()
-                pygame.time.wait(1)  # Milliseconds
+            self.updateScreen()
+            pygame.time.wait(1)  # Milliseconds
 
-            #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
+        #self.draw.line((self.width/2-radius + x, self.height/2-radius + y, self.width/2, self.height/2), fill=0)
         self.clearScreen()
         print("bootup done")
         return 1
