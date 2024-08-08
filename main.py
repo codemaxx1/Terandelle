@@ -130,16 +130,22 @@ class Terandelle:
                 properNoun = properNoun + " " + str(i)
 
             if functionRun == "update":
+                print("update")
                 Execute.update()
             elif functionRun == "restart":
+                print("restart")
                 Execute.restartProgram()
             elif functionRun == "news":
+                print("news")
                 Execute.news(Display)
             elif functionRun == "time":
+                print("time")
                 Execute.getDateTime()
             elif functionRun == "wikipedia":
+                print("wikipedia")
                 Execute.wikipediaDefine("thing to query", 0, 3)
             elif functionRun == "weather":
+                print("weather")
                 Execute.weather(properNoun, Display)
 
 
