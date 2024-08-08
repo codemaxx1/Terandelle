@@ -98,6 +98,7 @@ class ExecuteClass:
 
 
     def weather(self, city, Display):
+        self.Display = Display
         print(f"city is ... {city}")
         apiKey = '75f6c15e22433ed3e7406b24691a0706'                         # api key (might be outdated)
         baseURL = "http://api.openweathermap.org/data/2.5/weather?"         # url to get data from
@@ -174,8 +175,8 @@ class ExecuteClass:
             response += " and wind speed is " + str(self.windSpeed) + " so it feels like " + str(self.feelsLike)
         # Temperature (in kelvin unit) = " + str(temperature) + " atmospheric pressure (in hPa unit) = " + str(pressure) + " humidity (in percentage) = " + str(humidity) + " description = " +
 
-        Display.printText(f"weather : {self.weatherDescription}", 0, 0, 255)
-        Display.printText(f"temp : {self.temperature}", 0, "1textHeight", 255)
+        self.Display.printText( 0, 0, f"weather : {self.weatherDescription}", 255)
+        self.Display.printText( 0, 20, f"temp : {self.temperature}", 255)
 
         self.Terandelle.say(response)
 
