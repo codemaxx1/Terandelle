@@ -61,6 +61,8 @@ class TextProcessing:
         properNouns = []
         locatedFromFiles = []
 
+        commandToRun = "unknownCommand"
+
         for token in command:
             print(f"""TOKEN: {str(token)} \t\tTAG: {str(token.tag_)} \t POS: {token.pos_} \t EXPLANATION: {spacy.explain(token.tag_)}""")
             if str(token.tag_) == "VB":
