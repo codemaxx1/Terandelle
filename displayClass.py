@@ -106,6 +106,7 @@ class Display:
 
 
     def drawRect(self, x, y, height, width, outline, fill):
+        print(f"draw rect at x={x}, y={y}, height={height}, width={width}")
         self.draw.rectangle((min(x, width), min(y, height), max(x, width), max(y, height)), outline=outline, fill=fill)
         #self.draw.rectangle((0,0,5,5), outline=255, fill=0)
 
