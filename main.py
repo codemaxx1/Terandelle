@@ -126,8 +126,9 @@ class Terandelle:
             properNoun = ""
             functionRun, properNounList = TextProcessing.recognizeIntent(TextProcessing.analyzeCommand(command))
             functionRun = str(functionRun)
-            for i in properNounList:
-                properNoun = properNoun + str(i) + " "
+            if len(properNounList) != 0:
+                for i in properNounList:
+                    properNoun = properNoun + str(i) + " "
 
             print(f"functionRun={functionRun}, properNoun={properNoun}")
 
