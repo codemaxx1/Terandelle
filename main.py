@@ -351,15 +351,13 @@ if __name__ == "__main__":
     Display = Display(displayWidth, displayHeight)
 
     print("init terandelle")
-    #Terandelle = Terandelle(Display)
+    Terandelle = Terandelle(Display)
 
     #print("update")
     #Terandelle.update()
 
-    time.sleep(2)
-
     print("bootup sequence")
-    #Terandelle.bootup(Display)
+    Terandelle.bootup(Display)
 
     print('init text processing')
     TextProcessing = TextProcessing()

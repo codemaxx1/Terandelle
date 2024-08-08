@@ -23,14 +23,16 @@ class TextProcessing:
         path = os.getcwd() + "/keywords"
         dirList = os.listdir(path)
         print(f"Files and directories in {path} :")
+        self.listOfRelations = []
         for file in dirList:
             print(f"file: {file}")
             with open(path + "/" + file, "r") as fileData:
                 for word in fileData.readlines():
                     print(f"{file} contents: {word}")
                     # populate tree
-                    wordAscii = ''.join(str(ord(c)) for c in str(word))
-                    self.WordTree.insert(wordAscii)
+                    #load relations into memory
+                    self.listOfRelations += {word : file}
+
 
 
     def update(self):
@@ -65,15 +67,18 @@ class TextProcessing:
                 actions.append(token)
             if str(token.tag_) == "NN":
                 nouns.append(token)
-                tokenAscii = ''.join(str(ord(c)) for c in str(token))
-                locatedFromFiles.append(self.WordTree.find(tokenAscii))
+                if token in self.listOfRelations:
+                    commandToRun = token
+                    print(f"command to run is {token}")
+
             if str(token.tag_) == "NNP":
                 properNouns.append(token)
 
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
         print(f"located from files -- {locatedFromFiles}")
 
-
+        for i in self.listOfRelations:
+            print(f"{i}")
 
         """
         greeting_keywords = ['hello', 'hi', 'greetings', 'hey']
@@ -84,3 +89,4 @@ class TextProcessing:
         return "unknown"  # Default intent if no known intent is found
         """
 
+        return commandToRun
