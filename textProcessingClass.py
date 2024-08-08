@@ -69,9 +69,10 @@ class TextProcessing:
                 actions.append(token)
             if str(token.tag_) == "NN":
                 nouns.append(token)
-                if token in self.listOfRelations:
-                    commandToRun = token
-                    print(f"command to run is {token}")
+                for i in self.listOfRelations:
+                    if i[0] == token:
+                        commandToRun = token
+                        print(f"command to run is {token}")
 
             if str(token.tag_) == "NNP":
                 properNouns.append(token)
