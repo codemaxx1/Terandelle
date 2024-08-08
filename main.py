@@ -124,6 +124,7 @@ class Terandelle:
             Display.printText(0, 10, f"\"{command}\"", 1)
 
             properNoun = ""
+            properNounList = []
             functionRun, properNounList = TextProcessing.recognizeIntent(TextProcessing.analyzeCommand(command))
             functionRun = str(functionRun)
             if len(properNounList) != 0:
