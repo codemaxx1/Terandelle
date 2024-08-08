@@ -105,10 +105,8 @@ class Display:
         self.draw.text((x, y), text, font=self.font, fill=fill)
 
 
-    def drawRect(self, x, y, height, width, outline, fill):
-        print(f"draw rect at x={x}, y={y}, height={height}, width={width}")
-        #self.draw.rectangle((x, y, width, height), outline=outline, fill=fill)
-        self.draw.rectangle((60,10,65,75), outline=255, fill=0)
+    def drawRect(self, x, y, width, height, outline, fill):
+        self.draw.rectangle((x, y, width, height), outline=outline, fill=fill)
 
 
     def drawCircle(self, x, y, radius, outline, fill):
