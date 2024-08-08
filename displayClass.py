@@ -106,8 +106,8 @@ class Display:
 
 
     def drawRect(self, x, y, height, width, outline, fill):
-        #self.draw.rectangle((x, y, width, height), outline=outline, fill=fill)
-        self.draw.rectangle((0,0,5,5), outline=255, fill=0)
+        self.draw.rectangle((min(x, width), min(y, height), max(x, width), max(y, height)), outline=outline, fill=fill)
+        #self.draw.rectangle((0,0,5,5), outline=255, fill=0)
 
 
     def drawCircle(self, x, y, radius, outline, fill):
