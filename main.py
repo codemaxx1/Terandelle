@@ -126,8 +126,11 @@ class Terandelle:
 
             properNoun = ""
             functionRun, properNounList = TextProcessing.recognizeIntent(TextProcessing.analyzeCommand(command))
+
             for i in properNounList:
                 properNoun = properNoun + " " + str(i)
+
+            print(f"functionRun={functionRun}, properNounList={properNoun}")
 
             if functionRun == "update":
                 print("update")
