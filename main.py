@@ -357,7 +357,7 @@ if __name__ == "__main__":
     #Terandelle.update()
 
     print("bootup sequence")
-    Terandelle.bootup(Display)
+    #Terandelle.bootup(Display)
 
     print('init text processing')
     TextProcessing = TextProcessing()
