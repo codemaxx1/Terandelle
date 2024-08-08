@@ -65,7 +65,7 @@ class Display:
             self.printText(0, 0, IP, 1)
 
             #loading indicator
-            #self.drawRect(0, self.displayHeight-15, i, self.displayHeight, 1, 0)
+            self.drawRect(0, self.displayHeight-15, i, self.displayHeight, 1, 0)
 
 
             self.updateScreen()
