@@ -167,13 +167,14 @@ class ExecuteClass:
                 'name': 'Rexburg', 
                 'cod': 200}
             """
+            return 0
         return 1
 
 
     def weather(self, city, Display):
         print('getting weather')
         weather = self.getWeather(city)
-        if weather == 1:
+        if weather == 0:
             return 1
         # build TTS response
         print("creating tts response")
