@@ -23,7 +23,7 @@ class TextProcessing:
         path = os.getcwd() + "/keywords"
         dirList = os.listdir(path)
         print(f"Files and directories in {path} :")
-        self.listOfRelations = []
+        self.listOfRelations = {}
         for file in dirList:
             print(f"file: {file}")
             with open(path + "/" + file, "r") as fileData:
@@ -33,7 +33,7 @@ class TextProcessing:
                     print(f"{file} contents: {word}")
                     # populate tree
                     #load relations into memory
-                    self.listOfRelations.append({word : file})
+                    self.listOfRelations.update({word : file})
 
 
 
