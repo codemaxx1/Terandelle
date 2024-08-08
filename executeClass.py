@@ -167,6 +167,7 @@ class ExecuteClass:
 
 
     def weather(self, city, Display):
+        print('getting weather')
         weather = self.getWeather(city)
         # build TTS response
         response = "In " + str(city) + "the weather is " + str(weather.weatherDescription) + " and it is " + str(
