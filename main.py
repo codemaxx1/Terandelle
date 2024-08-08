@@ -113,7 +113,7 @@ class Terandelle:
         '''
         while True:
             # give signal that we are ready for a command
-            Display.printText("middle", 0, "please speak", 1)
+            Display.printText(50, 0, "please speak", 1)
             Display.drawCircle("middle", "middle", 10, 1, 1)
             Display.updateScreen()
 
@@ -123,14 +123,13 @@ class Terandelle:
             Display.printText(0, 0, f"you said:", 1)
             Display.printText(0, 10, f"\"{command}\"", 1)
 
-
             properNoun = ""
             functionRun, properNounList = TextProcessing.recognizeIntent(TextProcessing.analyzeCommand(command))
             functionRun = str(functionRun)
             for i in properNounList:
-                properNoun = properNoun + " " + str(i)
+                properNoun = properNoun + str(i) + " "
 
-            print(f"functionRun={functionRun}, properNounList={properNoun}")
+            print(f"functionRun={functionRun}, properNoun={properNoun}")
 
             if functionRun == "update":
                 print("update")
@@ -151,11 +150,8 @@ class Terandelle:
                 print("weather")
                 Execute.weather(properNoun, Display)
 
-
-
             # update the image buffer
             Display.updateScreen()
-
             time.sleep(10)
         return functionRun
 
