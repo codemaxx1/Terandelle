@@ -80,12 +80,14 @@ class TextProcessing:
                     commandToRun = token
                     print(f"command to run is {token}")
 
+        properNoun = ""
         if properNouns == [] and nouns != []:
             properNouns = nouns.remove(commandToRun)
-
-
+        if len(properNouns) != 0:
+            for i in properNouns:
+                properNoun = properNoun + str(i) + " "
 
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
         print(f"located from files -- {locatedFromFiles}")
 
-        return commandToRun, properNouns
+        return commandToRun, properNoun
