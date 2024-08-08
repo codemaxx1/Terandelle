@@ -168,14 +168,14 @@ class ExecuteClass:
 
         # build TTS response
         print("creating tts response")
-        response = "In " + str(city) + "the weather is " + str(weather.weatherDescription) + " and it is " + str(
-            round(weather.temperature ) ) + " degrees"
-        if weather.windSpeed > 10:
-            response += " and wind speed is " + str(weather.windSpeed) + " so it feels like " + str(weather.feelsLike)
+        response = "In " + str(city) + "the weather is " + str(self.weather.weatherDescription) + " and it is " + str(
+            round(self.weather.temperature ) ) + " degrees"
+        if self.weather.windSpeed > 10:
+            response += " and wind speed is " + str(self.weather.windSpeed) + " so it feels like " + str(selfweather.feelsLike)
         # Temperature (in kelvin unit) = " + str(temperature) + " atmospheric pressure (in hPa unit) = " + str(pressure) + " humidity (in percentage) = " + str(humidity) + " description = " +
 
-        Display.printText(f"weather : {weather.weatherDescription}", 0, 0, 255)
-        Display.printText(f"temp : {weather.temperature}", 0, "1textHeight", 255)
+        Display.printText(f"weather : {self.weather.weatherDescription}", 0, 0, 255)
+        Display.printText(f"temp : {self.weather.temperature}", 0, "1textHeight", 255)
 
         self.Terandelle.say(response)
 
