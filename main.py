@@ -149,7 +149,7 @@ class Terandelle:
                 Execute.wikipediaDefine("thing to query", 0, 3)
             elif functionRun == "weather":
                 print("weather")
-                Execute.weather(properNoun, Display)
+                Execute.weather(properNoun, Display, Terandelle)
 
 
 

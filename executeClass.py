@@ -166,7 +166,7 @@ class ExecuteClass:
         return 1
 
 
-    def weather(self, city, Display):
+    def weather(self, city, Display, Terandelle):
         print('getting weather')
         weather = self.getWeather(city)
         # build TTS response
@@ -179,7 +179,7 @@ class ExecuteClass:
         Display.printText(f"weather : {weather.weatherDescription}", 0, 0, 255)
         Display.printText(f"temp : {weather.temperature}", 0, "1textHeight", 255)
 
-        self.say(response)
+        Terandelle.say(response)
 
         return 1
 
