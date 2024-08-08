@@ -72,7 +72,7 @@ class TextProcessing:
             if str(token.tag_) == "NN":
                 nouns.append(token)
                 for word, reference in self.listOfRelations.items():
-                    print(f"word is \"{word}\" and reference is \"{reference}\". Oh, and token = \"{token}\" and token == word {token == word}")
+                    print(f"word is \"{word}\" and reference is \"{reference}\". Oh, and token = \"{token}\" and token == word {str(token) == str(word)}")
                     if token == word:
                         commandToRun = token
                         print(f"command to run is {token}")
