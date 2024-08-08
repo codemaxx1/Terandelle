@@ -126,7 +126,7 @@ class Terandelle:
 
             properNoun = ""
             functionRun, properNounList = TextProcessing.recognizeIntent(TextProcessing.analyzeCommand(command))
-
+            functionRun = str(functionRun)
             for i in properNounList:
                 properNoun = properNoun + " " + str(i)
 
