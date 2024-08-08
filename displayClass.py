@@ -57,7 +57,7 @@ class Display:
                 x = randrange(0, self.displayWidth)
                 y = randrange(0, self.displayHeight)
                 # random dots
-                self.drawRect(x, y, x+1, y+1, 1, 0)
+                self.drawRect(x, y, x+2, y+2, 1, 0)
 
                 text = "Terandelle"
                 self.printText(self.displayWidth / 2, self.displayHeight / 2, text, 1)
