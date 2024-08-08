@@ -95,12 +95,9 @@ class ExecuteClass:
         return 1
 
 
-    def getWeather(self, city):
-        '''
-        return the weather data for a specific city
-        :param city: the name of a city
-        :return: 1 on success
-        '''
+
+
+    def weather(self, city, Display):
         print(f"city is ... {city}")
         apiKey = '75f6c15e22433ed3e7406b24691a0706'                         # api key (might be outdated)
         baseURL = "http://api.openweathermap.org/data/2.5/weather?"         # url to get data from
@@ -135,6 +132,7 @@ class ExecuteClass:
 
         else:
             self.Terandelle.say(f"i'm sorry, but {city} does not seem to exist.")
+            return 0
 
             """
             example of returned weather JSON
@@ -167,15 +165,7 @@ class ExecuteClass:
                 'name': 'Rexburg', 
                 'cod': 200}
             """
-            return 0
-        return 1
 
-
-    def weather(self, city, Display):
-        print('getting weather')
-        weather = self.getWeather(city)
-        if weather == 0:
-            return 1
         # build TTS response
         print("creating tts response")
         response = "In " + str(city) + "the weather is " + str(weather.weatherDescription) + " and it is " + str(

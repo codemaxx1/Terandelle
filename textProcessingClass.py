@@ -83,6 +83,8 @@ class TextProcessing:
         if properNouns == [] and nouns != []:
             properNouns = nouns.strip(commandToRun)
 
+
+
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
         print(f"located from files -- {locatedFromFiles}")
 
