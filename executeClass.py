@@ -101,6 +101,7 @@ class ExecuteClass:
         :param city: the name of a city
         :return: 1 on success
         '''
+        print(f"city is ... {city}")
         apiKey = '75f6c15e22433ed3e7406b24691a0706'                         # api key (might be outdated)
         baseURL = "http://api.openweathermap.org/data/2.5/weather?"         # url to get data from
         url = baseURL + "appid=" + apiKey + "&q=" + city
@@ -172,6 +173,8 @@ class ExecuteClass:
     def weather(self, city, Display):
         print('getting weather')
         weather = self.getWeather(city)
+        if weather == 1:
+            return 1
         # build TTS response
         response = "In " + str(city) + "the weather is " + str(weather.weatherDescription) + " and it is " + str(
             round(weather.temperature ) ) + " degrees"
