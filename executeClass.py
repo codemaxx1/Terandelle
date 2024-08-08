@@ -176,6 +176,7 @@ class ExecuteClass:
         if weather == 1:
             return 1
         # build TTS response
+        print("creating tts response")
         response = "In " + str(city) + "the weather is " + str(weather.weatherDescription) + " and it is " + str(
             round(weather.temperature ) ) + " degrees"
         if weather.windSpeed > 10:
