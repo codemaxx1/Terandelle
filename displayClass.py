@@ -56,7 +56,7 @@ class Display:
             x = int(randrange(0, self.displayWidth))
             y = int(randrange(0, self.displayHeight))
             # random dots
-            #self.drawRect(x, y, x+2, y+2, 1, 1)
+            self.drawRect(x, y, x+2, y+2, 1, 1)
 
             text = "Terandelle"
             self.printText(self.displayWidth / 2, self.displayHeight / 2, text, 1)
@@ -106,7 +106,8 @@ class Display:
 
 
     def drawRect(self, x, y, height, width, outline, fill):
-        self.draw.rectangle((x, y, width, height), outline=outline, fill=fill)
+        #self.draw.rectangle((x, y, width, height), outline=outline, fill=fill)
+        self.draw.rectangle((0,0,5,5), outline=255, fill=0)
 
 
     def drawCircle(self, x, y, radius, outline, fill):
