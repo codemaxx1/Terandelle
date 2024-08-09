@@ -46,6 +46,7 @@ class Terandelle:
         p.play()
 
         # sleep until the ttsOut file is finished playing
+        time.sleep(1.5)
         duration = p.get_length() / 1000
         print(f"sleep duration: {duration}")
         time.sleep(duration)
