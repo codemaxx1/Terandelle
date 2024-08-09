@@ -54,13 +54,14 @@ class Terandelle:
         '''
         print(f"speaking (via tts) \"{words}\"")
         # if the spoken data is thread safe, then open a thread
-        if threadSafe:
+        if threadSafe == True:
             thread = threading.Thread(target=self.speakingThread, args=(words,), daemon=True)
             thread.start()
             return thread
         # if the spoken data is not thread safe, then just run the non-threaded function
-        else:
+        elif threadSafe == False:
             return self.speakingThread(words)
+
 
 
     def login(self):
