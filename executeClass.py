@@ -191,7 +191,7 @@ class ExecuteClass:
         update Terandelle program from git repo
         :return: return of subprocess call for update
         '''
-        returnedValue = [0,0]
+        returnedValue = [0, 0]
         returnedValue[0] = subprocess.check_output(["git", "pull"])
 
         #self.say(returnedValue.decode("utf-8"))
@@ -208,9 +208,9 @@ class ExecuteClass:
         else:
             self.Terandelle.say("I'm sorry, I didn't get a response I'm familiar with, so I'm just going to skip for now.", False)
 
-        self.Terandelle.say("Updating text processing datasets and models", False)
+        #self.Terandelle.say("Updating text processing datasets and models", False)
         #TextProcessing = TextProcessing()
-        TextProcessing.update()
+        #TextProcessing.update()
 
         self.Terandelle.say("Updates completed. Would you like me to restart?", False)
         response = self.Terandelle.listen(Display)
