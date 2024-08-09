@@ -191,8 +191,6 @@ class ExecuteClass:
         update Terandelle program from git repo
         :return: return of subprocess call for update
         '''
-        #self.say("pulling from remote repo")
-
         returnedValue = [0,0]
         returnedValue[0] = subprocess.check_output(["git", "pull"])
 
