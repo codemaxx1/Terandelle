@@ -100,7 +100,7 @@ class Terandelle:
             print('You said: ' + wordsSpoken + '\n')
         # loop back to continue to listen for commands if unrecognizable speech is received
         except sr.UnknownValueError:
-            print('unknown error')
+            print('unknown error in speech recognition module')
         return str(wordsSpoken)
 
 
@@ -153,7 +153,7 @@ class Terandelle:
                 Display.updateScreen()
                 time.sleep(1)
             except Exception as e:
-                self.Terandelle.say("Fatal Error. I won't shutdown right now, just be aware that there was a fatal error. Error description: {0}".format(e))
+                Terandelle.say("Fatal Error. I won't shutdown right now, just be aware that there was a fatal error. Error description: {0}".format(e))
         return functionRun
 
 
