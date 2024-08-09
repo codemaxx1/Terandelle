@@ -215,7 +215,7 @@ class ExecuteClass:
 
         self.Terandelle.say("Updates completed. Would you like me to restart?", False)
         response = self.Terandelle.listen(Display)
-        if("Yes" in response):
+        if "yes" in response:
             self.restartProgram()
         else:
             self.Terandelle.say("Okay then, I won't restart", False)
