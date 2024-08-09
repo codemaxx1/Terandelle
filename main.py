@@ -148,19 +148,19 @@ class Terandelle:
 
                 print(f"functionRun={functionRun}, properNoun={properNouns}, nouns={nouns}")
 
-                if functionRun == "update":
+                if functionRun == "update.txt":
                     Execute.update(Display)
-                elif functionRun == "restart":
+                elif functionRun == "restart.txt":
                     Execute.restartProgram()
-                elif functionRun == "news":
+                elif functionRun == "news.txt":
                     Execute.news(Display)
-                elif functionRun == "time":
+                elif functionRun == "time.txt":
                     Execute.getDateTime()
-                elif functionRun == "wikipedia":
+                elif functionRun == "wikipedia.txt":
                     Execute.wikipediaDefine("thing to query", 0, 3)
-                elif functionRun == "weather":
+                elif functionRun == "weather.txt":
                     Execute.weather(properNoun, Display)
-                elif functionRun == "shutdown":
+                elif functionRun == "shutdown.txt":
                     Execute.shutdown(Display, TextProcessing)
 
                 # update the image buffer
