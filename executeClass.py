@@ -196,7 +196,8 @@ class ExecuteClass:
 
         #self.say(returnedValue.decode("utf-8"))
 
-        self.Terandelle.say("update of program complete. Would you like me to update the Python3 packages? Please note, this could take some time.", False)
+        self.Terandelle.say("update of program complete. Would you like me to update the Python3 packages?", False)
+
         response = self.Terandelle.listen(Display)
 
         if "yes" in response:

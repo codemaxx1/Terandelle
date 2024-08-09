@@ -41,8 +41,13 @@ class Terandelle:
         # Save converted audio as mp3 format
         tts.save('ttsOut.mp3')
 
+        # load the ttsOut file and play it
         p = vlc.MediaPlayer("ttsOut.mp3")
         p.play()
+
+        # sleep until the ttsOut file is finished playing
+        duration = p.get_length() / 1000
+        time.sleep(duration)
         return text
 
 
@@ -55,11 +60,13 @@ class Terandelle:
         print(f"speaking (via tts) \"{words}\"")
         # if the spoken data is thread safe, then open a thread
         if threadSafe == True:
+            print("threadsafe")
             thread = threading.Thread(target=self.speakingThread, args=(words,), daemon=True)
             thread.start()
             return thread
         # if the spoken data is not thread safe, then just run the non-threaded function
         elif threadSafe == False:
+            print('not threadsafe')
             return self.speakingThread(words)
 
 
