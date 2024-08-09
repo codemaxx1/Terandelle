@@ -48,29 +48,28 @@ for package in packages:
     print(f"installing {package}")
     # implement pip3 as a subprocess:
     try:
-        subprocess.check_call(package)
+        if "pip3" in package:
+            subprocess.check_call(package)
 
-        # process output with an API in the subprocess module:
-        reqs = subprocess.check_output([sys.executable, '-m', 'pip3', 'freeze'])
-        installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
-        print(installed_packages)
+            # process output with an API in the subprocess module:
+            reqs = subprocess.check_output([sys.executable, '-m', 'pip3', 'freeze'])
+            installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
+            print(installed_packages)
+
+        elif "pip3" not in installCMD:
+            installCMD = ''
+            for i in range(len(package)):
+                installCMD += " " + package[i]
+            # execute OS function
+            os.system(installCMD)
+
+    # cancel on keyboard interrupt
     except KeyboardInterrupt:
         quit()
-    except:
-        installCMD = ''
-        for i in range(len(package)):
-            installCMD += " " + package[i]
 
-        try:
-            if "pip3" not in installCMD:
-                os.system(installCMD)
-            else:
-                print("unable to install python package {0}".format(package[i]))
-        except KeyboardInterrupt:
-            quit()
-        except Exception as e:
-            print("double falure in installing {0} because of {1}".format(package, e))
-            failureList.append(package)
+    except Exception as e:
+        print("double falure in installing {0} because of {1}".format(package, e))
+        failureList.append(package)
 
 
 print('\x1b[1;33m failed packages: {0} \x1b[0m'.format(failureList))
