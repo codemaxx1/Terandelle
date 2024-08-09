@@ -129,7 +129,8 @@ class Terandelle:
         while True:
             try:
                 # give signal that we are ready for a command
-                Display.printText(50, 0, "please speak", 1)
+                Display.drawRect(0, 0, displayWidth, displayHeight, 1, 1)
+                Display.printText(20, 0, "please speak", 1)
                 Display.drawCircle("middle", "middle", 10, 1, 1)
                 Display.updateScreen()
 
