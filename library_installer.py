@@ -59,8 +59,12 @@ for package in packages:
         installCMD = ''
         for i in range(len(package)):
             installCMD += " " + package[i]
+
         try:
-            os.system(installCMD)
+            if "pip3" not in installCMD:
+                os.system(installCMD)
+            else:
+                print("unable to install python package {0}".format(package[i]))
         except KeyboardInterrupt:
             quit()
         except Exception as e:
