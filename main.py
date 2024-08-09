@@ -166,26 +166,26 @@ if __name__ == "__main__":
         print("init terandelle")
         Terandelle = Terandelle(Display)
 
-    try:
-        print('init execute')
-        Execute = ExecuteClass(Terandelle)
+        try:
+            print('init execute')
+            Execute = ExecuteClass(Terandelle)
 
-        #print("update")
-        #Terandelle.update()
+            #print("update")
+            #Terandelle.update()
 
-        print("bootup sequence")
-        #Terandelle.bootup(Display)
+            print("bootup sequence")
+            #Terandelle.bootup(Display)
 
 
-        print('init text processing')
-        TextProcessing = TextProcessing()
+            print('init text processing')
+            TextProcessing = TextProcessing()
 
-        # begin performing functions
-        Terandelle.perform(Terandelle, Display, TextProcessing)
+            # begin performing functions
+            Terandelle.perform(Terandelle, Display, TextProcessing)
 
-        print("display wave")
-        Display.wave()
+            print("display wave")
+            Display.wave()
 
-    except Exception as e:
-        Terandelle.say(f"Fatal failure. Error description: {e}")
-        #sys.exit()
+        except Exception as e:
+            Terandelle.say(f"Fatal failure. Error description: {e}")
+            #sys.exit()
