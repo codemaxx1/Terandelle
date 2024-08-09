@@ -48,7 +48,7 @@ class Terandelle:
 
         # sleep until the ttsOut file is finished playing
         time.sleep(0.5)
-        duration = p.get_length() / 1000 - 1.5
+        duration = p.get_length() / 1000 - 1
         print(f"sleep duration: {duration}")
         time.sleep(duration)
         return text
@@ -149,25 +149,18 @@ class Terandelle:
                 print(f"functionRun={functionRun}, properNoun={properNouns}, nouns={nouns}")
 
                 if functionRun == "update":
-                    print("update")
                     Execute.update(Display)
                 elif functionRun == "restart":
-                    print("restart")
                     Execute.restartProgram()
                 elif functionRun == "news":
-                    print("news")
                     Execute.news(Display)
                 elif functionRun == "time":
-                    print("time")
                     Execute.getDateTime()
                 elif functionRun == "wikipedia":
-                    print("wikipedia")
                     Execute.wikipediaDefine("thing to query", 0, 3)
                 elif functionRun == "weather":
-                    print("weather")
                     Execute.weather(properNoun, Display)
                 elif functionRun == "shutdown":
-                    print("shutdown")
                     Execute.shutdown(Display, TextProcessing)
 
                 # update the image buffer
