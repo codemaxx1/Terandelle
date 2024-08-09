@@ -18,6 +18,7 @@ from personClass import Person
 from textProcessingClass import TextProcessing
 from executeClass import ExecuteClass
 
+import sounddevice  # in theory, this will take out all those annoying alsa mixer error returns
 '''
     Terandelle class
     for main functionality of the Terandelle system
@@ -140,11 +141,12 @@ class Terandelle:
                 Display.printText(0, 0, f"you said:", 1)
                 Display.printText(0, 10, f"\"{command}\"", 1)
 
-                functionRun, properNoun = TextProcessing.recognizeIntent(TextProcessing.analyzeCommand(command))
+                functionRun, properNouns, nouns = TextProcessing.recognizeIntent(TextProcessing.analyzeCommand(command))
                 functionRun = str(functionRun)
-                properNoun = str(properNoun)
+                properNoun = str(properNouns)
+                nouns = str(nouns)
 
-                print(f"functionRun={functionRun}, properNoun={properNoun}")
+                print(f"functionRun={functionRun}, properNoun={properNouns}, nouns={nouns}")
 
                 if functionRun == "update":
                     print("update")
@@ -164,6 +166,9 @@ class Terandelle:
                 elif functionRun == "weather":
                     print("weather")
                     Execute.weather(properNoun, Display)
+                elif functionRun == "shutdown":
+                    print("shutdown")
+                    Execute.shutdown(Display, TextProcessing)
 
                 # update the image buffer
                 Display.updateScreen()

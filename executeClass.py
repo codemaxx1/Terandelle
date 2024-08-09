@@ -12,6 +12,7 @@ import requests                 # used to send data requests
 import json
 import subprocess
 import time
+import os
 import sys
 
 from textProcessingClass import TextProcessing
@@ -184,6 +185,19 @@ class ExecuteClass:
         self.Terandelle.say(response, True)
 
         return 1
+
+
+    def shutdown(self, Display, TextProcessing):
+        self.Terandelle.say(f"shutdown command given. Would you like me to close the {sys.argv[0]} program, or shut down the entire device?")
+        response = self.Terandelle.listen(Display)
+        commandToRun, properNouns, nouns = TextProcessing.recognizeIntent(response)
+        for i in nouns:
+            # if the user indicates to shut down the device, shut down
+            if i == "system" or i == "device":
+                os.system('shutdown -s')
+            # if the user indicates to shut down only the program, exit
+            elif i == 'program' or i == "terandelle":
+                sys.exit()
 
 
 

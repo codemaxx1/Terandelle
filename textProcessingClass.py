@@ -80,16 +80,8 @@ class TextProcessing:
                     commandToRun = token
                     print(f"command to run is {token}")
 
-        nounReturnString = ""
-        if len(properNouns) != 0:
-            for i in properNouns:
-                nounReturnString = nounReturnString + i + " "
-        elif len(nouns) != 0:
-            for i in nouns:
-                nounReturnString = nounReturnString + i + " "
-
 
         print(f"actions to be performed: {actions}\nnouns captures: {nouns}\nproper noun captures: {properNouns}")
         print(f"located from files -- {locatedFromFiles}")
 
-        return commandToRun, nounReturnString
+        return commandToRun, properNouns, nouns
