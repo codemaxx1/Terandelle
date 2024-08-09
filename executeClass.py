@@ -13,6 +13,7 @@ import json
 import subprocess
 import sys
 
+from textProcessingClass import TextProcessing
 
 class ExecuteClass:
 
@@ -203,6 +204,7 @@ class ExecuteClass:
         returnedValue[1] = subprocess.call(str(updatePackages), shell=True)
 
         self.Terandelle.say("update of python3 packages complete. Updating text processing datasets and models")
+        TextProcessing = TextProcessing()
         TextProsessing.update()
 
         return returnedValue
