@@ -94,7 +94,7 @@ class Terandelle:
             print('Say something...')
             r.pause_threshold = 2
             r.adjust_for_ambient_noise(source, duration=1)
-            audio = r.listen(source, phrase_time_limit=7)
+            audio = r.listen(source, phrase_time_limit=5)
         try:
             wordsSpoken = r.recognize_google(audio).lower()
             print('You said: ' + wordsSpoken + '\n')
@@ -112,45 +112,48 @@ class Terandelle:
         :return: the name of the function run
         '''
         while True:
-            # give signal that we are ready for a command
-            Display.printText(50, 0, "please speak", 1)
-            Display.drawCircle("middle", "middle", 10, 1, 1)
-            Display.updateScreen()
+            try:
+                # give signal that we are ready for a command
+                Display.printText(50, 0, "please speak", 1)
+                Display.drawCircle("middle", "middle", 10, 1, 1)
+                Display.updateScreen()
 
-            # listen for a command
-            command = Terandelle.listen(Display)
+                # listen for a command
+                command = Terandelle.listen(Display)
 
-            Display.printText(0, 0, f"you said:", 1)
-            Display.printText(0, 10, f"\"{command}\"", 1)
+                Display.printText(0, 0, f"you said:", 1)
+                Display.printText(0, 10, f"\"{command}\"", 1)
 
-            functionRun, properNoun = TextProcessing.recognizeIntent(TextProcessing.analyzeCommand(command))
-            functionRun = str(functionRun)
-            properNoun = str(properNoun)
+                functionRun, properNoun = TextProcessing.recognizeIntent(TextProcessing.analyzeCommand(command))
+                functionRun = str(functionRun)
+                properNoun = str(properNoun)
 
-            print(f"functionRun={functionRun}, properNoun={properNoun}")
+                print(f"functionRun={functionRun}, properNoun={properNoun}")
 
-            if functionRun == "update":
-                print("update")
-                Execute.update()
-            elif functionRun == "restart":
-                print("restart")
-                Execute.restartProgram()
-            elif functionRun == "news":
-                print("news")
-                Execute.news(Display)
-            elif functionRun == "time":
-                print("time")
-                Execute.getDateTime()
-            elif functionRun == "wikipedia":
-                print("wikipedia")
-                Execute.wikipediaDefine("thing to query", 0, 3)
-            elif functionRun == "weather":
-                print("weather")
-                Execute.weather(properNoun, Display)
+                if functionRun == "update":
+                    print("update")
+                    Execute.update()
+                elif functionRun == "restart":
+                    print("restart")
+                    Execute.restartProgram()
+                elif functionRun == "news":
+                    print("news")
+                    Execute.news(Display)
+                elif functionRun == "time":
+                    print("time")
+                    Execute.getDateTime()
+                elif functionRun == "wikipedia":
+                    print("wikipedia")
+                    Execute.wikipediaDefine("thing to query", 0, 3)
+                elif functionRun == "weather":
+                    print("weather")
+                    Execute.weather(properNoun, Display)
 
-            # update the image buffer
-            Display.updateScreen()
-            time.sleep(10)
+                # update the image buffer
+                Display.updateScreen()
+                time.sleep(1)
+            except Exception as e:
+                self.Terandelle.say("Fatal Error. I won't shutdown right now, just be aware that there was a fatal error. Error description: {0}".format(e))
         return functionRun
 
 
@@ -166,26 +169,23 @@ if __name__ == "__main__":
         print("init terandelle")
         Terandelle = Terandelle(Display)
 
-        try:
-            print('init execute')
-            Execute = ExecuteClass(Terandelle)
 
-            #print("update")
-            #Terandelle.update()
+        print('init execute')
+        Execute = ExecuteClass(Terandelle)
 
-            print("bootup sequence")
-            #Terandelle.bootup(Display)
+        #print("update")
+        #Terandelle.update()
+
+        print("bootup sequence")
+        #Terandelle.bootup(Display)
 
 
-            print('init text processing')
-            TextProcessing = TextProcessing()
+        print('init text processing')
+        TextProcessing = TextProcessing()
 
-            # begin performing functions
-            Terandelle.perform(Terandelle, Display, TextProcessing)
+        # begin performing functions
+        Terandelle.perform(Terandelle, Display, TextProcessing)
 
-            print("display wave")
-            Display.wave()
+        print("display wave")
+        Display.wave()
 
-        except Exception as e:
-            Terandelle.say(f"Fatal failure. Error description: {e}")
-            #sys.exit()
