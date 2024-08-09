@@ -77,7 +77,7 @@ class TextProcessing:
 
             for word, reference in self.listOfRelations.items():
                 if str(token) == str(word):
-                    commandToRun = token
+                    commandToRun = reference
                     print(f"command to run is {token}")
 
 
