@@ -11,6 +11,7 @@ import psutil
 import requests                 # used to send data requests
 import json
 import subprocess
+import time
 import sys
 
 from textProcessingClass import TextProcessing
@@ -197,7 +198,8 @@ class ExecuteClass:
         #self.say(returnedValue.decode("utf-8"))
 
         self.Terandelle.say("update of program complete. Would you like me to update the Python3 packages?", False)
-
+        print("so... I'm already running...")
+        time.sleep(10)
         response = self.Terandelle.listen(Display)
 
         if "yes" in response:
