@@ -217,6 +217,8 @@ class ExecuteClass:
         response = self.Terandelle.listen(Display)
         if("Yes" in response):
             self.restartProgram()
+        else:
+            self.Terandelle.say("Okay then, I won't restart", False)
 
         return returnedValue
 
