@@ -103,7 +103,7 @@ class Terandelle:
         :param display: instance of display class
         :return: the text-converted voice data
         '''
-        r = sr.Recognizer()
+
         wordsSpoken = ""
         with sr.Microphone() as source:
             print('Say something...')
@@ -178,7 +178,7 @@ if __name__ == "__main__":
 
         displayHeight = 64
         displayWidth = 128
-
+        r = sr.Recognizer()
 
         print("init display")
         Display = Display(displayWidth, displayHeight)
