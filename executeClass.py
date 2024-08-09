@@ -198,14 +198,26 @@ class ExecuteClass:
 
         #self.say(returnedValue.decode("utf-8"))
 
-        self.Terandelle.say("update of program complete. Now, I'm updating Python3 packages")
+        self.Terandelle.say("update of program complete. Would you like me to update the Python3 packages? Please note, this could take some time.")
+        response = self.Terandelle.listen()
 
-        updatePackages = "python3 library_installer.py"
-        returnedValue[1] = subprocess.call(str(updatePackages), shell=True)
+        if "yes" in response:
+            self.Terandelle.say("Understood. Now, I'm updating Python3 packages")
+            updatePackages = "python3 library_installer.py"
+            returnedValue[1] = subprocess.call(str(updatePackages), shell=True)
+        elif "no " in response:
+            self.Terandelle.say("Understood. I will not update python packages at this time")
+        else:
+            self.Terandelle.say("I'm sorry, I didn't get a response I'm familiar with, so I'm just going to skip for now.")
 
-        self.Terandelle.say("update of python3 packages complete. Updating text processing datasets and models")
-        TextProcessing = TextProcessing()
-        TextProsessing.update()
+        self.Terandelle.say("Updating text processing datasets and models")
+        #TextProcessing = TextProcessing()
+        TextProcessing.update()
+
+        self.Terandelle.say("Updates completed. Would you like me to restart?")
+        response = self.Terandelle.listen()
+        if("Yes" in response):
+            self.restartProgram()
 
         return returnedValue
 

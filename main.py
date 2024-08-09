@@ -151,7 +151,7 @@ class Terandelle:
 
                 # update the image buffer
                 Display.updateScreen()
-                time.sleep(1)
+                #time.sleep(1)
             except Exception as e:
                 Terandelle.say("Fatal Error. I won't shutdown right now, just be aware that there was a fatal error. Error description: {0}".format(e))
         return functionRun
