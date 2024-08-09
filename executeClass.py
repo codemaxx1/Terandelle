@@ -60,7 +60,7 @@ class ExecuteClass:
         :param lineEnd: the position in the text that you want to stop reading at
         :return:
         '''
-        self.Terandelle.say("let's see what I can find")
+        self.Terandelle.say("let's see what I can find", True)
         try:
             text = wikipedia.summary(str(query))
             defineTextList = text.split('.')
@@ -68,9 +68,9 @@ class ExecuteClass:
             # loop through input:lines, or fewer lines in the return if there are fewer than input:lines lines in it
             for i in range( lineStart, min(len(defineTextList) + 1, lineEnd) ):
                 print("line: " + str(i))
-                self.Terandelle.say(defineTextList[i])
+                self.Terandelle.say(defineTextList[i], True)
         except Exception as e:
-            self.Terandelle.say(f"failure finding information about {query} because of {e}, could you try again?")
+            self.Terandelle.say(f"failure finding information about {query} because of {e}, could you try again?", False)
 
 
     def getNews(self):
@@ -133,7 +133,7 @@ class ExecuteClass:
             self.temperature = (9 / 5) * (self.temperature - 273) + 32
 
         else:
-            self.Terandelle.say(f"i'm sorry, but {city} does not seem to exist.")
+            self.Terandelle.say(f"i'm sorry, but {city} does not seem to exist.", True)
             return 0
 
             """
@@ -180,7 +180,7 @@ class ExecuteClass:
         self.Display.printText( 0, 20, f"temp : {self.temperature}", 255)
         self.Display.updateScreen()
 
-        self.Terandelle.say(response)
+        self.Terandelle.say(response, True)
 
         return 1
 
@@ -196,23 +196,23 @@ class ExecuteClass:
 
         #self.say(returnedValue.decode("utf-8"))
 
-        self.Terandelle.say("update of program complete. Would you like me to update the Python3 packages? Please note, this could take some time.")
+        self.Terandelle.say("update of program complete. Would you like me to update the Python3 packages? Please note, this could take some time.", False)
         response = self.Terandelle.listen(Display)
 
         if "yes" in response:
-            self.Terandelle.say("Understood. Now, I'm updating Python3 packages")
+            self.Terandelle.say("Understood. Now, I'm updating Python3 packages", True)
             updatePackages = "python3 library_installer.py"
             returnedValue[1] = subprocess.call(str(updatePackages), shell=True)
         elif "no " in response:
-            self.Terandelle.say("Understood. I will not update python packages at this time")
+            self.Terandelle.say("Understood. I will not update python packages at this time", False)
         else:
-            self.Terandelle.say("I'm sorry, I didn't get a response I'm familiar with, so I'm just going to skip for now.")
+            self.Terandelle.say("I'm sorry, I didn't get a response I'm familiar with, so I'm just going to skip for now.", False)
 
-        self.Terandelle.say("Updating text processing datasets and models")
+        self.Terandelle.say("Updating text processing datasets and models", False)
         #TextProcessing = TextProcessing()
         TextProcessing.update()
 
-        self.Terandelle.say("Updates completed. Would you like me to restart?")
+        self.Terandelle.say("Updates completed. Would you like me to restart?", False)
         response = self.Terandelle.listen(Display)
         if("Yes" in response):
             self.restartProgram()
@@ -225,7 +225,7 @@ class ExecuteClass:
         restart program by creating a new instance of it and terminating this one
         :return: none
         '''
-        self.Terandelle.say("restarting program")
+        self.Terandelle.say("restarting program", False)
         openNewProcess = "python3 " + str(sys.argv[0])
         subprocess.call(str(openNewProcess), shell=True)    # open new instance of self
         sys.exit()                                          # terminate instance of self

@@ -46,17 +46,19 @@ class Terandelle:
         return text
 
 
-    def say(self, words):
+    def say(self, words, threadSafe):
         '''
         create a thread to speak the words
         :param words: the words to be spoken
         :return: the thread info after it was started
         '''
         print(f"speaking (via tts) \"{words}\"")
-        thread = threading.Thread(target=self.speakingThread, args=(words,), daemon=True)
-        thread.start()
-        return thread
-
+        if threadSafe:
+            thread = threading.Thread(target=self.speakingThread, args=(words,), daemon=True)
+            thread.start()
+            return thread
+        else:
+            return self.speakingThread()
 
     def login(self):
         '''
@@ -74,10 +76,10 @@ class Terandelle:
         :param display: instance of the display class, named display
         :return: 1 on success
         '''
-        self.say("Terandelle system, booting up")
+        self.say("Terandelle system, booting up", True)
         Display.bootup()
         self.user = self.login()
-        self.say("Ready for your command")
+        self.say("Ready for your command", True)
 
         return 1
 
@@ -153,7 +155,7 @@ class Terandelle:
                 Display.updateScreen()
                 #time.sleep(1)
             except Exception as e:
-                Terandelle.say("Fatal Error. I won't shutdown right now, just be aware that there was a fatal error. Error description: {0}".format(e))
+                Terandelle.say("Fatal Error. I won't shutdown right now, just be aware that there was a fatal error. Error description: {0}".format(e), False)
         return functionRun
 
 
