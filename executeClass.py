@@ -188,7 +188,7 @@ class ExecuteClass:
 
 
     def shutdown(self, Display, TextProcessing):
-        self.Terandelle.say(f"shutdown command given. Would you like me to close the {sys.argv[0]} program, or shut down the entire device?")
+        self.Terandelle.say(f"shutdown command given. Would you like me to close the {sys.argv[0]} program, or shut down the entire device?", False)
         response = self.Terandelle.listen(Display)
         commandToRun, properNouns, nouns = TextProcessing.recognizeIntent(response)
         for i in nouns:
