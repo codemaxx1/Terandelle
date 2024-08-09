@@ -132,7 +132,7 @@ class Terandelle:
 
                 if functionRun == "update":
                     print("update")
-                    Execute.update()
+                    Execute.update(Display)
                 elif functionRun == "restart":
                     print("restart")
                     Execute.restartProgram()

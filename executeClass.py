@@ -186,7 +186,7 @@ class ExecuteClass:
 
 
 
-    def update(self):
+    def update(self, Display):
         '''
         update Terandelle program from git repo
         :return: return of subprocess call for update
@@ -197,7 +197,7 @@ class ExecuteClass:
         #self.say(returnedValue.decode("utf-8"))
 
         self.Terandelle.say("update of program complete. Would you like me to update the Python3 packages? Please note, this could take some time.")
-        response = self.Terandelle.listen()
+        response = self.Terandelle.listen(Display)
 
         if "yes" in response:
             self.Terandelle.say("Understood. Now, I'm updating Python3 packages")
@@ -213,7 +213,7 @@ class ExecuteClass:
         TextProcessing.update()
 
         self.Terandelle.say("Updates completed. Would you like me to restart?")
-        response = self.Terandelle.listen()
+        response = self.Terandelle.listen(Display)
         if("Yes" in response):
             self.restartProgram()
 
