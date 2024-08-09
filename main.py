@@ -58,7 +58,7 @@ class Terandelle:
             thread.start()
             return thread
         else:
-            return self.speakingThread()
+            return self.speakingThread(words)
 
     def login(self):
         '''
