@@ -53,12 +53,15 @@ class Terandelle:
         :return: the thread info after it was started
         '''
         print(f"speaking (via tts) \"{words}\"")
+        # if the spoken data is thread safe, then open a thread
         if threadSafe:
             thread = threading.Thread(target=self.speakingThread, args=(words,), daemon=True)
             thread.start()
             return thread
+        # if the spoken data is not thread safe, then just run the non-threaded function
         else:
             return self.speakingThread(words)
+
 
     def login(self):
         '''
@@ -155,7 +158,8 @@ class Terandelle:
                 Display.updateScreen()
                 #time.sleep(1)
             except Exception as e:
-                Terandelle.say("Fatal Error. I won't shutdown right now, just be aware that there was a fatal error. Error description: {0}".format(e), False)
+                Terandelle.say("Fatal Error. I will shutdown right now, just be aware that there was a fatal error. Error description: {0}".format(e), False)
+                sys.exit()
         return functionRun
 
 
