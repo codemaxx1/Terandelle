@@ -155,30 +155,34 @@ class Terandelle:
 
 
 if __name__ == "__main__":
-    displayHeight = 64
-    displayWidth = 128
+    try:
+        displayHeight = 64
+        displayWidth = 128
 
 
-    print("init display")
-    Display = Display(displayWidth, displayHeight)
+        print("init display")
+        Display = Display(displayWidth, displayHeight)
 
-    print("init terandelle")
-    Terandelle = Terandelle(Display)
+        print("init terandelle")
+        Terandelle = Terandelle(Display)
 
-    print('init execute')
-    Execute = ExecuteClass(Terandelle)
+        print('init execute')
+        Execute = ExecuteClass(Terandelle)
 
-    #print("update")
-    #Terandelle.update()
+        #print("update")
+        #Terandelle.update()
 
-    print("bootup sequence")
-    #Terandelle.bootup(Display)
+        print("bootup sequence")
+        #Terandelle.bootup(Display)
 
-    print('init text processing')
-    TextProcessing = TextProcessing()
+        print('init text processing')
+        TextProcessing = TextProcessing()
 
-    # begin performing functions
-    Terandelle.perform(Terandelle, Display, TextProcessing)
+        # begin performing functions
+        Terandelle.perform(Terandelle, Display, TextProcessing)
 
-    print("display wave")
-    Display.wave()
+        print("display wave")
+        Display.wave()
+    except Exception as e:
+        Terandelle.say(f"Fatal failure. Shutting down for safety. Error description: {e}")
+        sys.exit()
